@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis Interaktif Aljabar & PLSV Kelas 8</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- MathJax Configuration & Script -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' },
+      startup: {
+        typeset: true
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+
+  <!-- Custom CSS Animations & Theme Styling -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      transition: all 0.2s ease-in-out;
+    }
+    .btn-gradient:hover {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Option selection animation */
+    .option-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: translateX(4px);
+      border-color: #3b82f6;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+
+  <!-- HEADER / NAVBAR -->
+  <header class="w-full glass-card sticky top-0 z-40 border-b border-slate-800 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-xl">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg md:text-xl text-white tracking-tight">Kuis Matematika Kelas 8</h1>
+          <p class="text-xs text-slate-400">Operasi Aljabar & PLSV (40 Soal Interaktif)</p>
+        </div>
+      </div>
+
+      <!-- Mode Badge & Quick Controls -->
+      <div class="flex items-center gap-3">
+        <span id="mode-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          <i class="fa-solid fa-book-open mr-1"></i> Mode Latihan
+        </span>
+        <button id="btn-sound-toggle" onclick="toggleSound()" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition" title="Toggle Suara">
+          <i id="sound-icon" class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-grow">
+    
+    <!-- DASHBOARD SETUP (FILTER & MODE SELECTOR) -->
+    <section id="dashboard-section" class="glass-card rounded-2xl p-6 mb-6 shadow-xl border border-slate-800">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        
+        <!-- Filter Kategori Materi -->
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Topik Materi:</label>
+          <select id="category-filter" onchange="changeFilter()" class="w-full bg-slate-800/90 text-slate-200 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+            <option value="all">Semua Topik (40 Soal)</option>
+            <option value="suku-sejenis">1. Penjumlahan & Pengurangan Suku Sejenis (10 Soal)</option>
+            <option value="perkalian-kurung">2. Perkalian Distributif & Kuadrat (10 Soal)</option>
+            <option value="plsv-direct">3. Penyelesaian PLSV Langsung (10 Soal)</option>
+            <option value="soal-cerita">4. Soal Cerita & Aplikasi (10 Soal)</option>
+          </select>
+        </div>
+
+        <!-- Mode Selector -->
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Mode Kuis:</label>
+          <div class="grid grid-cols-2 gap-2 bg-slate-800/90 p-1 rounded-xl border border-slate-700">
+            <button id="btn-mode-practice" onclick="setQuizMode('practice')" class="py-1.5 px-3 rounded-lg text-xs font-semibold transition bg-blue-600 text-white shadow">
+              <i class="fa-solid fa-graduation-cap mr-1"></i> Latihan
+            </button>
+            <button id="btn-mode-exam" onclick="setQuizMode('exam')" class="py-1.5 px-3 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
+              <i class="fa-solid fa-clock mr-1"></i> Ujian
+            </button>
+          </div>
+        </div>
+
+        <!-- Start/Reset Button -->
+        <div class="flex items-end h-full">
+          <button onclick="restartQuiz()" class="w-full btn-gradient py-2.5 px-4 rounded-xl font-semibold text-sm text-white flex items-center justify-center gap-2 shadow-lg">
+            <i class="fa-solid fa-rotate-right"></i> Mulai Ulang Kuis
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ INTERFACE -->
+    <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      
+      <!-- LEFT / MAIN: Question Box -->
+      <div class="lg:col-span-3 space-y-6">
+        
+        <!-- Progress Bar & Status Bar -->
+        <div class="glass-card rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div class="w-full sm:w-2/3">
+            <div class="flex justify-between text-xs text-slate-400 mb-1">
+              <span>Kemajuan Kuis</span>
+              <span id="progress-text">Soal 1 dari 40</span>
+            </div>
+            <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
+              <div id="progress-bar" class="bg-blue-500 h-full w-0 transition-all duration-300 rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Timer Box (Visible in Exam mode) -->
+          <div id="timer-box" class="flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 px-3.5 py-1.5 rounded-xl text-sm font-semibold">
+            <i class="fa-solid fa-stopwatch animate-pulse"></i>
+            <span id="timer-display">40:00</span>
+          </div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="glass-card rounded-2xl p-6 shadow-xl relative min-h-[220px]">
+          <!-- Category Tag -->
+          <div class="mb-4">
+            <span id="question-category-tag" class="px-3 py-1 rounded-md text-xs font-medium bg-slate-800 text-blue-400 border border-slate-700">
+              Kategori Materi
+            </span>
+          </div>
+
+          <!-- Question Content -->
+          <div id="question-text" class="text-base sm:text-lg text-slate-100 font-medium leading-relaxed mb-6">
+            <!-- Rendered Question Text -->
+          </div>
+
+          <!-- Options Grid -->
+          <div id="options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+            <!-- Generated dynamically -->
+          </div>
+
+          <!-- Explanation Box (Appears in Practice Mode after selection) -->
+          <div id="explanation-box" class="hidden p-4 rounded-xl bg-slate-800/90 border border-blue-500/30 text-sm text-slate-300 leading-relaxed space-y-2">
+            <div class="flex items-center gap-2 font-semibold text-blue-400">
+              <i class="fa-solid fa-lightbulb"></i> Pembahasan Langkah demi Langkah:
+            </div>
+            <div id="explanation-text" class="text-slate-200"></div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center gap-4">
+          <button id="btn-prev" onclick="navigateQuestion(-1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-sm font-medium transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+          </button>
+
+          <button id="btn-next" onclick="navigateQuestion(1)" class="btn-gradient px-6 py-2.5 rounded-xl text-white text-sm font-semibold shadow-md flex items-center gap-2">
+            Berikutnya <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Question Number Map Panel -->
+      <div class="lg:col-span-1">
+        <div class="glass-card rounded-2xl p-5 sticky top-24">
+          <h3 class="text-sm font-bold text-white mb-3 flex items-center justify-between">
+            <span>Peta Nomor Soal</span>
+            <span id="answered-count" class="text-xs font-normal text-slate-400">0/40 Terjawab</span>
+          </h3>
+
+          <!-- Grid Numbers -->
+          <div id="question-map-grid" class="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto custom-scrollbar pr-1">
+            <!-- Buttons generated dynamically -->
+          </div>
+
+          <hr class="border-slate-800 my-4" />
+
+          <!-- Submit Button -->
+          <button onclick="finishQuiz()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i> Selesaikan Kuis
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL SCORE / RESULTS -->
+  <div id="score-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-card max-w-lg w-full rounded-2xl p-6 sm:p-8 text-center border border-slate-700 shadow-2xl relative">
+      
+      <div class="w-20 h-20 rounded-full bg-blue-500/20 border-2 border-blue-500/40 text-blue-400 mx-auto flex items-center justify-center text-3xl mb-4">
+        <i id="score-icon" class="fa-solid fa-trophy"></i>
+      </div>
+
+      <h2 class="text-2xl font-bold text-white mb-1">Hasil Kuis Anda</h2>
+      <p id="score-grade-text" class="text-sm text-slate-400 mb-6">Sangat Bagus! Pertahankan Prestasi Anda.</p>
+
+      <!-- Score Numbers -->
+      <div class="grid grid-cols-3 gap-3 bg-slate-800/80 p-4 rounded-xl border border-slate-700 mb-6">
+        <div>
+          <p class="text-xs text-slate-400 mb-1">Skor Akhir</p>
+          <p id="final-score" class="text-2xl font-extrabold text-blue-400">0</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400 mb-1">Benar</p>
+          <p id="final-correct" class="text-2xl font-bold text-emerald-400">0</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400 mb-1">Salah</p>
+          <p id="final-wrong" class="text-2xl font-bold text-rose-400">0</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-3">
+        <button onclick="closeModal()" class="w-1/2 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition">
+          Tinjau Pembahasan
+        </button>
+        <button onclick="restartQuiz(); closeModal();" class="w-1/2 btn-gradient py-2.5 px-4 rounded-xl text-white font-semibold text-sm shadow-md">
+          Coba Lagi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="w-full glass-card border-t border-slate-800 py-4 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
+      <p>Kuis Interaktif Matematika Kelas 8 — Operasi Bentuk Aljabar & PLSV</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================================
+       QUESTION BANK (40 Soal Aljabar & PLSV Kelas 8)
+       Distribusi Jawaban Benar:
+       Opsi 0 (A): 10 Soal
+       Opsi 1 (B): 10 Soal
+       Opsi 2 (C): 10 Soal
+       Opsi 3 (D): 10 Soal
+       ======================================================== */
+    const questionBank = [
+      // ----------------------------------------------------
+      // TOPIK 1: Penjumlahan & Pengurangan Suku Sejenis (1-10)
+      // ----------------------------------------------------
+      {
+        id: 1,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Sederhanakan bentuk aljabar berikut: <br><br> $$5a - 3b + 2a + 8b$$",
+        options: ["7a + 5b", "7a - 5b", "3a + 5b", "10a + 11b"],
+        answer: 0,
+        explanation: "Kelompokkan suku-suku sejenis:<br>• Variabel $a$: $5a + 2a = 7a$<br>• Variabel $b$: $-3b + 8b = 5b$<br>Hasil sederhananya: <strong>$7a + 5b$</strong>."
+      },
+      {
+        id: 2,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Hasil pengurangan dari $(7x - 4y) - (2x - 9y)$ adalah...",
+        options: ["5x - 13y", "5x + 5y", "9x - 13y", "5x - 5y"],
+        answer: 1,
+        explanation: "Buka tanda kurung dengan mengalikan $-1$ pada kelompok kedua:<br>$$(7x - 4y) - (2x - 9y) = 7x - 4y - 2x + 9y$$ $$= (7x - 2x) + (-4y + 9y) = 5x + 5y$$"
+      },
+      {
+        id: 3,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Bentuk paling sederhana dari $2x^2 + 5x - 3 - x^2 - 8x + 7$ adalah...",
+        options: ["x^2 + 3x + 4", "3x^2 - 3x + 10", "x^2 - 3x + 4", "x^2 - 13x - 4"],
+        answer: 2,
+        explanation: "Kelompokkan berdasarkan derajat pangkatnya:<br>• Suku $x^2$: $2x^2 - x^2 = x^2$<br>• Suku $x$: $5x - 8x = -3x$<br>• Konstanta: $-3 + 7 = 4$<br>Hasilnya: <strong>$x^2 - 3x + 4$</strong>."
+      },
+      {
+        id: 4,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Hasil penjumlahan dari $(3p - 2q + 5)$ dan $(p + 6q - 8)$ adalah...",
+        options: ["4p - 8q + 3", "2p + 4q - 3", "4p + 8q - 13", "4p + 4q - 3"],
+        answer: 3,
+        explanation: "Jumlahkan suku-suku yang sejenis secara langsung:<br>$$(3p + p) + (-2q + 6q) + (5 - 8) = 4p + 4q - 3$$"
+      },
+      {
+        id: 5,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Kurangkan $(2m^2 - 5m + 3)$ <strong>DARI</strong> $(6m^2 + m - 4)$!",
+        options: ["4m^2 - 4m - 1", "4m^2 + 6m - 7", "-4m^2 - 6m + 7", "8m^2 - 4m - 1"],
+        answer: 1,
+        explanation: "Kata kunci <strong>'DARI'</strong> berarti bentuk kedua dikurangi bentuk pertama:<br>$$(6m^2 + m - 4) - (2m^2 - 5m + 3)$$ $$= 6m^2 - 2m^2 + m + 5m - 4 - 3 = 4m^2 + 6m - 7$$"
+      },
+      {
+        id: 6,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Sederhanakan bentuk aljabar berikut: <br><br> $$4(a + 2b) - 2(3a - b)$$",
+        options: ["-2a + 6b", "2a + 10b", "-2a + 10b", "-2a + 7b"],
+        answer: 2,
+        explanation: "Gunakan sifat distributif lalu gabungkan suku sejenis:<br>$$4(a + 2b) - 2(3a - b) = 4a + 8b - 6a + 2b$$ $$= (4a - 6a) + (8b + 2b) = -2a + 10b$$"
+      },
+      {
+        id: 7,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Jika $P = 3x - 2y$ dan $Q = x + 5y$, maka nilai dari $2P - Q$ adalah...",
+        options: ["5x + 9y", "5x - 10y", "7x - 9y", "5x - 9y"],
+        answer: 3,
+        explanation: "Substitusikan bentuk $P$ dan $Q$:<br>$$2(3x - 2y) - (x + 5y) = 6x - 4y - x - 5y$$ $$= (6x - x) + (-4y - 5y) = 5x - 9y$$"
+      },
+      {
+        id: 8,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Sederhanakan bentuk aljabar: $8xy - 3x + 2xy + 7x - 5$",
+        options: ["10xy + 4x - 5", "10xy - 10x - 5", "6xy + 4x - 5", "10xy + 10x + 5"],
+        answer: 0,
+        explanation: "Kelompokkan suku $xy$ dan suku $x$:<br>$$(8xy + 2xy) + (-3x + 7x) - 5 = 10xy + 4x - 5$$"
+      },
+      {
+        id: 9,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Jumlah dari $5x^2y - 2xy^2$ dan $-3x^2y + 7xy^2$ adalah...",
+        options: ["8x^2y + 5xy^2", "2x^2y + 5xy^2", "2x^2y - 9xy^2", "-2x^2y + 5xy^2"],
+        answer: 1,
+        explanation: "Jumlahkan suku sejenis berdasarkan variabel dan pangkat yang sama:<br>• Suku $x^2y$: $5x^2y + (-3x^2y) = 2x^2y$<br>• Suku $xy^2$: $-2xy^2 + 7xy^2 = 5xy^2$<br>Hasil: <strong>$2x^2y + 5xy^2$</strong>."
+      },
+      {
+        id: 10,
+        category: "suku-sejenis",
+        categoryLabel: "Penjumlahan & Pengurangan Suku Sejenis",
+        question: "Hasil pengurangan $(5a - 2b)$ <strong>OLEH</strong> $(3a + 4b)$ adalah...",
+        options: ["2a + 2b", "8a + 2b", "2a - 6b", "-2a + 6b"],
+        answer: 2,
+        explanation: "Kata kunci <strong>'OLEH'</strong> berarti bentuk pertama dikurangi bentuk kedua:<br>$$(5a - 2b) - (3a + 4b) = 5a - 2b - 3a - 4b = 2a - 6b$$"
+      },
+
+      // ----------------------------------------------------
+      // TOPIK 2: Perkalian Distributif / Dalam Kurung (11-20)
+      // ----------------------------------------------------
+      {
+        id: 11,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil dari perkalian $4x(3x - 2y)$ adalah...",
+        options: ["12x^2 - 2y", "12x - 8xy", "7x^2 - 6xy", "12x^2 - 8xy"],
+        answer: 3,
+        explanation: "Kalikan $4x$ ke seluruh suku di dalam kurung:<br>$$4x \cdot 3x - 4x \cdot 2y = 12x^2 - 8xy$$"
+      },
+      {
+        id: 12,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Jabarkan perkalian dua suku berikut: $(x + 5)(x - 3)$!",
+        options: ["x^2 + 2x - 15", "x^2 - 2x - 15", "x^2 + 8x - 15", "x^2 - 15"],
+        answer: 0,
+        explanation: "Gunakan metode perkalian distributif ganda (FOIL):<br>$$(x \cdot x) + (x \cdot -3) + (5 \cdot x) + (5 \cdot -3)$$ $$= x^2 - 3x + 5x - 15 = x^2 + 2x - 15$$"
+      },
+      {
+        id: 13,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil dari $(3x - 2)(2x + 5)$ adalah...",
+        options: ["6x^2 - 11x - 10", "6x^2 + 11x - 10", "6x^2 + 19x - 10", "6x^2 - 10"],
+        answer: 1,
+        explanation: "Jabarkan secara bertahap:<br>$$3x(2x + 5) - 2(2x + 5) = 6x^2 + 15x - 4x - 10 = 6x^2 + 11x - 10$$"
+      },
+      {
+        id: 14,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil penjabaran kuadrat dari $(2a + 5)^2$ adalah...",
+        options: ["4a^2 + 10a + 25", "4a^2 + 25", "4a^2 + 20a + 25", "2a^2 + 20a + 25"],
+        answer: 2,
+        explanation: "Gunakan rumus kuadrat sempurna $(x + y)^2 = x^2 + 2xy + y^2$:<br>• $x^2 = (2a)^2 = 4a^2$<br>• $2xy = 2(2a)(5) = 20a$<br>• $y^2 = 5^2 = 25$<br>Hasilnya: <strong>$4a^2 + 20a + 25$</strong>."
+      },
+      {
+        id: 15,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil perkalian dari $(4x - 3y)(4x + 3y)$ adalah...",
+        options: ["16x^2 + 9y^2", "16x^2 - 24xy - 9y^2", "8x^2 - 6y^2", "16x^2 - 9y^2"],
+        answer: 3,
+        explanation: "Gunakan sifat selisih dua kuadrat $(a - b)(a + b) = a^2 - b^2$:<br>$$(4x)^2 - (3y)^2 = 16x^2 - 9y^2$$"
+      },
+      {
+        id: 16,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Sederhanakan bentuk $2x(x - 3) + 3x(2x + 1)$!",
+        options: ["8x^2 - 3x", "8x^2 + 3x", "5x^2 - 3x", "8x^2 - 5x"],
+        answer: 0,
+        explanation: "Jabarkan kurung terlebih dahulu:<br>$$2x^2 - 6x + 6x^2 + 3x = (2x^2 + 6x^2) + (-6x + 3x) = 8x^2 - 3x$$"
+      },
+      {
+        id: 17,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil penjabaran dari $(x - 6)^2$ adalah...",
+        options: ["x^2 - 6x + 36", "x^2 - 12x + 36", "x^2 - 36", "x^2 + 12x + 36"],
+        answer: 1,
+        explanation: "Gunakan rumus $(a - b)^2 = a^2 - 2ab + b^2$:<br>$$x^2 - 2(x)(6) + 6^2 = x^2 - 12x + 36$$"
+      },
+      {
+        id: 18,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil dari $-5a(2a^2 - 3a + 4)$ adalah...",
+        options: ["-10a^3 - 15a^2 - 20a", "10a^3 - 15a^2 + 20a", "-10a^3 + 15a^2 - 20a", "-10a^2 + 15a - 20"],
+        answer: 2,
+        explanation: "Kalikan $-5a$ ke setiap suku di dalam kurung:<br>• $-5a \cdot 2a^2 = -10a^3$<br>• $-5a \cdot (-3a) = +15a^2$<br>• $-5a \cdot 4 = -20a$<br>Hasilnya: <strong>$-10a^3 + 15a^2 - 20a$</strong>."
+      },
+      {
+        id: 19,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Jabarkan perkalian berikut: $(2x - 1)(x^2 + 3x - 2)$!",
+        options: ["2x^3 + 6x^2 - 7x - 2", "2x^3 - 5x^2 + 7x - 2", "2x^3 + 5x^2 + 4x - 2", "2x^3 + 5x^2 - 7x + 2"],
+        answer: 3,
+        explanation: "Jabarkan secara terpisah:<br>$$2x(x^2 + 3x - 2) - 1(x^2 + 3x - 2)$$ $$= (2x^3 + 6x^2 - 4x) - (x^2 + 3x - 2) = 2x^3 + 5x^2 - 7x + 2$$"
+      },
+      {
+        id: 20,
+        category: "perkalian-kurung",
+        categoryLabel: "Perkalian Distributif & Kuadrat Suku Dua",
+        question: "Hasil kuadrat dari $(3a - 4b)^2$ adalah...",
+        options: ["9a^2 - 24ab + 16b^2", "9a^2 - 12ab + 16b^2", "9a^2 - 16b^2", "9a^2 + 24ab + 16b^2"],
+        answer: 0,
+        explanation: "Gunakan rumus kuadrat sempurna:<br>$$(3a)^2 - 2(3a)(4b) + (4b)^2 = 9a^2 - 24ab + 16b^2$$"
+      },
+
+      // ----------------------------------------------------
+      // TOPIK 3: Penyelesaian PLSV Langsung (21-30)
+      // ----------------------------------------------------
+      {
+        id: 21,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Tentukan nilai $x$ dari persamaan linear: <br><br> $$3x + 8 = 23$$",
+        options: ["x = 3", "x = 5", "x = 7", "x = 15"],
+        answer: 1,
+        explanation: "Pindahkan konstanta ke ruas kanan:<br>$$3x = 23 - 8 \implies 3x = 15 \implies x = \\frac{15}{3} = 5$$"
+      },
+      {
+        id: 22,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Selesaikan persamaan linear berikut: <br><br> $$4x - 5 = 2x + 7$$",
+        options: ["x = 1", "x = 12", "x = 6", "x = 3"],
+        answer: 2,
+        explanation: "Kelompokkan variabel di ruas kiri dan konstanta di ruas kanan:<br>$$4x - 2x = 7 + 5 \implies 2x = 12 \implies x = 6$$"
+      },
+      {
+        id: 23,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Tentukan nilai $y$ jika $2(y - 3) = 14$!",
+        options: ["y = 7", "y = 4", "y = 16", "y = 10"],
+        answer: 3,
+        explanation: "Bagi kedua ruas dengan 2:<br>$$y - 3 = 7 \implies y = 7 + 3 = 10$$"
+      },
+      {
+        id: 24,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Penyelesaian dari persamaan pecahan $$\\frac{3x - 2}{4} = 4$$ adalah...",
+        options: ["x = 6", "x = 5", "x = 18", "x = 8"],
+        answer: 0,
+        explanation: "Kalikan kedua ruas dengan 4:<br>$$3x - 2 = 16 \implies 3x = 18 \implies x = 6$$"
+      },
+      {
+        id: 25,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Tentukan nilai $m$ dari persamaan: <br><br> $$-5m + 12 = 2m - 2$$",
+        options: ["m = -2", "m = 2", "m = 3", "m = 10"],
+        answer: 1,
+        explanation: "Pindahkan variabel ke satu ruas:<br>$$-5m - 2m = -2 - 12 \implies -7m = -14 \implies m = \\frac{-14}{-7} = 2$$"
+      },
+      {
+        id: 26,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Tentukan nilai $a$ yang memenuhi persamaan: <br><br> $$5(a - 2) = 2(a + 7)$$",
+        options: ["a = 6", "a = 4", "a = 8", "a = 12"],
+        answer: 2,
+        explanation: "Jabarkan kurung di kedua ruas terlebih dahulu:<br>$$5a - 10 = 2a + 14 \implies 5a - 2a = 14 + 10 \implies 3a = 24 \implies a = 8$$"
+      },
+      {
+        id: 27,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Jika $2x + 7 = 19$, berapakah nilai dari $3x - 5$?",
+        options: ["6", "18", "11", "13"],
+        answer: 3,
+        explanation: "Cari nilai $x$ terlebih dahulu:<br>$$2x = 12 \implies x = 6$$<br>Substitusikan $x = 6$ ke bentuk $3x - 5$:<br>$$3(6) - 5 = 18 - 5 = 13$$"
+      },
+      {
+        id: 28,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Penyelesaian dari persamaan pecahan $$\\frac{1}{2}x + 3 = \\frac{1}{3}x + 5$$ adalah...",
+        options: ["x = 12", "x = 6", "x = 24", "x = 2"],
+        answer: 0,
+        explanation: "Kalikan seluruh ruas dengan 6 (KPK dari 2 dan 3):<br>$$6 \cdot \\left(\\frac{1}{2}x + 3\\right) = 6 \cdot \\left(\\frac{1}{3}x + 5\\right)$$ $$3x + 18 = 2x + 30 \implies 3x - 2x = 30 - 18 \implies x = 12$$"
+      },
+      {
+        id: 29,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Tentukan nilai $x$ dari persamaan $4(2x - 3) - 2(x + 1) = 10$!",
+        options: ["x = 3", "x = 4", "x = 2", "x = 5"],
+        answer: 1,
+        explanation: "Jabarkan kurung dan sederhanakan:<br>$$(8x - 12) - (2x + 2) = 10 \implies 6x - 14 = 10 \implies 6x = 24 \implies x = 4$$"
+      },
+      {
+        id: 30,
+        category: "plsv-direct",
+        categoryLabel: "Penyelesaian PLSV Langsung",
+        question: "Jika $x + 4 = -3x + 20$, berapakah nilai dari $x^2$?",
+        options: ["4", "9", "16", "25"],
+        answer: 2,
+        explanation: "Selesaikan persamaan untuk $x$:<br>$$x + 3x = 20 - 4 \implies 4x = 16 \implies x = 4$$<br>Nilai dari $x^2 = 4^2 = 16$."
+      },
+
+      // ----------------------------------------------------
+      // TOPIK 4: Soal Cerita / Aplikasi Kontekstual (31-40)
+      // ----------------------------------------------------
+      {
+        id: 31,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Dua kali suatu bilangan dikurangi $7$ hasilnya adalah $19$. Bilangan yang dimaksud adalah...",
+        options: ["11", "6", "26", "13"],
+        answer: 3,
+        explanation: "Misalkan bilangan tersebut $= x$.<br>Model matematika: $$2x - 7 = 19 \implies 2x = 26 \implies x = 13$$"
+      },
+      {
+        id: 32,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Umur Ayah $4$ kali umur Rian. Jika selisih umur mereka adalah $30$ tahun, berapakah umur Rian saat ini?",
+        options: ["10 tahun", "12 tahun", "8 tahun", "15 tahun"],
+        answer: 0,
+        explanation: "Misal Umur Rian $= x$, maka Umur Ayah $= 4x$.<br>Selisih umur:<br>$$4x - x = 30 \implies 3x = 30 \implies x = 10\\text{ tahun}$$"
+      },
+      {
+        id: 33,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Sebuah persegi panjang memiliki panjang $(2x + 3)\\text{ cm}$ dan lebar $(x - 1)\\text{ cm}$. Jika kelilingnya $28\\text{ cm}$, tentukan nilai $x$!",
+        options: ["3", "4", "5", "6"],
+        answer: 1,
+        explanation: "Rumus keliling $K = 2(p + l)$:<br>$$28 = 2((2x + 3) + (x - 1)) \implies 28 = 2(3x + 2)$$ $$28 = 6x + 4 \implies 6x = 24 \implies x = 4$$"
+      },
+      {
+        id: 34,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Jumlah tiga bilangan genap berurutan adalah $48$. Tentukan bilangan terkecil di antara ketiga bilangan tersebut!",
+        options: ["16", "18", "14", "12"],
+        answer: 2,
+        explanation: "Misalkan 3 bilangan genap berurutan adalah $x$, $x+2$, dan $x+4$.<br>$$x + (x + 2) + (x + 4) = 48 \implies 3x + 6 = 48 \implies 3x = 42 \implies x = 14$$ Bilangan terkecilnya adalah <strong>$14$</strong>."
+      },
+      {
+        id: 35,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Harga $3$ buah buku dan $2$ buah pensil adalah $\\text{Rp 19.000,00}$. Jika harga $1$ pensil adalah $\\text{Rp 2.000,00}$, berapakah harga $1$ buah buku?",
+        options: ["Rp 4.000,00", "Rp 6.000,00", "Rp 3.500,00", "Rp 5.000,00"],
+        answer: 3,
+        explanation: "Misal harga buku $= b$.<br>$$3b + 2(2.000) = 19.000 \implies 3b + 4.000 = 19.000 \implies 3b = 15.000 \implies b = 5.000$$"
+      },
+      {
+        id: 36,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Sebuah segitiga memiliki panjang sisi $(x + 2)\\text{ cm}$, $(2x + 1)\\text{ cm}$, dan $(3x - 1)\\text{ cm}$. Jika kelilingnya $26\\text{ cm}$, tentukan panjang sisi terpanjang!",
+        options: ["11 cm", "9 cm", "6 cm", "13 cm"],
+        answer: 0,
+        explanation: "Keliling $= (x + 2) + (2x + 1) + (3x - 1) = 6x + 2$<br>$$6x + 2 = 26 \implies 6x = 24 \implies x = 4$$<br>Panjang sisi-sisi segitiga:<br>• $4 + 2 = 6\\text{ cm}$<br>• $2(4) + 1 = 9\\text{ cm}$<br>• $3(4) - 1 = 11\\text{ cm}$ (Terpanjang)."
+      },
+      {
+        id: 37,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Andi membeli $5$ bungkus mi instan dan membayar dengan uang $\\text{Rp 20.000,00}$. Ia mendapat kembalian $\\text{Rp 2.500,00}$. Berapakah harga $1$ bungkus mi instan?",
+        options: ["Rp 3.000,00", "Rp 3.500,00", "Rp 4.000,00", "Rp 2.500,00"],
+        answer: 1,
+        explanation: "Misal harga 1 mi instan $= m$.<br>$$5m = 20.000 - 2.500 \implies 5m = 17.500 \implies m = \\frac{17.500}{5} = \\text{Rp 3.500,00}$$"
+      },
+      {
+        id: 38,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Luas sebuah persegi panjang adalah $60\\text{ cm}^2$. Jika lebarnya $5\\text{ cm}$ dan panjangnya $(2x + 2)\\text{ cm}$, berapakah nilai $x$?",
+        options: ["6", "4", "5", "10"],
+        answer: 2,
+        explanation: "Luas $= p \\times l$:<br>$$60 = (2x + 2) \\times 5 \implies 60 = 10x + 10 \implies 10x = 50 \implies x = 5$$"
+      },
+      {
+        id: 39,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Budi memiliki kelereng $5$ lebihnya dari kelereng Dedi. Jika jumlah kelereng mereka berdua adalah $35$ butir, berapa banyak kelereng Budi?",
+        options: ["15 butir", "25 butir", "18 butir", "20 butir"],
+        answer: 3,
+        explanation: "Misal Kelereng Dedi $= x$, maka Kelereng Budi $= x + 5$.<br>$$x + (x + 5) = 35 \implies 2x + 5 = 35 \implies 2x = 30 \implies x = 15$$<br>Banyak kelereng Budi $= 15 + 5 = <strong>20\\text{ butir}$</strong>."
+      },
+      {
+        id: 40,
+        category: "soal-cerita",
+        categoryLabel: "Soal Cerita & Aplikasi Kontekstual",
+        question: "Pak Anton berumur $3$ kali umur anaknya, Tito. Sepuluh tahun yang akan datang, jumlah umur mereka adalah $60$ tahun. Berapakah umur Tito sekarang?",
+        options: ["10 tahun", "12 tahun", "15 tahun", "8 tahun"],
+        answer: 0,
+        explanation: "Misal Umur Tito sekarang $= x$, maka Umur Pak Anton $= 3x$.<br>10 tahun mendatang: Tito $= x + 10$, Pak Anton $= 3x + 10$.<br>$$(x + 10) + (3x + 10) = 60 \implies 4x + 20 = 60 \implies 4x = 40 \implies x = 10\\text{ tahun}$$"
+      }
+    ];
+
+    /* ========================================================
+       GLOBAL STATE VARIABLES
+       ======================================================== */
+    let filteredQuestions = [...questionBank];
+    let currentIndex = 0;
+    let userAnswers = {}; // { questionId: optionIndex }
+    let quizMode = "practice"; // 'practice' or 'exam'
+    let soundEnabled = true;
+    let timerInterval = null;
+    let timeRemaining = 40 * 60; // 40 minutes in seconds
+
+    /* ========================================================
+       AUDIO SYNTHESIS (Web Audio API)
+       ======================================================== */
+    function playSound(type) {
+      if (!soundEnabled) return;
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'correct') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+          osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.3);
+        } else if (type === 'wrong') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+          osc.frequency.exponentialRampToValueAtTime(130.81, ctx.currentTime + 0.2); // C3
+          gain.gain.setValueAtTime(0.3, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.35);
+        }
+      } catch (e) {
+        console.log("Audio not supported or blocked", e);
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const soundIcon = document.getElementById('sound-icon');
+      if (soundEnabled) {
+        soundIcon.className = 'fa-solid fa-volume-high text-blue-400';
+      } else {
+        soundIcon.className = 'fa-solid fa-volume-xmark text-rose-400';
+      }
+    }
+
+    /* ========================================================
+       QUIZ ENGINE & LOGIC
+       ======================================================== */
+    window.onload = function() {
+      restartQuiz();
+    };
+
+    function setQuizMode(mode) {
+      quizMode = mode;
+      const practiceBtn = document.getElementById('btn-mode-practice');
+      const examBtn = document.getElementById('btn-mode-exam');
+      const modeBadge = document.getElementById('mode-badge');
+      const timerBox = document.getElementById('timer-box');
+
+      if (mode === 'practice') {
+        practiceBtn.className = "py-1.5 px-3 rounded-lg text-xs font-semibold transition bg-blue-600 text-white shadow";
+        examBtn.className = "py-1.5 px-3 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        modeBadge.innerHTML = '<i class="fa-solid fa-book-open mr-1"></i> Mode Latihan';
+        timerBox.classList.add('hidden');
+        clearInterval(timerInterval);
+      } else {
+        examBtn.className = "py-1.5 px-3 rounded-lg text-xs font-semibold transition bg-amber-600 text-white shadow";
+        practiceBtn.className = "py-1.5 px-3 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+        modeBadge.innerHTML = '<i class="fa-solid fa-clock mr-1"></i> Mode Ujian';
+        timerBox.classList.remove('hidden');
+        startTimer();
+      }
+      renderCurrentQuestion();
+    }
+
+    function changeFilter() {
+      const selectedCat = document.getElementById('category-filter').value;
+      if (selectedCat === 'all') {
+        filteredQuestions = [...questionBank];
+      } else {
+        filteredQuestions = questionBank.filter(q => q.category === selectedCat);
+      }
+      restartQuiz();
+    }
+
+    function restartQuiz() {
+      currentIndex = 0;
+      userAnswers = {};
+      
+      // Reset timer if in exam mode
+      if (quizMode === 'exam') {
+        timeRemaining = filteredQuestions.length * 60; // 1 min per question
+        startTimer();
+      }
+
+      renderMapGrid();
+      renderCurrentQuestion();
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeRemaining = filteredQuestions.length * 60;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          finishQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const timerDisplay = document.getElementById('timer-display');
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function renderCurrentQuestion() {
+      if (filteredQuestions.length === 0) return;
+
+      const q = filteredQuestions[currentIndex];
+      
+      // Update Category Tag
+      document.getElementById('question-category-tag').innerText = q.categoryLabel;
+
+      // Update Question Text
+      document.getElementById('question-text').innerHTML = `<strong>${currentIndex + 1}.</strong> ${q.question}`;
+
+      // Progress bar
+      const progressPercent = ((currentIndex + 1) / filteredQuestions.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+      document.getElementById('progress-text').innerText = `Soal ${currentIndex + 1} dari ${filteredQuestions.length}`;
+
+      // Navigation Buttons Enable/Disable
+      document.getElementById('btn-prev').disabled = currentIndex === 0;
+      document.getElementById('btn-next').innerText = (currentIndex === filteredQuestions.length - 1) ? "Selesai" : "Berikutnya";
+
+      // Render Options
+      const optionsContainer = document.getElementById('options-grid');
+      optionsContainer.innerHTML = '';
+
+      const optionLabels = ['A', 'B', 'C', 'D'];
+      const hasAnswered = userAnswers.hasOwnProperty(q.id);
+      const selectedOption = userAnswers[q.id];
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `option-btn w-full text-left p-4 rounded-xl border text-sm font-medium transition flex items-center justify-between gap-3 `;
+        
+        let borderBgStyle = "bg-slate-800/80 border-slate-700 text-slate-200 hover:bg-slate-700/80";
+
+        if (hasAnswered) {
+          if (quizMode === 'practice') {
+            if (idx === q.answer) {
+              borderBgStyle = "bg-emerald-500/20 border-emerald-500 text-emerald-300 font-bold";
+            } else if (idx === selectedOption) {
+              borderBgStyle = "bg-rose-500/20 border-rose-500 text-rose-300 font-bold";
+            } else {
+              borderBgStyle = "bg-slate-800/40 border-slate-800 text-slate-500 opacity-60";
+            }
+          } else { // Exam mode: just mark selected
+            if (idx === selectedOption) {
+              borderBgStyle = "bg-blue-600/30 border-blue-500 text-blue-300 font-bold";
+            } else {
+              borderBgStyle = "bg-slate-800/50 border-slate-700 text-slate-400";
+            }
+          }
+        }
+
+        btn.className += borderBgStyle;
+        btn.onclick = () => selectOption(q.id, idx);
+
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-slate-700/60 border border-slate-600/60 flex items-center justify-center text-xs font-bold shrink-0">
+              ${optionLabels[idx]}
+            </span>
+            <span>$${optText}$</span>
+          </div>
+          ${hasAnswered && quizMode === 'practice' && idx === q.answer ? '<i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>' : ''}
+          ${hasAnswered && quizMode === 'practice' && idx === selectedOption && idx !== q.answer ? '<i class="fa-solid fa-circle-xmark text-rose-400 text-base"></i>' : ''}
+        `;
+
+        optionsContainer.appendChild(btn);
+      });
+
+      // Explanation Box Visibility
+      const explBox = document.getElementById('explanation-box');
+      if (hasAnswered && quizMode === 'practice') {
+        document.getElementById('explanation-text').innerHTML = q.explanation;
+        explBox.classList.remove('hidden');
+      } else {
+        explBox.classList.add('hidden');
+      }
+
+      // Re-trigger MathJax Typeset
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      }
+
+      updateMapGridState();
+    }
+
+    function selectOption(questionId, optionIdx) {
+      const q = filteredQuestions.find(item => item.id === questionId);
+      if (!q) return;
+
+      const isFirstAnswer = !userAnswers.hasOwnProperty(questionId);
+      userAnswers[questionId] = optionIdx;
+
+      // Play audio feedback
+      if (isFirstAnswer || quizMode === 'practice') {
+        if (optionIdx === q.answer) {
+          playSound('correct');
+        } else {
+          playSound('wrong');
+        }
+      }
+
+      renderCurrentQuestion();
+      renderMapGrid();
+    }
+
+    function navigateQuestion(direction) {
+      if (currentIndex + direction >= 0 && currentIndex + direction < filteredQuestions.length) {
+        currentIndex += direction;
+        renderCurrentQuestion();
+      } else if (currentIndex + direction >= filteredQuestions.length) {
+        finishQuiz();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      currentIndex = index;
+      renderCurrentQuestion();
+    }
+
+    function renderMapGrid() {
+      const mapContainer = document.getElementById('question-map-grid');
+      mapContainer.innerHTML = '';
+
+      let answeredCount = 0;
+
+      filteredQuestions.forEach((q, idx) => {
+        const isAnswered = userAnswers.hasOwnProperty(q.id);
+        if (isAnswered) answeredCount++;
+
+        const btn = document.createElement('button');
+        btn.onclick = () => jumpToQuestion(idx);
+
+        let btnStyle = "bg-slate-800 text-slate-400 border-slate-700 hover:border-slate-500";
+
+        if (idx === currentIndex) {
+          btnStyle = "ring-2 ring-blue-500 bg-blue-600 text-white font-bold border-transparent shadow";
+        } else if (isAnswered) {
+          if (quizMode === 'practice') {
+            btnStyle = userAnswers[q.id] === q.answer 
+              ? "bg-emerald-600/30 text-emerald-300 border-emerald-500/50 font-bold" 
+              : "bg-rose-600/30 text-rose-300 border-rose-500/50 font-bold";
+          } else {
+            btnStyle = "bg-blue-600/30 text-blue-300 border-blue-500/50 font-semibold";
+          }
+        }
+
+        btn.className = `w-full h-9 rounded-lg border text-xs flex items-center justify-center transition ${btnStyle}`;
+        btn.innerText = idx + 1;
+
+        mapContainer.appendChild(btn);
+      });
+
+      document.getElementById('answered-count').innerText = `${answeredCount}/${filteredQuestions.length} Terjawab`;
+    }
+
+    function updateMapGridState() {
+      renderMapGrid();
+    }
+
+    function finishQuiz() {
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      let wrongCount = 0;
+
+      filteredQuestions.forEach(q => {
+        if (userAnswers.hasOwnProperty(q.id)) {
+          if (userAnswers[q.id] === q.answer) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        }
+      });
+
+      const total = filteredQuestions.length;
+      const score = Math.round((correctCount / total) * 100);
+
+      document.getElementById('final-score').innerText = score;
+      document.getElementById('final-correct').innerText = correctCount;
+      document.getElementById('final-wrong').innerText = wrongCount;
+
+      const gradeText = document.getElementById('score-grade-text');
+      const scoreIcon = document.getElementById('score-icon');
+
+      if (score >= 85) {
+        gradeText.innerText = "Luar Biasa! Pemahaman Aljabar Anda Sangat Baik!";
+        scoreIcon.className = "fa-solid fa-trophy text-amber-400";
+      } else if (score >= 70) {
+        gradeText.innerText = "Bagus! Teruskan Berlatih Untuk Mencapai Nilai Sempurna.";
+        scoreIcon.className = "fa-solid fa-medal text-blue-400";
+      } else {
+        gradeText.innerText = "Tetap Semangat! Pelajari Kembali Pembahasan Soal.";
+        scoreIcon.className = "fa-solid fa-book-open-reader text-emerald-400";
+      }
+
+      document.getElementById('score-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('score-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

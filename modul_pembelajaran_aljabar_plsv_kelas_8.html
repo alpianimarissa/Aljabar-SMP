@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul Interaktif Matematika Kelas 8: Bentuk Aljabar & PLSV</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- MathJax Configuration for LaTeX Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .page-content { display: none; }
+    .page-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Custom Scrollbar for Drawer */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header Section -->
+  <header class="bg-indigo-700 text-white shadow-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <button id="toggleMenu" class="md:hidden text-white hover:text-indigo-200 focus:outline-none">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+        <span class="bg-indigo-900 text-indigo-200 text-xs font-semibold px-2.5 py-1 rounded-full">SMP Kelas 8</span>
+        <h1 class="font-bold text-lg md:text-xl truncate">Aljabar & PLSV Interaktif</h1>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="text-xs md:text-sm bg-indigo-800 px-3 py-1.5 rounded-lg border border-indigo-600">
+          Halaman <span id="currentPageNum" class="font-bold text-yellow-300">1</span> dari <span class="font-bold">35</span>
+        </div>
+      </div>
+    </div>
+    <!-- Progress Bar -->
+    <div class="w-full bg-indigo-900 h-1.5">
+      <div id="progressBar" class="bg-yellow-400 h-1.5 transition-all duration-300" style="width: 2.85%;"></div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="max-w-6xl mx-auto w-full flex-grow flex flex-col md:flex-row p-4 gap-6">
+
+    <!-- Sidebar Navigation / Index -->
+    <aside id="sidebar" class="hidden md:block w-full md:w-72 bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex-shrink-0 h-[calc(100vh-100px)] sticky top-20 overflow-y-auto">
+      <h2 class="font-bold text-slate-700 mb-3 flex items-center gap-2 border-b pb-2">
+        <i class="fa-solid fa-list-ol text-indigo-600"></i> Daftar Halaman
+      </h2>
+      <div class="space-y-1 text-sm" id="navList">
+        <!-- JS will populate nav items -->
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="flex-grow bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 flex flex-col justify-between">
+      
+      <div id="pagesContainer" class="flex-grow">
+
+        <!-- Page 1 -->
+        <div id="page-1" class="page-content active">
+          <div class="text-center py-8">
+            <span class="inline-block p-4 bg-indigo-50 text-indigo-600 rounded-full mb-4">
+              <i class="fa-solid fa-calculator text-5xl"></i>
+            </span>
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-3">Modul E-Learning Matematika</h2>
+            <h3 class="text-xl font-semibold text-indigo-600 mb-6">Operasi Bentuk Aljabar & Persamaan Linear Satu Variabel (PLSV)</h3>
+            <p class="text-slate-600 max-w-xl mx-auto mb-8 leading-relaxed">
+              Selamat datang! Modul ini dirancang khusus untuk siswa Kelas 8 SMP/MTs. Kamu akan belajar mengenai keindahan aljabar, mulai dari menyederhanakan bentuk aljabar hingga memecahkan teka-teki matematika dengan PLSV secara bertahap dan menyenangkan.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto text-left mb-8">
+              <div class="p-4 bg-blue-50 border border-blue-100 rounded-lg">
+                <i class="fa-solid fa-layer-group text-blue-600 text-xl mb-2"></i>
+                <h4 class="font-bold text-slate-800">35 Halaman Pembelajaran</h4>
+                <p class="text-xs text-slate-600">Materi terstruktur ringkas dan padat</p>
+              </div>
+              <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-lg">
+                <i class="fa-solid fa-lightbulb text-emerald-600 text-xl mb-2"></i>
+                <h4 class="font-bold text-slate-800">Konsep Kontekstual</h4>
+                <p class="text-xs text-slate-600">Dihubungkan dengan kehidupan nyata</p>
+              </div>
+              <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
+                <i class="fa-solid fa-circle-check text-amber-600 text-xl mb-2"></i>
+                <h4 class="font-bold text-slate-800">Latihan Interaktif</h4>
+                <p class="text-xs text-slate-600">Uji pemahamanmu secara langsung</p>
+              </div>
+            </div>
+            <button onclick="goToPage(2)" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md transition duration-200">
+              Mulai Pembelajaran <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="page-2" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 1: Pengenalan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Tujuan Pembelajaran</h2>
+          </div>
+          <p class="text-slate-600 mb-6">Setelah mempelajari seluruh materi pada modul ini, kamu diharapkan mampu:</p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+              <div>
+                <h3 class="font-bold text-slate-800">Mengenal Unsur-Unsur Aljabar</h3>
+                <p class="text-sm text-slate-600">Mengidentifikasi variabel, koefisien, konstanta, serta membedakan suku sejenis dan suku tak sejenis.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+              <div>
+                <h3 class="font-bold text-slate-800">Mengoperasikan Bentuk Aljabar</h3>
+                <p class="text-sm text-slate-600">Melakukan penjumlahan dan pengurangan pada suku sejenis, perkalian sifat distributif (dalam kurung), serta pembagian aljabar sederet.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+              <div>
+                <h3 class="font-bold text-slate-800">Memahami Konsep Kesetaraan PLSV</h3>
+                <p class="text-sm text-slate-600">Mengubah kalimat terbuka menjadi Persamaan Linear Satu Variabel (PLSV) dan menggunakan prinsip timbangan seimbang.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+              <div>
+                <h3 class="font-bold text-slate-800">Menyelesaikan Masalah Kontekstual</h3>
+                <p class="text-sm text-slate-600">Menyelesaikan model matematika dari kehidupan sehari-hari menggunakan operasi aljabar dan penyelesaian PLSV.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3 -->
+        <div id="page-3" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Apersepsi / Pemanasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Warm-Up 1: Permainan Rahasia Simbol</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Sebelum masuk ke rumus matematika, mari kita bayangkan sebuah permainan toko buah berikut:</p>
+          <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-r-lg">
+            <p class="font-medium text-amber-900">
+              Bayangkan di sebuah toko:
+            </p>
+            <ul class="list-disc list-inside text-sm text-amber-800 mt-2 space-y-1">
+              <li>1 Keranjang Apel disimbolkan dengan gambar 🍎</li>
+              <li>1 Keranjang Jeruk disimbolkan dengan gambar 🍊</li>
+            </ul>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+            <p class="font-semibold text-slate-700">Pertanyaan Perenungan:</p>
+            <p class="text-sm">1. Jika Budi membeli 3 keranjang apel (🍎🍎🍎) dan Ani memberi Budi 2 keranjang apel lagi (🍎🍎), berapa total keranjang apel Budi sekarang?</p>
+            <p class="text-sm text-indigo-700 font-bold">Jawaban: 3 keranjang apel + 2 keranjang apel = 5 keranjang apel (5🍎)</p>
+            <hr>
+            <p class="text-sm">2. Jika Budi punya 3 keranjang apel (🍎🍎🍎) lalu membeli 2 keranjang jeruk (🍊🍊), bisakah kita katakan Budi punya 5 keranjang apel-jeruk?</p>
+            <p class="text-sm text-rose-600 font-bold">Jawabannya TIDAK! Apel dan Jeruk adalah barang yang berbeda. Kita hanya bisa menyebutnya: 3 keranjang apel + 2 keranjang jeruk.</p>
+          </div>
+          <p class="mt-4 text-slate-600 text-sm">
+            Inilah inti dasar Aljabar: <strong>Kita HANYA bisa menjumlahkan atau mengurangkan objek yang sejenis!</strong>
+          </p>
+        </div>
+
+        <!-- Page 4 -->
+        <div id="page-4" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Apersepsi / Pemanasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Warm-Up 2: Kotak Misteri Variabel</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Mengapa dalam matematika kita sering melihat huruf seperti $x, y, a,$ atau $b$?</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+            <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+              <div class="text-4xl mb-2">📦</div>
+              <h3 class="font-bold text-indigo-900">Kotak Misteri</h3>
+              <p class="text-xs text-indigo-700 mt-1">
+                Di dalam kotak ada sejumlah kelereng yang belum kita ketahui jumlah pastinya.
+              </p>
+            </div>
+            <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+              <div class="text-4xl mb-2 font-serif text-indigo-700 italic">$x$</div>
+              <h3 class="font-bold text-indigo-900">Huruf Variabel ($x$)</h3>
+              <p class="text-xs text-indigo-700 mt-1">
+                Daripada menggambar kotak terus-menerus, matematikawan sepakat menggunakan huruf $x$ untuk mewakili nilai yang belum diketahui tersebut.
+              </p>
+            </div>
+          </div>
+          <div class="bg-slate-100 p-4 rounded-lg">
+            <p class="text-sm text-slate-700">
+              Jika 1 kotak berisi $x$ kelereng, maka:
+            </p>
+            <ul class="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
+              <li>2 kotak kelereng $= x + x = 2x$</li>
+              <li>3 kotak kelereng ditambah 4 kelereng lepas $= 3x + 4$</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Page 5 -->
+        <div id="page-5" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Koneksi Kehidupan Nyata</span>
+            <h2 class="text-2xl font-bold text-slate-800">Koneksi Nyata 1: Aljabar di Minimarket</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Apakah aljabar berguna di dunia nyata? Mari simak cerita Rian di Minimarket!</p>
+          <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-xl space-y-3">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-shopping-cart text-2xl text-emerald-600"></i>
+              <h3 class="font-bold text-emerald-900">Struk Belanja Rian</h3>
+            </div>
+            <p class="text-sm text-slate-700">
+              Rian membeli <strong>3 buku tulis</strong> dan <strong>2 pensil</strong>. Harga 1 buku tulis adalah $x$ rupiah dan harga 1 pensil adalah $y$ rupiah.
+            </p>
+            <div class="bg-white p-3 rounded border border-emerald-300 font-mono text-sm text-slate-800">
+              Total Pembayaran = $3 \times x + 2 \times y = 3x + 2y$
+            </div>
+            <p class="text-xs text-slate-600">
+              Jika harga buku $x = \text{Rp } 5.000$ dan pensil $y = \text{Rp } 3.000$, maka kasir cukup menghitung:
+              <br>
+              $\text{Total} = 3(5.000) + 2(3.000) = 15.000 + 6.000 = \text{Rp } 21.000$.
+            </p>
+          </div>
+          <div class="mt-4 text-xs text-slate-500 italic">
+            *Aljabar memudahkan kita membuat rumus belanja umum sebelum angka pasti dimasukkan!
+          </div>
+        </div>
+
+        <!-- Page 6 -->
+        <div id="page-6" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 2: Konsep Dasar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Anatomi Bentuk Aljabar</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Mari bedah unsur-unsur penting dari suatu bentuk aljabar, contohnya: <span class="font-bold text-indigo-600">$5x + 3y - 7$</span></p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+              <span class="bg-indigo-600 text-white text-xs px-2 py-0.5 rounded font-bold">Variabel (Peubah)</span>
+              <p class="text-sm text-slate-700 mt-2">Huruf yang mewakili nilai yang belum diketahui.</p>
+              <p class="text-sm font-bold text-indigo-800 mt-1">Pada $5x + 3y - 7$, variabelnya adalah $x$ dan $y$.</p>
+            </div>
+            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <span class="bg-blue-600 text-white text-xs px-2 py-0.5 rounded font-bold">Koefisien</span>
+              <p class="text-sm text-slate-700 mt-2">Angka yang menempel/mengalikan variabel.</p>
+              <p class="text-sm font-bold text-blue-800 mt-1">Koefisien dari $x$ adalah $5$, koefisien dari $y$ adalah $3$.</p>
+            </div>
+            <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <span class="bg-amber-600 text-white text-xs px-2 py-0.5 rounded font-bold">Konstanta</span>
+              <p class="text-sm text-slate-700 mt-2">Nilai berupa angka tetap yang berdiri sendiri tanpa variabel.</p>
+              <p class="text-sm font-bold text-amber-800 mt-1">Konstantanya adalah $-7$ (perhatikan tanda negatifnya).</p>
+            </div>
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+              <span class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded font-bold">Suku</span>
+              <p class="text-sm text-slate-700 mt-2">Bagian aljabar yang dipisahkan oleh tanda $+$ atau $-$.</p>
+              <p class="text-sm font-bold text-emerald-800 mt-1">Suku-sukunya adalah $5x$, $3y$, dan $-7$ (Terdiri dari 3 suku / Triterminal).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 7 -->
+        <div id="page-7" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 2: Konsep Dasar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Suku Sejenis vs Suku Tak Sejenis</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Kunci utama operasi penjumlahan dan pengurangan aljabar adalah memahami <strong>Suku Sejenis</strong>.</p>
+          
+          <div class="space-y-4">
+            <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg">
+              <h3 class="font-bold text-emerald-900">Suku Sejenis</h3>
+              <p class="text-sm text-emerald-800 mt-1">
+                Suku-suku yang memiliki <strong>variabel yang sama</strong> DAN <strong>pangkat variabel yang sama</strong>.
+              </p>
+              <div class="mt-2 bg-white p-2 rounded text-xs text-slate-700 font-mono">
+                • $3x$ dan $7x$ (Sejenis, variabel $x$ pangkat 1)<br>
+                • $-2a^2b$ dan $5a^2b$ (Sejenis, variabel $a^2b$)<br>
+                • $8$ dan $-15$ (Sejenis, sesama konstanta)
+              </div>
+            </div>
+
+            <div class="p-4 bg-rose-50 border-l-4 border-rose-500 rounded-r-lg">
+              <h3 class="font-bold text-rose-900">Suku Tak Sejenis</h3>
+              <p class="text-sm text-rose-800 mt-1">
+                Suku-suku yang memiliki variabel berbeda ATAU pangkat variabel berbeda.
+              </p>
+              <div class="mt-2 bg-white p-2 rounded text-xs text-slate-700 font-mono">
+                • $3x$ dan $3y$ (Tak sejenis, variabel $x$ dan $y$ berbeda)<br>
+                • $4x$ dan $4x^2$ (Tak sejenis, pangkatnya berbeda: 1 dan 2)<br>
+                • $5a$ dan $5$ (Tak sejenis, yang satu punya variabel $a$, satunya konstanta)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 8 -->
+        <div id="page-8" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Contoh Soal & Pembahasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Contoh: Mengidentifikasi Unsur Aljabar</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 1:</p>
+              <p class="text-sm text-slate-700">Ditentukan bentuk aljabar: $2x^2 - 4x + 9$. Tentukan koefisien dari $x$, koefisien dari $x^2$, dan konstantanya!</p>
+              <div class="mt-3 bg-blue-50 p-3 rounded text-sm text-blue-900 border border-blue-200">
+                <p class="font-semibold">Pembahasan:</p>
+                <ul class="list-disc list-inside mt-1 space-y-1 text-xs">
+                  <li>Koefisien $x^2$ adalah angka di depan $x^2$, yaitu $2$.</li>
+                  <li>Koefisien $x$ adalah angka di depan $x$, yaitu $-4$ (ingat tanda minus di depannya).</li>
+                  <li>Konstanta adalah angka tanpa variabel, yaitu $9$.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 2:</p>
+              <p class="text-sm text-slate-700">Kelompokkan suku-suku berikut yang sejenis: $3p, -2q, 7, 5p, 8q, -10$.</p>
+              <div class="mt-3 bg-blue-50 p-3 rounded text-sm text-blue-900 border border-blue-200">
+                <p class="font-semibold">Pembahasan:</p>
+                <p class="text-xs mt-1">
+                  • Suku sejenis dengan $p$: $3p$ dan $5p$<br>
+                  • Suku sejenis dengan $q$: $-2q$ dan $8q$<br>
+                  • Suku sejenis konstanta: $7$ dan $-10$
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 9 -->
+        <div id="page-9" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Latihan Mandiri Interaktif</span>
+            <h2 class="text-2xl font-bold text-slate-800">Latsol 1: Uji Pemahaman Unsur Aljabar</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Pilihlah pasangan suku berikut yang merupakan <strong>Suku Sejenis</strong>!</p>
+
+          <div class="space-y-3">
+            <button onclick="checkQuiz(1, false)" class="q1-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              A. $4x$ dan $4y$
+            </button>
+            <button onclick="checkQuiz(1, true)" class="q1-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              B. $-3a^2b$ dan $7a^2b$
+            </button>
+            <button onclick="checkQuiz(1, false)" class="q1-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              C. $5x$ dan $5x^2$
+            </button>
+            <button onclick="checkQuiz(1, false)" class="q1-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              D. $2m$ dan $2$
+            </button>
+          </div>
+
+          <div id="quiz-feedback-1" class="mt-4 p-3 rounded-lg hidden text-sm font-semibold"></div>
+        </div>
+
+        <!-- Page 10 -->
+        <div id="page-10" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 3: Operasi Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Penjumlahan Bentuk Aljabar</h2>
+          </div>
+          <p class="text-slate-600 mb-4">Aturan Emas Penjumlahan: <strong>Hanya suku-suku SEJENIS yang boleh dijumlahkan koefisiennya!</strong></p>
+          
+          <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg mb-4">
+            <h3 class="font-bold text-indigo-900 mb-2">Bentuk Umum:</h3>
+            <p class="text-center font-mono text-indigo-800 text-base">
+              $ax + bx = (a + b)x$
+            </p>
+          </div>
+
+          <h3 class="font-bold text-slate-800 mb-2">Langkah-Langkah Penyelesaian:</h3>
+          <ol class="list-decimal list-inside space-y-2 text-sm text-slate-700">
+            <li>Dekatkan / kumpulkan suku-suku yang <strong>sejenis</strong>.</li>
+            <li>Jumlahkan nilai <strong>koefisien</strong> suku sejenis tersebut.</li>
+            <li>Variabelnya tetap sama (tidak berubah pangkatnya saat penjumlahan!).</li>
+          </ol>
+
+          <div class="mt-4 p-3 bg-slate-100 rounded text-xs font-mono text-slate-800">
+            Contoh Ringkas:<br>
+            $3x + 5x = (3 + 5)x = 8x$<br>
+            $4a + 2b + 3a = (4a + 3a) + 2b = 7a + 2b$
+          </div>
+        </div>
+
+        <!-- Page 11 -->
+        <div id="page-11" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 3: Operasi Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Pengurangan Bentuk Aljabar & Waspada Kata "Dari"</h2>
+          </div>
+          <p class="text-slate-600 mb-3">Sama seperti penjumlahan, pengurangan hanya berlaku untuk suku sejenis. Namun, perhatikan kalimat soalnya!</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+            <div class="p-4 bg-amber-50 border border-amber-300 rounded-lg">
+              <h4 class="font-bold text-amber-900 text-sm">Kalimat 1: "Kurangkan $A$ OLEH $B$"</h4>
+              <p class="text-xs text-amber-800 mt-1">Artinya posisinya tetap:</p>
+              <p class="font-mono text-center font-bold text-amber-900 my-2">$A - B$</p>
+            </div>
+            <div class="p-4 bg-rose-50 border border-rose-300 rounded-lg">
+              <h4 class="font-bold text-rose-900 text-sm">Kalimat 2: "Kurangkan $A$ DARI $B$"</h4>
+              <p class="text-xs text-rose-800 mt-1">Artinya posisinya DIBALIK ($B$ dikurangi $A$):</p>
+              <p class="font-mono text-center font-bold text-rose-900 my-2">$B - A$</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded text-xs text-slate-700">
+            <strong>Peringatan Tanda Kurung:</strong> Saat mengurangkan kelompok suku, berikan tanda kurung karena tanda minus akan mendistribusikan pengaruh ke seluruh suku di dalamnya!
+            <br>
+            Contoh: $5x - (2x - 3) = 5x - 2x + 3 = 3x + 3$.
+          </div>
+        </div>
+
+        <!-- Page 12 -->
+        <div id="page-12" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Contoh Soal & Pembahasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Contoh: Penjumlahan & Pengurangan Aljabar</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 1:</p>
+              <p class="text-sm text-slate-700">Sederhanakan bentuk aljabar: $(7x - 3y + 4) + (2x + 8y - 10)$</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                = $7x - 3y + 4 + 2x + 8y - 10$<br>
+                = $(7x + 2x) + (-3y + 8y) + (4 - 10)$ &nbsp;&nbsp;← (kelompokkan suku sejenis)<br>
+                = $9x + 5y - 6$
+              </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 2:</p>
+              <p class="text-sm text-slate-700">Kurangkan $3x - 5$ dari $8x + 2$!</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                Ingat kata "DARI", maka: $(8x + 2) - (3x - 5)$<br>
+                = $8x + 2 - 3x + 5$ &nbsp;&nbsp;← (perhatikan $-(-5)$ menjadi $+5$)<br>
+                = $(8x - 3x) + (2 + 5)$<br>
+                = $5x + 7$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 13 -->
+        <div id="page-13" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Koneksi Kehidupan Nyata</span>
+            <h2 class="text-2xl font-bold text-slate-800">Koneksi Nyata 2: Keliling Kebun Pak Budi</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Pak Budi memiliki kebun berbentuk segitiga dengan panjang sisi-sisinya dinyatakan dalam bentuk aljabar:</p>
+
+          <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg flex flex-col md:flex-row items-center gap-4 mb-4">
+            <div class="text-emerald-700 text-5xl">📐</div>
+            <div class="text-sm text-emerald-900">
+              <p>• Sisi 1 = $(2x + 3)$ meter</p>
+              <p>• Sisi 2 = $(x + 5)$ meter</p>
+              <p>• Sisi 3 = $(3x - 1)$ meter</p>
+            </div>
+          </div>
+
+          <p class="text-sm font-semibold text-slate-800 mb-2">Berapakah Keliling Kebun Pak Budi seluruhnya?</p>
+          <div class="bg-white p-3 border border-slate-300 rounded font-mono text-xs space-y-1">
+            <p>$\text{Keliling} = \text{Sisi } 1 + \text{Sisi } 2 + \text{Sisi } 3$</p>
+            <p>$\text{Keliling} = (2x + 3) + (x + 5) + (3x - 1)$</p>
+            <p>$\text{Keliling} = (2x + x + 3x) + (3 + 5 - 1)$</p>
+            <p class="font-bold text-indigo-700">$\text{Keliling} = (6x + 7) \text{ meter}$</p>
+          </div>
+        </div>
+
+        <!-- Page 14 -->
+        <div id="page-14" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Latihan Mandiri Interaktif</span>
+            <h2 class="text-2xl font-bold text-slate-800">Latsol 2: Penjumlahan & Pengurangan</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Hasil penyederhanaan dari $5a - 2b + 3a + 7b$ adalah...</p>
+
+          <div class="space-y-3">
+            <button onclick="checkQuiz(2, false)" class="q2-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              A. $8a - 5b$
+            </button>
+            <button onclick="checkQuiz(2, true)" class="q2-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              B. $8a + 5b$
+            </button>
+            <button onclick="checkQuiz(2, false)" class="q2-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              C. $2a + 9b$
+            </button>
+            <button onclick="checkQuiz(2, false)" class="q2-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              D. $13ab$
+            </button>
+          </div>
+
+          <div id="quiz-feedback-2" class="mt-4 p-3 rounded-lg hidden text-sm font-semibold"></div>
+        </div>
+
+        <!-- Page 15 -->
+        <div id="page-15" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 4: Perkalian Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Perkalian Suku Satu Ke Dalam Kurung (Sifat Distributif)</h2>
+          </div>
+          <p class="text-slate-600 mb-4 text-sm">Perkalian aljabar <strong>TIDAK HARUS</strong> suku sejenis! Berbeda dengan penjumlahan, pada perkalian variabel juga saling dikalikan (pangkat bertambah).</p>
+
+          <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg mb-4 text-center">
+            <h3 class="font-bold text-indigo-900 mb-1">Rumus Distributif Utama:</h3>
+            <p class="font-mono text-indigo-800 text-lg">$a(b + c) = ab + ac$</p>
+            <p class="font-mono text-indigo-800 text-lg mt-1">$a(b - c) = ab - ac$</p>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div class="p-3 bg-slate-50 border rounded">
+              <span class="font-bold text-slate-800">Contoh 1:</span> $3(2x + 4)$
+              <p class="text-xs text-indigo-700 font-mono mt-1">= $(3 \times 2x) + (3 \times 4) = 6x + 12$</p>
+            </div>
+            <div class="p-3 bg-slate-50 border rounded">
+              <span class="font-bold text-slate-800">Contoh 2:</span> $-2x(x - 5)$
+              <p class="text-xs text-indigo-700 font-mono mt-1">= $(-2x \times x) + (-2x \times -5) = -2x^2 + 10x$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 16 -->
+        <div id="page-16" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 4: Perkalian Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Perkalian Dua Suku Dua $(ax + b)(cx + d)$</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Untuk mengalikan bentuk suku dua dengan suku dua, gunakan metode pelangi / FOIL (First, Outer, Inner, Last):</p>
+
+          <div class="bg-amber-50 border border-amber-200 p-4 rounded-lg mb-4 text-center font-mono text-amber-900">
+            $(a + b)(c + d) = ac + ad + bc + bd$
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-2 text-sm">
+            <p class="font-bold text-slate-800">Skema Langkah FOIL:</p>
+            <p class="text-xs">1. <strong>F</strong>irst (Suku Pertama): $a \times c = ac$</p>
+            <p class="text-xs">2. <strong>O</strong>uter (Suku Luar): $a \times d = ad$</p>
+            <p class="text-xs">3. <strong>I</strong>nner (Suku Dalam): $b \times c = bc$</p>
+            <p class="text-xs">4. <strong>L</strong>ast (Suku Terakhir): $b \times d = bd$</p>
+          </div>
+        </div>
+
+        <!-- Page 17 -->
+        <div id="page-17" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 4: Perkalian Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Rumus Istimewa Kuadrat Suku Dua</h2>
+          </div>
+          <p class="text-slate-600 mb-4 text-sm">Ada 3 bentuk perkalian khusus yang sangat sering keluar dalam ujian. Wajib dihapal!</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded text-center">
+              <span class="text-xs font-bold text-indigo-600">Bentuk 1</span>
+              <p class="font-mono font-bold text-indigo-900 my-2 text-sm">$(a + b)^2$</p>
+              <p class="font-mono text-xs text-indigo-700">$= a^2 + 2ab + b^2$</p>
+            </div>
+            <div class="p-3 bg-rose-50 border border-rose-200 rounded text-center">
+              <span class="text-xs font-bold text-rose-600">Bentuk 2</span>
+              <p class="font-mono font-bold text-rose-900 my-2 text-sm">$(a - b)^2$</p>
+              <p class="font-mono text-xs text-rose-700">$= a^2 - 2ab + b^2$</p>
+            </div>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded text-center">
+              <span class="text-xs font-bold text-emerald-600">Bentuk 3 (Selisih Kuadrat)</span>
+              <p class="font-mono font-bold text-emerald-900 my-2 text-sm">$(a + b)(a - b)$</p>
+              <p class="font-mono text-xs text-emerald-700">$= a^2 - b^2$</p>
+            </div>
+          </div>
+          <div class="mt-4 text-xs text-slate-500 bg-slate-100 p-2 rounded">
+            <strong>Hati-Hati Kekeliruan Fatal:</strong> $(a + b)^2 \neq a^2 + b^2$! Jangan lupa suku tengahnya $2ab$!
+          </div>
+        </div>
+
+        <!-- Page 18 -->
+        <div id="page-18" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Contoh Soal & Pembahasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Contoh: Perkalian Aljabar & Luas Persegi Panjang</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 1:</p>
+              <p class="text-sm text-slate-700">Jabarkan bentuk perkalian: $(2x + 3)(x - 5)$!</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                = $2x(x) + 2x(-5) + 3(x) + 3(-5)$<br>
+                = $2x^2 - 10x + 3x - 15$<br>
+                = $2x^2 - 7x - 15$
+              </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 2 (Aplikasi Luas):</p>
+              <p class="text-sm text-slate-700">Sebuah persegi panjang memiliki panjang $(x + 4) \text{ cm}$ dan lebar $(x - 2) \text{ cm}$. Tentukan luasnya dalam $x$!</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                $\text{Luas} = p \times l = (x + 4)(x - 2)$<br>
+                = $x^2 - 2x + 4x - 8$<br>
+                = $x^2 + 2x - 8 \text{ cm}^2$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 19 -->
+        <div id="page-19" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Latihan Mandiri Interaktif</span>
+            <h2 class="text-2xl font-bold text-slate-800">Latsol 3: Perkalian Aljabar</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Hasil penjabaran dari $(3x - 2)^2$ adalah...</p>
+
+          <div class="space-y-3">
+            <button onclick="checkQuiz(3, false)" class="q3-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              A. $9x^2 - 4$
+            </button>
+            <button onclick="checkQuiz(3, false)" class="q3-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              B. $9x^2 - 6x + 4$
+            </button>
+            <button onclick="checkQuiz(3, true)" class="q3-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              C. $9x^2 - 12x + 4$
+            </button>
+            <button onclick="checkQuiz(3, false)" class="q3-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              D. $9x^2 + 12x - 4$
+            </button>
+          </div>
+
+          <div id="quiz-feedback-3" class="mt-4 p-3 rounded-lg hidden text-sm font-semibold"></div>
+        </div>
+
+        <!-- Page 20 -->
+        <div id="page-20" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 5: Pembagian Aljabar</span>
+            <h2 class="text-2xl font-bold text-slate-800">Pembagian & Penyederhanaan Pecahan Aljabar</h2>
+          </div>
+          <p class="text-slate-600 mb-4 text-sm">Pembagian aljabar dapat dilakukan dengan membagi koefisien dengan koefisien, dan mengurangkan pangkat variabel sejenis $\left(\frac{x^a}{x^b} = x^{a-b}\right)$.</p>
+
+          <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg mb-4">
+            <h3 class="font-bold text-indigo-900 text-sm mb-2">Contoh Sederhana:</h3>
+            <p class="font-mono text-xs text-indigo-800">
+              $\frac{12x^3y^2}{4xy} = \left(\frac{12}{4}\right) \cdot x^{3-1} \cdot y^{2-1} = 3x^2y$
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg">
+            <h3 class="font-bold text-slate-800 text-sm mb-2">Pembagian dengan Faktorisasi:</h3>
+            <p class="text-xs text-slate-600 mb-2">Jika pembagi berupa suku dua, keluarkan faktor persekutuan terlebih dahulu:</p>
+            <p class="font-mono text-xs text-slate-800">
+              $\frac{6x^2 + 4x}{2x} = \frac{2x(3x + 2)}{2x} = 3x + 2$
+            </p>
+          </div>
+        </div>
+
+        <!-- Page 21 -->
+        <div id="page-21" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Contoh Soal & Pembahasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Contoh: Pembagian Aljabar</h2>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 1:</p>
+              <p class="text-sm text-slate-700">Sederhanakan bentuk $\frac{15a^4b^3}{3a^2b}$!</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                = $\left(\frac{15}{3}\right) \cdot a^{4-2} \cdot b^{3-1}$<br>
+                = $5a^2b^2$
+              </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              <p class="font-bold text-slate-800 text-sm">Soal 2:</p>
+              <p class="text-sm text-slate-700">Sederhanakan $\frac{x^2 - 9}{x + 3}$!</p>
+              <div class="mt-2 bg-blue-50 p-3 rounded text-xs text-blue-900 border border-blue-200 font-mono">
+                Ingat selisih kuadrat: $x^2 - 9 = (x + 3)(x - 3)$<br>
+                Maka: $\frac{(x + 3)(x - 3)}{x + 3} = x - 3$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 22 -->
+        <div id="page-22" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Latihan Mandiri Interaktif</span>
+            <h2 class="text-2xl font-bold text-slate-800">Latsol 4: Pembagian Aljabar</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Bentuk sederhana dari $\frac{8x^3 - 12x^2}{4x}$ adalah...</p>
+
+          <div class="space-y-3">
+            <button onclick="checkQuiz(4, true)" class="q4-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              A. $2x^2 - 3x$
+            </button>
+            <button onclick="checkQuiz(4, false)" class="q4-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              B. $2x - 3$
+            </button>
+            <button onclick="checkQuiz(4, false)" class="q4-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              C. $2x^2 - 3$
+            </button>
+            <button onclick="checkQuiz(4, false)" class="q4-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              D. $4x^2 - 3x$
+            </button>
+          </div>
+
+          <div id="quiz-feedback-4" class="mt-4 p-3 rounded-lg hidden text-sm font-semibold"></div>
+        </div>
+
+        <!-- Page 23 -->
+        <div id="page-23" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Bagian 6: Transisi ke PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">Warm-Up PLSV: Filosofi Timbangan Seimbang</h2>
+          </div>
+          <p class="text-slate-600 mb-4 text-sm">Sekarang kita memasuki babak baru: <strong>Persamaan Linear Satu Variabel (PLSV)</strong>.</p>
+
+          <div class="bg-amber-50 border border-amber-200 p-5 rounded-lg text-center my-4">
+            <div class="text-5xl mb-2">⚖️</div>
+            <h3 class="font-bold text-amber-900">Timbangan dalam Keadaan Seimbang</h3>
+            <p class="text-xs text-amber-800 mt-2 max-w-lg mx-auto">
+              Satu piringan timbangan berisi <strong>1 Kotak Misteri ($x$) + 2 kg beban</strong>, sedangkan piringan sebelahnya berisi <strong>7 kg beban</strong>. Timbangan dalam posisi pas seimbang!
+            </p>
+            <p class="font-mono text-sm font-bold text-amber-900 mt-3">$x + 2 = 7$</p>
+          </div>
+
+          <p class="text-sm text-slate-700">
+            Agar timbangan tetap seimbang, jika kita mengambil 2 kg dari piringan kiri, kita JUGA HARUS mengambil 2 kg dari piringan kanan!
+            <br>
+            Sehingga tersisa: $x = 7 - 2 \implies x = 5\text{ kg}$.
+          </p>
+        </div>
+
+        <!-- Page 24 -->
+        <div id="page-24" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 6: Konsep PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">Apa itu PLSV?</h2>
+          </div>
+          <p class="text-slate-600 mb-4 text-sm">Mari bedah pengertian kalimat terbuka, pernyataan, dan definisi PLSV.</p>
+
+          <div class="space-y-3">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-slate-800 text-sm">1. Kalimat Terbuka:</span>
+              <p class="text-xs text-slate-600 mt-1">Kalimat yang belum dapat ditentukan nilai kebenarannya (benar atau salah) karena memuat variabel. Contoh: $x + 4 = 10$.</p>
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-slate-800 text-sm">2. Pernyataan:</span>
+              <p class="text-xs text-slate-600 mt-1">Kalimat yang sudah jelas nilai bernilai Benar atau Salah. Contoh: $3 + 4 = 7$ (Benar).</p>
+            </div>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded">
+              <span class="font-bold text-indigo-900 text-sm">3. Definisi PLSV:</span>
+              <p class="text-xs text-indigo-800 mt-1">Kalimat terbuka yang dihubungkan oleh tanda sama dengan ($=$), hanya memiliki <strong>1 jenis variabel</strong>, dan variabel tersebut <strong>berpangkat 1</strong>.</p>
+              <p class="font-mono text-xs font-bold text-indigo-900 mt-2">Bentuk Umum: $ax + b = c \quad (a \neq 0)$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 25 -->
+        <div id="page-25" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 6: Konsep PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">Sifat-Sifat Kesetaraan Persamaan</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Dua persamaan dikatakan ekuivalen (setara, dilambangkan $\iff$) jika mempunyai penyelesaian yang sama.</p>
+
+          <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg space-y-3 text-xs text-indigo-900">
+            <p><strong>Sifat 1 (Penjumlahan/Pengurangan):</strong> Nilai persamaan tidak berubah jika kedua ruas ditambah atau dikurangi dengan bilangan yang sama.</p>
+            <p><strong>Sifat 2 (Perkalian/Pembagian):</strong> Nilai persamaan tidak berubah jika kedua ruas dikali atau dibagi dengan bilangan bukan nol yang sama.</p>
+          </div>
+
+          <div class="mt-4 p-3 bg-slate-100 rounded text-xs font-mono">
+            Contoh:<br>
+            $2x - 4 = 6$ &nbsp;&nbsp;(Kedua ruas ditambah 4)<br>
+            $2x = 10$ &nbsp;&nbsp;&nbsp;&nbsp;(Kedua ruas dibagi 2)<br>
+            $x = 5$
+          </div>
+        </div>
+
+        <!-- Page 26 -->
+        <div id="page-26" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Koneksi Kehidupan Nyata</span>
+            <h2 class="text-2xl font-bold text-slate-800">Koneksi Nyata 3: Masalah Tarif Taksi Online</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Bagaimana PLSV digunakan dalam menghitung biaya perjalan mas per kilometer?</p>
+
+          <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg space-y-2 text-sm text-emerald-900">
+            <p class="font-bold">Kasus:</p>
+            <p class="text-xs">
+              Tarif awal (buka pintu) taksi adalah $\text{Rp } 10.000$. Tarif per kilometer adalah $\text{Rp } 4.000$. Jika Dina membayar total $\text{Rp } 42.000$, berapa kilometer jarak perjalanan Dina ($x$)?
+            </p>
+            <div class="bg-white p-3 rounded font-mono text-xs text-slate-800 border border-emerald-300">
+              Model PLSV: $4.000x + 10.000 = 42.000$<br>
+              $4.000x = 42.000 - 10.000$<br>
+              $4.000x = 32.000$<br>
+              $x = \frac{32.000}{4.000} = 8 \text{ km}$
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 27 -->
+        <div id="page-27" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 7: Menyelesaikan PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">Teknik "Pindah Ruas"</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Teknik pindah ruas adalah bentuk praktis dari sifat kesetaraan persamaan.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+            <div class="p-3 bg-blue-50 border border-blue-200 rounded text-xs space-y-1">
+              <p class="font-bold text-blue-900">Aturan Tanda Pindah Ruas:</p>
+              <p>• Tambah ($+$) pindah ruas menjadi Kurang ($-$).</p>
+              <p>• Kurang ($-$) pindah ruas menjadi Tambah ($+$).</p>
+              <p>• Kali ($\times$) pindah ruas menjadi Bagi ($\div$).</p>
+              <p>• Bagi ($\div$) pindah ruas menjadi Kali ($\times$).</p>
+            </div>
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded text-xs font-mono space-y-1">
+              <p class="font-bold text-indigo-900">Contoh Praktis:</p>
+              <p>$3x + 5 = 20$</p>
+              <p>$3x = 20 - 5$ &nbsp;( $+5$ pindah jadi $-5$ )</p>
+              <p>$3x = 15$</p>
+              <p>$x = \frac{15}{3}$ &nbsp;&nbsp;&nbsp;( $\times 3$ pindah jadi $\div 3$ )</p>
+              <p class="font-bold text-indigo-700">$x = 5$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 28 -->
+        <div id="page-28" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 7: Menyelesaikan PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">Menyelesaikan PLSV dengan Tanda Kurung</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Jika terdapat tanda kurung dalam PLSV, bukalah kurung terlebih dahulu dengan sifat distributif aljabar yang sudah kita pelajari!</p>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-2">
+            <p class="font-bold text-slate-800">Langkah-Langkah:</p>
+            <ol class="list-decimal list-inside space-y-1 text-slate-700">
+              <li>Kalikan suku luar ke dalam kurung.</li>
+              <li>Kumpulkan suku yang memiliki variabel di <strong>ruas kiri</strong>.</li>
+              <li>Kumpulkan suku konstanta di <strong>ruas kanan</strong>.</li>
+              <li>Sederhanakan dan tentukan nilai $x$.</li>
+            </ol>
+          </div>
+
+          <div class="mt-3 p-3 bg-indigo-50 border border-indigo-200 rounded font-mono text-xs text-indigo-900">
+            Contoh: $2(x - 3) = 4x + 2$<br>
+            $2x - 6 = 4x + 2$<br>
+            $2x - 4x = 2 + 6$<br>
+            $-2x = 8 \implies x = \frac{8}{-2} = -4$
+          </div>
+        </div>
+
+        <!-- Page 29 -->
+        <div id="page-29" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 7: Menyelesaikan PLSV</span>
+            <h2 class="text-2xl font-bold text-slate-800">PLSV Berbentuk Pecahan</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Tips terbaik menyelesaikan PLSV pecahan: <strong>Hilangkan penyebutnya dengan mengalikan kedua ruas dengan KPK dari penyebut!</strong></p>
+
+          <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg text-xs font-mono text-amber-900 space-y-2">
+            <p class="font-bold">Contoh Soal:</p>
+            <p>$\frac{x + 2}{3} = \frac{x - 1}{2}$</p>
+            <p class="text-slate-600 italic">KPK penyebut (3 dan 2) adalah 6. Kalikan kedua ruas dengan 6!</p>
+            <p>$6 \cdot \left(\frac{x + 2}{3}\right) = 6 \cdot \left(\frac{x - 1}{2}\right)$</p>
+            <p>$2(x + 2) = 3(x - 1)$</p>
+            <p>$2x + 4 = 3x - 3$</p>
+            <p>$2x - 3x = -3 - 4$</p>
+            <p>$-x = -7 \implies x = 7$</p>
+          </div>
+        </div>
+
+        <!-- Page 30 -->
+        <div id="page-30" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Contoh Soal & Pembahasan</span>
+            <h2 class="text-2xl font-bold text-slate-800">Contoh: Soal Cerita PLSV</h2>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg text-xs space-y-2">
+            <p class="font-bold text-slate-800">Soal Cerita Umur:</p>
+            <p class="text-slate-700">Umur ayah saat ini adalah 3 kali umur Budi. Jika jumlah umur mereka adalah 48 tahun, tentukan umur Budi!</p>
+            
+            <div class="bg-blue-50 p-3 rounded text-blue-900 border border-blue-200 font-mono space-y-1">
+              <p><strong>Misal:</strong> Umur Budi = $x$ tahun</p>
+              <p>Maka Umur Ayah = $3x$ tahun</p>
+              <p>$\text{Jumlah Umur} = x + 3x = 48$</p>
+              <p>$4x = 48$</p>
+              <p>$x = \frac{48}{4} = 12$</p>
+              <p class="font-bold mt-1 text-indigo-700">Jadi, umur Budi saat ini adalah 12 tahun.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 31 -->
+        <div id="page-31" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">Latihan Mandiri Interaktif</span>
+            <h2 class="text-2xl font-bold text-slate-800">Latsol 5: Penyelesaian PLSV</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Penyelesaian dari persamaan $4x - 7 = 2x + 5$ adalah $x = ...$</p>
+
+          <div class="space-y-3">
+            <button onclick="checkQuiz(5, false)" class="q5-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              A. $4$
+            </button>
+            <button onclick="checkQuiz(5, true)" class="q5-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              B. $6$
+            </button>
+            <button onclick="checkQuiz(5, false)" class="q5-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              C. $8$
+            </button>
+            <button onclick="checkQuiz(5, false)" class="q5-btn w-full text-left p-3 border border-slate-300 rounded-lg hover:bg-indigo-50 transition text-sm">
+              D. $12$
+            </button>
+          </div>
+
+          <div id="quiz-feedback-5" class="mt-4 p-3 rounded-lg hidden text-sm font-semibold"></div>
+        </div>
+
+        <!-- Page 32 -->
+        <div id="page-32" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Bagian 8: Evaluasi & Integrasi</span>
+            <h2 class="text-2xl font-bold text-slate-800">Soal Integrasi: Gabungan Aljabar & PLSV</h2>
+          </div>
+          <p class="text-slate-600 mb-3 text-sm">Mari selesaikan masalah geometri gabungan aljabar dan PLSV!</p>
+
+          <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-lg text-xs space-y-2">
+            <p class="font-bold text-indigo-900">Soal Integrasi Geometri:</p>
+            <p class="text-slate-700">
+              Sebuah persegi panjang memiliki panjang $(3x - 2) \text{ cm}$ dan lebar $(x + 4) \text{ cm}$. Jika keliling persegi panjang tersebut adalah $36 \text{ cm}$, tentukan ukuran panjang dan lebarnya!
+            </p>
+            <div class="bg-white p-3 rounded font-mono text-indigo-900 border border-indigo-200 space-y-1">
+              <p>$K = 2(p + l)$</p>
+              <p>$36 = 2((3x - 2) + (x + 4))$</p>
+              <p>$36 = 2(4x + 2)$</p>
+              <p>$36 = 8x + 4 \implies 8x = 32 \implies x = 4$</p>
+              <hr>
+              <p>• Panjang = $3(4) - 2 = 10 \text{ cm}$</p>
+              <p>• Lebar = $4 + 4 = 8 \text{ cm}$</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 33 -->
+        <div id="page-33" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Rangkuman Materi</span>
+            <h2 class="text-2xl font-bold text-slate-800">Peta Konsep & Rangkuman Utama</h2>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-indigo-700">1. Unsur Aljabar:</span> Variabel (huruf), Koefisien (angka depan variabel), Konstanta (angka berdiri sendiri), dan Suku.
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-indigo-700">2. Penjumlahan & Pengurangan:</span> Hanya dilakukan pada **SUKU SEJENIS** (variabel dan pangkat sama).
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-indigo-700">3. Perkalian Aljabar:</span> Gunakan Sifat Distributif $a(b+c) = ab + ac$ dan skema FOIL untuk $(a+b)(c+d)$.
+            </div>
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <span class="font-bold text-indigo-700">4. PLSV:</span> Persamaan dengan 1 variabel pangkat 1. Diselesaikan dengan membuat variabel berada tunggal di satu ruas.
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 34 -->
+        <div id="page-34" class="page-content">
+          <div class="border-b pb-3 mb-4">
+            <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">Evaluasi Akhir</span>
+            <h2 class="text-2xl font-bold text-slate-800">Uji Kompetensi Akhir Modul</h2>
+          </div>
+          <p class="text-slate-600 text-sm mb-4">Jawablah pertanyaan berikut untuk mengecek pemahaman keseluruhanmu:</p>
+
+          <div class="space-y-4 text-xs">
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <p class="font-bold text-slate-800">Soal A: Sederhanakan $3(2x - 4) + 5x$!</p>
+              <button onclick="toggleAnswer('ans-1')" class="mt-2 px-3 py-1 bg-indigo-600 text-white rounded text-xs">Lihat Jawaban</button>
+              <div id="ans-1" class="hidden mt-2 p-2 bg-indigo-50 rounded text-indigo-900 font-mono">$6x - 12 + 5x = 11x - 12$</div>
+            </div>
+
+            <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+              <p class="font-bold text-slate-800">Soal B: Carilah penyelesaian dari $\frac{2x - 1}{3} = 5$!</p>
+              <button onclick="toggleAnswer('ans-2')" class="mt-2 px-3 py-1 bg-indigo-600 text-white rounded text-xs">Lihat Jawaban</button>
+              <div id="ans-2" class="hidden mt-2 p-2 bg-indigo-50 rounded text-indigo-900 font-mono">$2x - 1 = 15 \implies 2x = 16 \implies x = 8$</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 35 -->
+        <div id="page-35" class="page-content">
+          <div class="text-center py-8">
+            <span class="inline-block p-4 bg-emerald-100 text-emerald-600 rounded-full mb-4">
+              <i class="fa-solid fa-trophy text-5xl"></i>
+            </span>
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-2">Selamat! Pembelajaran Selesai!</h2>
+            <p class="text-slate-600 text-sm max-w-lg mx-auto mb-6">
+              Kamu telah menyelesaikan seluruh 35 halaman materi Operasi Bentuk Aljabar dan Persamaan Linear Satu Variabel (PLSV) Kelas 8.
+            </p>
+
+            <div class="p-6 bg-slate-50 border-2 border-dashed border-indigo-300 rounded-xl max-w-md mx-auto text-left mb-6">
+              <h3 class="font-bold text-center text-indigo-900 mb-2 text-base">Refleksi Diri Pembelajaran</h3>
+              <ul class="text-xs text-slate-700 space-y-2">
+                <li>✅ Paham membedakan suku sejenis & tak sejenis</li>
+                <li>✅ Terampil mengalikan sifat distributif</li>
+                <li>✅ Mampu menyelesaikan persamaan PLSV sederhana & cerita</li>
+              </ul>
+            </div>
+
+            <button onclick="goToPage(1)" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow transition">
+              <i class="fa-solid fa-rotate-left mr-2"></i> Ulangi Dari Awal
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Navigation Controls -->
+      <footer class="mt-8 pt-4 border-t border-slate-200 flex items-center justify-between">
+        <button id="prevBtn" onclick="prevPage()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-lg text-sm transition disabled:opacity-50 disabled:cursor-not-allowed">
+          <i class="fa-solid fa-chevron-left mr-1"></i> Sebelum
+        </button>
+        <span class="text-xs text-slate-500 font-medium hidden sm:inline">Gunakan tombol panah untuk navigasi</span>
+        <button id="nextBtn" onclick="nextPage()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-sm transition">
+          Lanjut <i class="fa-solid fa-chevron-right ml-1"></i>
+        </button>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const TOTAL_PAGES = 35;
+    let currentPage = 1;
+
+    // Titles for navigation drawer
+    const pageTitles = [
+      "Judul & Cover Utama",
+      "Tujuan Pembelajaran",
+      "Warm-Up 1: Simbol Buah",
+      "Warm-Up 2: Kotak Misteri",
+      "Koneksi Nyata 1: Minimarket",
+      "Anatomi Bentuk Aljabar",
+      "Suku Sejenis vs Tak Sejenis",
+      "Contoh: Unsur Aljabar",
+      "Latsol 1: Unsur Aljabar",
+      "Penjumlahan Aljabar",
+      "Pengurangan & Kata 'Dari'",
+      "Contoh: Penjumlahan/Pengurangan",
+      "Koneksi Nyata 2: Kebun Pak Budi",
+      "Latsol 2: Penjumlahan Aljabar",
+      "Perkalian Distributif",
+      "Perkalian Suku Dua (FOIL)",
+      "Kuadrat Suku Dua Khusus",
+      "Contoh: Perkalian & Luas",
+      "Latsol 3: Perkalian Aljabar",
+      "Pembagian & Penyederhanaan",
+      "Contoh: Pembagian Aljabar",
+      "Latsol 4: Pembagian Aljabar",
+      "Warm-Up PLSV: Timbangan",
+      "Apa itu PLSV?",
+      "Sifat-Sifat Kesetaraan",
+      "Koneksi Nyata 3: Tarif Taksi",
+      "Teknik Pindah Ruas",
+      "PLSV Tanda Kurung",
+      "PLSV Berbentuk Pecahan",
+      "Contoh: Soal Cerita PLSV",
+      "Latsol 5: Penyelesaian PLSV",
+      "Soal Integrasi Geometri",
+      "Rangkuman & Peta Konsep",
+      "Evaluasi Akhir Modul",
+      "Refleksi & Penutup"
+    ];
+
+    document.addEventListener("DOMContentLoaded", function() {
+      renderNavList();
+      updatePageUI();
+    });
+
+    function renderNavList() {
+      const navContainer = document.getElementById("navList");
+      navContainer.innerHTML = "";
+      for (let i = 1; i <= TOTAL_PAGES; i++) {
+        const btn = document.createElement("button");
+        btn.className = `w-full text-left px-3 py-2 rounded-lg text-xs flex items-center justify-between transition ${i === currentPage ? 'bg-indigo-100 text-indigo-700 font-bold' : 'text-slate-600 hover:bg-slate-100'}`;
+        btn.onclick = () => goToPage(i);
+        btn.innerHTML = `
+          <span class="truncate">${i}. ${pageTitles[i-1]}</span>
+          ${i === currentPage ? '<i class="fa-solid fa-chevron-right text-xs"></i>' : ''}
+        `;
+        navContainer.appendChild(btn);
+      }
+    }
+
+    function goToPage(pageNum) {
+      if (pageNum < 1 || pageNum > TOTAL_PAGES) return;
+      
+      document.getElementById(`page-${currentPage}`).classList.remove("active");
+      currentPage = pageNum;
+      document.getElementById(`page-${currentPage}`).classList.add("active");
+      
+      updatePageUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Typeset MathJax dynamically
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      }
+    }
+
+    function nextPage() {
+      if (currentPage < TOTAL_PAGES) goToPage(currentPage + 1);
+    }
+
+    function prevPage() {
+      if (currentPage > 1) goToPage(currentPage - 1);
+    }
+
+    function updatePageUI() {
+      document.getElementById("currentPageNum").innerText = currentPage;
+      const progressPercent = (currentPage / TOTAL_PAGES) * 100;
+      document.getElementById("progressBar").style.width = `${progressPercent}%`;
+
+      document.getElementById("prevBtn").disabled = currentPage === 1;
+      const nextBtn = document.getElementById("nextBtn");
+      if (currentPage === TOTAL_PAGES) {
+        nextBtn.innerHTML = `Selesai <i class="fa-solid fa-check ml-1"></i>`;
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.innerHTML = `Lanjut <i class="fa-solid fa-chevron-right ml-1"></i>`;
+        nextBtn.disabled = false;
+      }
+
+      renderNavList();
+    }
+
+    // Toggle Sidebar Mobile
+    document.getElementById("toggleMenu").addEventListener("click", function() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("hidden");
+    });
+
+    // Quiz Checkers
+    function checkQuiz(quizId, isCorrect) {
+      const feedback = document.getElementById(`quiz-feedback-${quizId}`);
+      feedback.classList.remove("hidden", "bg-emerald-100", "text-emerald-800", "bg-rose-100", "text-rose-800");
+      
+      if (isCorrect) {
+        feedback.classList.add("bg-emerald-100", "text-emerald-800");
+        feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i><strong>Jawabanmu Tepat Sekali!</strong> Bagus, mari lanjutkan ke materi berikutnya.`;
+      } else {
+        feedback.classList.add("bg-rose-100", "text-rose-800");
+        feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i><strong>Jawaban Kurang Tepat.</strong> Coba periksa kembali langkah pengerjaannya ya!`;
+      }
+    }
+
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>

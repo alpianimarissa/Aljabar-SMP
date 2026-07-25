@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar & PLSV Interaktif - Penguatan & Review SMP</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- KaTeX for Mathematics Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .custom-shadow {
+            box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.08);
+        }
+        .balance-beam {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white pb-20">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white font-black text-xl shadow-md">
+                        🧮
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-lg text-slate-900 tracking-tight block leading-none">Aljabar & PLSV</span>
+                        <span class="text-xs font-semibold text-emerald-600">Review & Penguatan SMP</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden lg:flex items-center gap-1 text-xs font-bold text-slate-600">
+                    <a href="#tujuan" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-emerald-600 transition">Tujuan</a>
+                    <a href="#warmup" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-emerald-600 transition">Warm-Up</a>
+                    <a href="#koneksi" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-emerald-600 transition">Dunia Nyata</a>
+                    <a href="#materi" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-emerald-600 transition">Materi & Simulasi</a>
+                    <a href="#contoh" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-emerald-600 transition">Contoh Soal</a>
+                    <a href="#latihan" class="px-3 py-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 shadow-md transition ml-2">Latihan Soal</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Hero -->
+    <header class="bg-gradient-to-br from-slate-900 via-teal-950 to-emerald-900 text-white py-14 px-4 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center space-y-4 relative z-10">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-emerald-200 text-xs font-bold border border-white/20">
+                <i class="fa-solid fa-graduation-cap"></i> Matematika SMP — Modul Penguatan & Review
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                Aljabar & Persamaan Linear <br class="hidden sm:inline"><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Satu Variabel (PLSV)</span>
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto font-medium">
+                Sempurnakan pemahamanmu tentang simbol aljabar, penyederhanaan suku, serta teknik menyeimbangkan PLSV melalui visualisasi interaktif!
+            </p>
+        </div>
+    </header>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-12 mt-8">
+
+        <!-- SECTION 1: TUJUAN PEMBELAJARAN -->
+        <section id="tujuan" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 custom-shadow space-y-4">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+                    🎯
+                </div>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900">1. Tujuan Pembelajaran (Review & Penguatan)</h2>
+                    <p class="text-xs text-slate-500 font-medium">Target kemampuan yang akan diperkuat melalui modul interaktif ini</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Mengidentifikasi unsur-unsur bentuk aljabar (variabel, koefisien, konstanta, dan suku sejenis).</p>
+                </div>
+                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Melakukan operasi penjumlahan, pengurangan, dan perkalian bentuk aljabar sederhana.</p>
+                </div>
+                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
+                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Menerjemahkan kalimat cerita verbal menjadi model matematika berupa <strong>PLSV</strong>.</p>
+                </div>
+                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/60">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Menyelesaikan PLSV bentuk dasar maupun variabel di dua sisi dengan prinsip kesamaan (timbangan seimbang).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WARM-UP (8 SOAL INTERAKTIF) -->
+        <section id="warmup" class="bg-gradient-to-br from-emerald-50 via-white to-teal-50 rounded-3xl p-6 sm:p-8 border border-emerald-100 custom-shadow space-y-6">
+            <div class="flex items-center justify-between border-b border-emerald-100 pb-4 flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">
+                        🔥
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-extrabold text-slate-900">2. Warm-Up (Review 8 Soal Apersepsi)</h2>
+                        <p class="text-xs text-slate-600 font-medium">Ingat kembali konsep prasyarat sebelum masuk ke pembahasan tingkat lanjut!</p>
+                    </div>
+                </div>
+                <span id="warmup-score" class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold">
+                    Skor: 0 / 8
+                </span>
+            </div>
+
+            <!-- Warm Up Grid (8 Questions) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="warmup-container">
+                <!-- Warm Up 1 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-1">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 1</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Pada bentuk aljabar $3x^2 - 7x + 5$, manakah yang merupakan <strong>koefisien dari $x$</strong>?</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(1, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. 3</button>
+                        <button onclick="checkWarmup(1, 'B', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. -7</button>
+                        <button onclick="checkWarmup(1, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. 7</button>
+                        <button onclick="checkWarmup(1, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. 5</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 2 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-2">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 2</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Suku-suku berikut yang tergolong sebagai <strong>suku sejenis</strong> adalah...</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(2, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. $2x$ dan $2y$</button>
+                        <button onclick="checkWarmup(2, 'B', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. $5ab$ dan $-2ab$</button>
+                        <button onclick="checkWarmup(2, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. $3x^2$ dan $3x$</button>
+                        <button onclick="checkWarmup(2, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. $4a$ dan $4b^2$</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 3 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-3">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 3</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Sederhanakan bentuk aljabar berikut: $4a + 7b - 2a + 3b$</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(3, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. $6a + 10b$</button>
+                        <button onclick="checkWarmup(3, 'B', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. $2a + 10b$</button>
+                        <button onclick="checkWarmup(3, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. $2a + 4b$</button>
+                        <button onclick="checkWarmup(3, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. $12ab$</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 4 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-4">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 4</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Hasil penjabaran dari $3(2x - 5)$ adalah...</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(4, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. $6x - 5$</button>
+                        <button onclick="checkWarmup(4, 'B', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. $6x + 15$</button>
+                        <button onclick="checkWarmup(4, 'C', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. $6x - 15$</button>
+                        <button onclick="checkWarmup(4, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. $5x - 15$</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 5 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-5">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 5</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Manakah dari kalimat matematika berikut yang merupakan **PLSV**?</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(5, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. $2x + y = 6$</button>
+                        <button onclick="checkWarmup(5, 'B', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. $3m - 4 = 11$</button>
+                        <button onclick="checkWarmup(5, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. $x^2 + 5 = 9$</button>
+                        <button onclick="checkWarmup(5, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. $2a + 3 > 7$</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 6 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-6">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 6</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Kalimat verbal: *"Suatu bilangan $n$ dikurangi 8 menghasilkan 12"*. Model PLSV-nya:</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(6, 'A', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. $n - 8 = 12$</button>
+                        <button onclick="checkWarmup(6, 'B', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. $8 - n = 12$</button>
+                        <button onclick="checkWarmup(6, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. $n + 8 = 12$</button>
+                        <button onclick="checkWarmup(6, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. $12 - n = 8$</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 7 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-7">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 7</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Penyelesaian dari persamaan dasar $x + 9 = 15$ adalah $x = ...$</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(7, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. 24</button>
+                        <button onclick="checkWarmup(7, 'B', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. 6</button>
+                        <button onclick="checkWarmup(7, 'C', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. -6</button>
+                        <button onclick="checkWarmup(7, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. 135</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+
+                <!-- Warm Up 8 -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3" id="wu-card-8">
+                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Soal Warm-Up 8</p>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800">Jika $4x = 20$, maka nilai dari $2x + 3$ adalah...</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button onclick="checkWarmup(8, 'A', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">A. 5</button>
+                        <button onclick="checkWarmup(8, 'B', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">B. 10</button>
+                        <button onclick="checkWarmup(8, 'C', this, true)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">C. 13</button>
+                        <button onclick="checkWarmup(8, 'D', this)" class="p-2.5 rounded-xl border border-slate-200 hover:bg-emerald-50 text-slate-700 transition">D. 23</button>
+                    </div>
+                    <div class="wu-feedback hidden text-xs font-bold mt-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: KONEKSI DUNIA NYATA (3 CONTOH KASUS) -->
+        <section id="koneksi" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 custom-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">
+                    🌍
+                </div>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900">3. Koneksi Dunia Nyata</h2>
+                    <p class="text-xs text-slate-500 font-medium">Bagaimana Aljabar dan PLSV mempermudah penyelesaian masalah sehari-hari?</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kasus 1 -->
+                <div class="bg-gradient-to-b from-slate-50 to-emerald-50/40 rounded-2xl p-5 border border-slate-200/80 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg shadow-md">
+                        🛍️
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">1. Struk Belanja & Kembalian</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Rani membeli 3 buku tulis identik ($x$) dan membayarnya dengan uang Rp50.000, lalu mendapat kembalian Rp14.000.
+                    </p>
+                    <div class="p-3 bg-white rounded-xl border border-emerald-200 text-xs font-mono font-bold text-emerald-800">
+                        $$3x + 14.000 = 50.000$$
+                        <span class="block text-[10px] text-slate-500 font-sans font-normal mt-1">$x$ = harga 1 buku tulis (Rp12.000)</span>
+                    </div>
+                </div>
+
+                <!-- Kasus 2 -->
+                <div class="bg-gradient-to-b from-slate-50 to-teal-50/40 rounded-2xl p-5 border border-slate-200/80 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-500 text-white flex items-center justify-center text-lg shadow-md">
+                        📐
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">2. Desain Batas Lapangan / Kebun</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Sebuah kebun persegi panjang memiliki panjang $(2x + 3)$ meter dan lebar $x$ meter. Jika keliling pagar adalah 36 meter:
+                    </p>
+                    <div class="p-3 bg-white rounded-xl border border-teal-200 text-xs font-mono font-bold text-teal-800">
+                        $$2((2x + 3) + x) = 36$$
+                        <span class="block text-[10px] text-slate-500 font-sans font-normal mt-1">Gunakan PLSV untuk menentukan ukuran sebenarnya!</span>
+                    </div>
+                </div>
+
+                <!-- Kasus 3 -->
+                <div class="bg-gradient-to-b from-slate-50 to-amber-50/40 rounded-2xl p-5 border border-slate-200/80 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shadow-md">
+                        🎂
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">3. Perbandingan Umur Anggota Keluarga</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        Umur Ayah saat ini 3 kali umur Budi. Jika selisih umur mereka adalah 28 tahun, berapakah umur Budi ($x$)?
+                    </p>
+                    <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs font-mono font-bold text-amber-800">
+                        $$3x - x = 28 \implies 2x = 28$$
+                        <span class="block text-[10px] text-slate-500 font-sans font-normal mt-1">Maka umur Budi $x = 14$ tahun.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: MATERI INTI & SIMULATOR TIMBANGAN PLSV -->
+        <section id="materi" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 custom-shadow space-y-8">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-lg">
+                    📖
+                </div>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900">4. Materi Inti & Laboratorium Timbangan PLSV</h2>
+                    <p class="text-xs text-slate-500 font-medium">Rangkuman konsep kunci dan visualisasi sifat kesamaan pada persamaan linear</p>
+                </div>
+            </div>
+
+            <!-- Ringkasan Konsep Aljabar & PLSV -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Konsep 1: Unsur Aljabar & Operasi -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                    <h3 class="text-sm font-extrabold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-cube"></i> A. Unsur & Operasi Aljabar
+                    </h3>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside font-medium leading-relaxed">
+                        <li><strong>Variabel:</strong> Simbol pengganti nilai yang belum diketahui (contoh: $x, y, a$).</li>
+                        <li><strong>Koefisien:</strong> Angka pengali variabel (pada $5x$, koefisiennya $5$).</li>
+                        <li><strong>Konstanta:</strong> Suku berupa angka tetap tanpa variabel.</li>
+                        <li><strong>Suku Sejenis:</strong> Suku dengan variabel dan pangkat yang sama persis (dapat dijumlah/dikurang).</li>
+                        <li><strong>Sifat Distributif:</strong> $a(bx + c) = abx + ac$.</li>
+                    </ul>
+                </div>
+
+                <!-- Konsep 2: Aturan Kesamaan PLSV -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                    <h3 class="text-sm font-extrabold text-emerald-700 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced"></i> B. Prinsi Kesamaan PLSV
+                    </h3>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                        PLSV adalah kalimat terbuka yang dihubungkan tanda sama dengan ($=$) dan variabelnya berpangkat <strong>1</strong>.
+                    </p>
+                    <div class="p-3 bg-white rounded-xl border border-slate-200 text-xs space-y-1.5 font-medium">
+                        <p class="text-emerald-700 font-bold">Prinsip Timbangan Seimbang:</p>
+                        <p>1. Menambah/mengurangi ruas kiri & kanan dengan angka yang sama.</p>
+                        <p>2. Mengali/membagi kedua ruas dengan angka non-nol yang sama.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMULATOR TIMBANGAN INTERAKTIF PLSV -->
+            <div class="bg-gradient-to-br from-slate-900 to-teal-950 text-white rounded-2xl p-5 sm:p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <span>⚖️</span> Simulasi Timbangan Seimbang ($ax + b = c$)
+                        </h3>
+                        <p class="text-xs text-slate-300 font-medium">Atur jumlah Kotak Rahasia ($x$) dan Beban untuk melihat apakah timbangan seimbang!</p>
+                    </div>
+                    <div id="balance-status" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-xs font-bold text-center">
+                        Status: SEIMBANG ✅
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                    <!-- Control Panel -->
+                    <div class="space-y-4 bg-white/5 p-4 rounded-xl border border-white/10 text-xs">
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-200 mb-1">
+                                <label for="x-val-sim">Nilai Rahasia ($x$):</label>
+                                <span id="x-sim-text" class="text-emerald-400 font-mono">4</span>
+                            </div>
+                            <input type="range" id="x-val-sim" min="1" max="10" value="4" class="w-full accent-emerald-400 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-200 mb-1">
+                                <label for="left-boxes">Kotak $x$ di Kiri ($a$):</label>
+                                <span id="a-sim-text" class="text-sky-400 font-mono">2</span>
+                            </div>
+                            <input type="range" id="left-boxes" min="1" max="5" value="2" class="w-full accent-sky-400 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-200 mb-1">
+                                <label for="left-weights">Beban Tambahan Kiri ($b$):</label>
+                                <span id="b-sim-text" class="text-amber-400 font-mono">3</span>
+                            </div>
+                            <input type="range" id="left-weights" min="0" max="10" value="3" class="w-full accent-amber-400 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-200 mb-1">
+                                <label for="right-weights">Total Beban Kanan ($c$):</label>
+                                <span id="c-sim-text" class="text-rose-400 font-mono">11</span>
+                            </div>
+                            <input type="range" id="right-weights" min="1" max="25" value="11" class="w-full accent-rose-400 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Visual Timbangan Canvas/SVG -->
+                    <div class="lg:col-span-2 flex flex-col items-center bg-slate-950/80 p-6 rounded-xl border border-white/10 space-y-4">
+                        <div class="text-center font-mono text-sm text-emerald-300 font-bold bg-white/5 px-4 py-1.5 rounded-lg border border-white/10">
+                            Persamaan: <span id="sim-eq-display">2x + 3 = 11</span>
+                        </div>
+
+                        <!-- Graphical Balance -->
+                        <div class="relative w-full max-w-md h-44 flex flex-col items-center justify-end">
+                            <!-- Beam -->
+                            <div id="balance-beam" class="balance-beam w-full h-3 bg-amber-600 rounded-full flex justify-between items-center px-4 relative origin-center" style="transform: rotate(0deg);">
+                                <!-- Left Pan -->
+                                <div class="absolute left-4 top-3 flex flex-col items-center">
+                                    <div class="w-0.5 h-12 bg-amber-400"></div>
+                                    <div class="w-32 h-10 bg-slate-800 border-2 border-amber-400 rounded-b-2xl flex items-center justify-center gap-1 p-1 overflow-hidden" id="left-pan-items">
+                                        <!-- Items loaded via JS -->
+                                    </div>
+                                </div>
+
+                                <!-- Right Pan -->
+                                <div class="absolute right-4 top-3 flex flex-col items-center">
+                                    <div class="w-0.5 h-12 bg-amber-400"></div>
+                                    <div class="w-32 h-10 bg-slate-800 border-2 border-amber-400 rounded-b-2xl flex items-center justify-center gap-1 p-1 overflow-hidden" id="right-pan-items">
+                                        <!-- Items loaded via JS -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Base Fulcrum -->
+                            <div class="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-amber-500 mt-2"></div>
+                            <div class="w-32 h-3 bg-amber-700 rounded-t-md"></div>
+                        </div>
+
+                        <p id="sim-explanation" class="text-xs text-slate-300 text-center max-w-sm">
+                            Kiri: $2(4) + 3 = 11$ kg | Kanan: $11$ kg. Timbangan seimbang sempurna!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONTOH SOAL (1 SOAL TIAP KATEGORI) -->
+        <section id="contoh" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 custom-shadow space-y-6">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div class="w-10 h-10 rounded-2xl bg-sky-500 text-white flex items-center justify-center font-bold text-lg">
+                    📝
+                </div>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900">5. Contoh Soal & Pembahasan Bertahap</h2>
+                    <p class="text-xs text-slate-500 font-medium">1 Contoh pembahasan rinci untuk setiap 5 kategori konsep Aljabar & PLSV</p>
+                </div>
+            </div>
+
+            <!-- Accordion Examples Container -->
+            <div class="space-y-4">
+
+                <!-- Contoh 1: Menyederhanakan Suku Sejenis -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50">
+                    <button onclick="toggleAccordion('ex-1')" class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-100 transition font-bold text-xs sm:text-sm text-slate-900">
+                        <span class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px]">Kategori 1</span>
+                            Penyederhanakan Bentuk Aljabar & Suku Sejenis
+                        </span>
+                        <i id="ex-1-icon" class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div id="ex-1" class="hidden p-4 bg-white border-t border-slate-200 space-y-3 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">Soal: Sederhanakan bentuk aljabar $7x + 5y - 3x + 2y - 8$!</p>
+                        <div class="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-200">
+                            <p class="font-bold text-emerald-700">Pembahasan Step-by-Step:</p>
+                            <p>1. Kelompokkan suku-suku yang sejenis (mempunyai variabel sama):</p>
+                            $$(7x - 3x) + (5y + 2y) - 8$$
+                            <p>2. Operasikan koefisien masing-masing suku sejenis:</p>
+                            $$(7 - 3)x + (5 + 2)y - 8 = 4x + 7y - 8$$
+                            <p class="font-bold text-slate-900">Jadi, bentuk sederhananya adalah $4x + 7y - 8$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 2: Operasi Perkalian Aljabar (Distributif) -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50">
+                    <button onclick="toggleAccordion('ex-2')" class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-100 transition font-bold text-xs sm:text-sm text-slate-900">
+                        <span class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px]">Kategori 2</span>
+                            Operasi Distributif dan Kurung Aljabar
+                        </span>
+                        <i id="ex-2-icon" class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div id="ex-2" class="hidden p-4 bg-white border-t border-slate-200 space-y-3 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">Soal: Jabarkan dan sederhanakan $3(2x - 4) - 2(x + 5)$!</p>
+                        <div class="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-200">
+                            <p class="font-bold text-emerald-700">Pembahasan Step-by-Step:</p>
+                            <p>1. Gunakan sifat distributif $a(b + c) = ab + ac$:</p>
+                            $$3 \cdot 2x - 3 \cdot 4 - 2 \cdot x - 2 \cdot 5$$
+                            $$= 6x - 12 - 2x - 10$$
+                            <p>2. Gabungkan suku sejenis:</p>
+                            $$=(6x - 2x) + (-12 - 10) = 4x - 22$$
+                            <p class="font-bold text-slate-900">Jadi, hasilnya adalah $4x - 22$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 3: Menerjemahkan Kalimat Verbal ke PLSV -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50">
+                    <button onclick="toggleAccordion('ex-3')" class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-100 transition font-bold text-xs sm:text-sm text-slate-900">
+                        <span class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px]">Kategori 3</span>
+                            Pemodelan Matematika (Kalimat Verbal ke PLSV)
+                        </span>
+                        <i id="ex-3-icon" class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div id="ex-3" class="hidden p-4 bg-white border-t border-slate-200 space-y-3 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">Soal: *"Tiga kali suatu bilangan $y$ jika ditambah 10 menghasilkan 25"*. Tuliskan persamaan PLSV-nya!</p>
+                        <div class="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-200">
+                            <p class="font-bold text-emerald-700">Pembahasan Step-by-Step:</p>
+                            <p>• Kata *"Tiga kali suatu bilangan $y$"* artinya $3y$.</p>
+                            <p>• Kata *"ditambah 10"* artinya $+ 10$.</p>
+                            <p>• Kata *"menghasilkan 25"* artinya $= 25$.</p>
+                            <p class="font-bold text-slate-900">Model PLSV: $3y + 10 = 25$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 4: Penyelesaian PLSV Variabel Dua Sisi -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50">
+                    <button onclick="toggleAccordion('ex-4')" class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-100 transition font-bold text-xs sm:text-sm text-slate-900">
+                        <span class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px]">Kategori 4</span>
+                            Menyelesaikan PLSV Variabel di Dua Sisi
+                        </span>
+                        <i id="ex-4-icon" class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div id="ex-4" class="hidden p-4 bg-white border-t border-slate-200 space-y-3 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">Soal: Tentukan penyelesaian dari $5x - 7 = 2x + 8$!</p>
+                        <div class="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-200">
+                            <p class="font-bold text-emerald-700">Pembahasan Step-by-Step:</p>
+                            <p>1. Kurangi kedua ruas dengan $2x$ agar variabel berkumpul di ruas kiri:</p>
+                            $$5x - 2x - 7 = 8 \implies 3x - 7 = 8$$
+                            <p>2. Tambahkan kedua ruas dengan $7$:</p>
+                            $$3x = 8 + 7 \implies 3x = 15$$
+                            <p>3. Bagi kedua ruas dengan $3$:</p>
+                            $$x = \frac{15}{3} \implies x = 5$$
+                            <p class="font-bold text-slate-900">Jadi, nilai $x = 5$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 5: Penerapan Soal Cerita PLSV -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50">
+                    <button onclick="toggleAccordion('ex-5')" class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-100 transition font-bold text-xs sm:text-sm text-slate-900">
+                        <span class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-[11px]">Kategori 5</span>
+                            Soal Cerita Aplikasi Geometri & PLSV
+                        </span>
+                        <i id="ex-5-icon" class="fa-solid fa-chevron-down text-slate-400"></i>
+                    </button>
+                    <div id="ex-5" class="hidden p-4 bg-white border-t border-slate-200 space-y-3 text-xs sm:text-sm">
+                        <p class="font-semibold text-slate-800">Soal: Keliling persegi panjang adalah 40 cm. Jika panjangnya $(x + 4)$ cm dan lebarnya $x$ cm, hitunglah luas persegi panjang tersebut!</p>
+                        <div class="p-3 bg-slate-50 rounded-xl space-y-2 border border-slate-200">
+                            <p class="font-bold text-emerald-700">Pembahasan Step-by-Step:</p>
+                            <p>1. Formula Keliling: $2(p + l) = 40 \implies p + l = 20$.</p>
+                            <p>2. Substitusikan $p = x + 4$ dan $l = x$:</p>
+                            $$(x + 4) + x = 20 \implies 2x + 4 = 20 \implies 2x = 16 \implies x = 8$$
+                            <p>3. Dapatkan ukuran sebenarnya:</p>
+                            $$\text{Lebar } l = 8\text{ cm}, \quad \text{Panjang } p = 8 + 4 = 12\text{ cm}$$
+                            <p>4. Hitung Luas:</p>
+                            $$\text{Luas} = p \times l = 12 \times 8 = 96\text{ cm}^2$$
+                            <p class="font-bold text-slate-900">Jadi, luas persegi panjang adalah $96\text{ cm}^2$.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: LATIHAN SOAL MANDIRI (2 SOAL TIAP KATEGORI = 10 SOAL) -->
+        <section id="latihan" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 custom-shadow space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold text-lg">
+                        🏆
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-extrabold text-white">6. Latihan Soal Evaluasi Mandiri</h2>
+                        <p class="text-xs text-slate-400 font-medium">Uji penguasaanmu dengan 10 soal (2 soal per kategori) berpenilaian otomatis!</p>
+                    </div>
+                </div>
+                <div class="bg-white/10 px-4 py-2 rounded-2xl border border-white/10 flex items-center gap-3 text-xs font-bold">
+                    <span>Skor Kamu:</span>
+                    <span id="quiz-score" class="text-lg text-emerald-400 font-mono">0 / 100</span>
+                </div>
+            </div>
+
+            <!-- Quiz Items Container -->
+            <div class="space-y-6" id="quiz-items-container">
+
+                <!-- Kategori 1: Menyederhanakan Suku Sejenis (Soal 1 & 2) -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest border-b border-slate-800 pb-1">
+                        📌 Kategori 1: Suku Sejenis & Bentuk Aljabar (Soal 1 & 2)
+                    </h3>
+
+                    <!-- Q1 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-1">
+                        <p class="text-xs sm:text-sm font-semibold">1. Hasil penyederhanaan dari $9a - 3b - 5a + 8b$ adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(1, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $14a + 5b$</button>
+                            <button onclick="checkQuiz(1, 'B', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $4a + 5b$</button>
+                            <button onclick="checkQuiz(1, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $4a - 11b$</button>
+                            <button onclick="checkQuiz(1, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $9ab$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-2">
+                        <p class="text-xs sm:text-sm font-semibold">2. Jumlah dari $(3x^2 - 4x + 6)$ dan $(2x^2 + 7x - 10)$ adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(2, 'A', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $5x^2 + 3x - 4$</button>
+                            <button onclick="checkQuiz(2, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $5x^2 - 3x + 4$</button>
+                            <button onclick="checkQuiz(2, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $5x^2 + 11x + 16$</button>
+                            <button onclick="checkQuiz(2, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $6x^2 + 3x - 4$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Kategori 2: Operasi Distributif & Perkalian Aljabar (Soal 3 & 4) -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest border-b border-slate-800 pb-1">
+                        📌 Kategori 2: Operasi Distributif & Kurung (Soal 3 & 4)
+                    </h3>
+
+                    <!-- Q3 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-3">
+                        <p class="text-xs sm:text-sm font-semibold">3. Hasil ekspansi dari $-4(3x - 5)$ adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(3, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $-12x - 20$</button>
+                            <button onclick="checkQuiz(3, 'B', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $-12x + 20$</button>
+                            <button onclick="checkQuiz(3, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $12x - 20$</button>
+                            <button onclick="checkQuiz(3, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $-12x + 5$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-4">
+                        <p class="text-xs sm:text-sm font-semibold">4. Bentuk paling sederhana dari $5(p + 2) - 3(2p - 1)$ adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(4, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $-p + 7$</button>
+                            <button onclick="checkQuiz(4, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $11p + 13$</button>
+                            <button onclick="checkQuiz(4, 'C', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $-p + 13$</button>
+                            <button onclick="checkQuiz(4, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $-p + 9$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Kategori 3: Pemodelan Matematika PLSV (Soal 5 & 6) -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest border-b border-slate-800 pb-1">
+                        📌 Kategori 3: Pemodelan Kalimat Verbal ke PLSV (Soal 5 & 6)
+                    </h3>
+
+                    <!-- Q5 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-5">
+                        <p class="text-xs sm:text-sm font-semibold">5. *"Dua kali suatu bilangan $k$ ditambah 7 sama dengan lima kali bilangan itu dikurangi 8"*. Model PLSV-nya:</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(5, 'A', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $2k + 7 = 5k - 8$</button>
+                            <button onclick="checkQuiz(5, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $2k - 7 = 5k + 8$</button>
+                            <button onclick="checkQuiz(5, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $7k + 2 = 8k - 5$</button>
+                            <button onclick="checkQuiz(5, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $2(k + 7) = 5(k - 8)$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-6">
+                        <p class="text-xs sm:text-sm font-semibold">6. Tiga bilangan bulat berurutan jumlahnya adalah $45$. Jika bilangan terkecil adalah $x$, model persamaan matematika yang benar adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(6, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. $3x = 45$</button>
+                            <button onclick="checkQuiz(6, 'B', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. $3x + 3 = 45$</button>
+                            <button onclick="checkQuiz(6, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. $3x + 6 = 45$</button>
+                            <button onclick="checkQuiz(6, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. $x + 3 = 45$</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Kategori 4: Penyelesaian PLSV (Soal 7 & 8) -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest border-b border-slate-800 pb-1">
+                        📌 Kategori 4: Penyelesaian Persamaan PLSV (Soal 7 & 8)
+                    </h3>
+
+                    <!-- Q7 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-7">
+                        <p class="text-xs sm:text-sm font-semibold">7. Penyelesaian dari $4x - 9 = 15$ adalah $x = ...$</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(7, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. 4</button>
+                            <button onclick="checkQuiz(7, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. 5</button>
+                            <button onclick="checkQuiz(7, 'C', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. 6</button>
+                            <button onclick="checkQuiz(7, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. 7</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Q8 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-8">
+                        <p class="text-xs sm:text-sm font-semibold">8. Jika $7x + 2 = 3x + 18$, maka nilai dari $x - 2$ adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(8, 'A', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. 2</button>
+                            <button onclick="checkQuiz(8, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. 4</button>
+                            <button onclick="checkQuiz(8, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. 6</button>
+                            <button onclick="checkQuiz(8, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. 8</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Kategori 5: Aplikasi Nyata Soal Cerita PLSV (Soal 9 & 10) -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest border-b border-slate-800 pb-1">
+                        📌 Kategori 5: Aplikasi Soal Cerita PLSV (Soal 9 & 10)
+                    </h3>
+
+                    <!-- Q9 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-9">
+                        <p class="text-xs sm:text-sm font-semibold">9. Andi membeli 4 pensil dan membayar dengan uang Rp20.000, lalu mendapat kembalian Rp6.000. Harga 1 pensil adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(9, 'A', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. Rp3.000</button>
+                            <button onclick="checkQuiz(9, 'B', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. Rp3.500</button>
+                            <button onclick="checkQuiz(9, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. Rp4.000</button>
+                            <button onclick="checkQuiz(9, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. Rp5.000</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Q10 -->
+                    <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-3" id="qcard-10">
+                        <p class="text-xs sm:text-sm font-semibold">10. Umur Ibu 4 kali umur Dika. Lima tahun yang akan datang, jumlah umur mereka adalah 50 tahun. Umur Dika saat ini adalah...</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+                            <button onclick="checkQuiz(10, 'A', this, true)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">A. 8 tahun</button>
+                            <button onclick="checkQuiz(10, 'B', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">B. 10 tahun</button>
+                            <button onclick="checkQuiz(10, 'C', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">C. 12 tahun</button>
+                            <button onclick="checkQuiz(10, 'D', this)" class="p-2.5 rounded-xl bg-slate-700/60 hover:bg-emerald-600 transition">D. 15 tahun</button>
+                        </div>
+                        <div class="q-feedback hidden text-xs p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 text-center text-xs font-semibold text-slate-400 py-6 border-t border-slate-200">
+        Aljabar & PLSV • Modul Pembelajaran Matematika Interaktif SMP
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const katexConfig = {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        };
+
+        function renderMathInContainer(container = document.body) {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(container, katexConfig);
+            }
+        }
+
+        let warmupScoreCount = 0;
+        let answeredWarmup = new Set();
+        
+        let quizScoreTotal = 0;
+        let answeredQuiz = new Set();
+
+        function checkWarmup(qNum, choice, btn, isCorrect = false) {
+            if (answeredWarmup.has(qNum)) return;
+            answeredWarmup.add(qNum);
+
+            const card = document.getElementById(`wu-card-${qNum}`);
+            const feedback = card.querySelector('.wu-feedback');
+            const buttons = card.querySelectorAll('button');
+
+            buttons.forEach(b => b.disabled = true);
+            feedback.classList.remove('hidden');
+
+            if (isCorrect) {
+                btn.className = "p-2.5 rounded-xl bg-emerald-500 text-white font-bold transition";
+                feedback.className = "wu-feedback text-xs font-bold mt-2 text-emerald-600";
+                feedback.innerHTML = "<i class='fa-solid fa-circle-check'></i> Tepat sekali!";
+                warmupScoreCount += 1;
+            } else {
+                btn.className = "p-2.5 rounded-xl bg-rose-500 text-white font-bold transition";
+                feedback.className = "wu-feedback text-xs font-bold mt-2 text-rose-600";
+                feedback.innerHTML = "<i class='fa-solid fa-circle-xmark'></i> Kurang tepat, cermati lagi ya!";
+            }
+
+            document.getElementById('warmup-score').textContent = `Skor: ${warmupScoreCount} / 8`;
+            renderMathInContainer(feedback);
+        }
+
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById(`${id}-icon`);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                icon.className = "fa-solid fa-chevron-up text-emerald-600";
+                renderMathInContainer(el);
+            } else {
+                el.classList.add('hidden');
+                icon.className = "fa-solid fa-chevron-down text-slate-400";
+            }
+        }
+
+        // SIMULATOR LOGIC
+        const xValInput = document.getElementById('x-val-sim');
+        const leftBoxesInput = document.getElementById('left-boxes');
+        const leftWeightsInput = document.getElementById('left-weights');
+        const rightWeightsInput = document.getElementById('right-weights');
+
+        function updateBalanceSimulator() {
+            if (!xValInput) return;
+            const x = parseInt(xValInput.value);
+            const a = parseInt(leftBoxesInput.value);
+            const b = parseInt(leftWeightsInput.value);
+            const c = parseInt(rightWeightsInput.value);
+
+            document.getElementById('x-sim-text').textContent = x;
+            document.getElementById('a-sim-text').textContent = a;
+            document.getElementById('b-sim-text').textContent = b;
+            document.getElementById('c-sim-text').textContent = c;
+
+            const bText = b > 0 ? ` + ${b}` : '';
+            document.getElementById('sim-eq-display').textContent = `${a}x${bText} = ${c}`;
+
+            const leftTotal = a * x + b;
+            const rightTotal = c;
+
+            // Update Items inside Pan
+            const leftPan = document.getElementById('left-pan-items');
+            const rightPan = document.getElementById('right-pan-items');
+            leftPan.innerHTML = '';
+            rightPan.innerHTML = '';
+
+            // Render boxes (x)
+            for (let i = 0; i < Math.min(a, 4); i++) {
+                const box = document.createElement('div');
+                box.className = 'w-6 h-6 bg-emerald-500 text-white rounded font-mono font-bold text-[10px] flex items-center justify-center flex-shrink-0 shadow';
+                box.textContent = 'x';
+                leftPan.appendChild(box);
+            }
+
+            // Render left extra weight
+            if (b > 0) {
+                const weight = document.createElement('div');
+                weight.className = 'w-6 h-6 bg-amber-500 text-white rounded-full font-mono font-bold text-[10px] flex items-center justify-center flex-shrink-0 shadow';
+                weight.textContent = b;
+                leftPan.appendChild(weight);
+            }
+
+            // Render right total weight
+            const rWeight = document.createElement('div');
+            rWeight.className = 'px-2 h-6 bg-rose-500 text-white rounded-lg font-mono font-bold text-xs flex items-center justify-center flex-shrink-0 shadow';
+            rWeight.textContent = `${c} kg`;
+            rightPan.appendChild(rWeight);
+
+            // Calculate tilt angle (max 12 deg)
+            const diff = leftTotal - rightTotal;
+            let angle = 0;
+            if (diff > 0) angle = -Math.min(diff * 2, 12);
+            else if (diff < 0) angle = Math.min(Math.abs(diff) * 2, 12);
+
+            const beam = document.getElementById('balance-beam');
+            beam.style.transform = `rotate(${angle}deg)`;
+
+            const status = document.getElementById('balance-status');
+            const explanation = document.getElementById('sim-explanation');
+
+            if (leftTotal === rightTotal) {
+                status.className = "px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono text-xs font-bold text-center";
+                status.textContent = "Status: SEIMBANG ✅";
+                explanation.innerHTML = `Kiri: $${a}(${x}) + ${b} = ${leftTotal}$ kg | Kanan: $${rightTotal}$ kg. Persamaan valid dan terbukti seimbang!`;
+            } else {
+                status.className = "px-3 py-1.5 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono text-xs font-bold text-center";
+                status.textContent = "Status: TIDAK SEIMBANG ❌";
+                explanation.innerHTML = `Kiri: $${a}(${x}) + ${b} = ${leftTotal}$ kg | Kanan: $${rightTotal}$ kg. Geser $x$ ke <strong>${((c - b) / a).toFixed(1)}</strong> agar seimbang!`;
+            }
+
+            renderMathInContainer(explanation);
+        }
+
+        if (xValInput) {
+            xValInput.addEventListener('input', updateBalanceSimulator);
+            leftBoxesInput.addEventListener('input', updateBalanceSimulator);
+            leftWeightsInput.addEventListener('input', updateBalanceSimulator);
+            rightWeightsInput.addEventListener('input', updateBalanceSimulator);
+        }
+
+        function checkQuiz(qNum, choice, btn, isCorrect = false) {
+            if (answeredQuiz.has(qNum)) return;
+            answeredQuiz.add(qNum);
+
+            const card = document.getElementById(`qcard-${qNum}`);
+            const feedback = card.querySelector('.q-feedback');
+            const buttons = card.querySelectorAll('button');
+
+            buttons.forEach(b => b.disabled = true);
+            feedback.classList.remove('hidden');
+
+            const explanations = {
+                1: "Gabungkan suku sejenis: $(9a - 5a) + (-3b + 8b) = 4a + 5b$.",
+                2: "Jumlahkan: $(3x^2 + 2x^2) + (-4x + 7x) + (6 - 10) = 5x^2 + 3x - 4$.",
+                3: "Gunakan distributif: $-4 \\cdot 3x - (-4) \\cdot 5 = -12x + 20$.",
+                4: "Jabarkan: $(5p + 10) - (6p - 3) = 5p - 6p + 10 + 3 = -p + 13$.",
+                5: "Dua kali $k$ ditambah 7 ($2k + 7$), lima kali $k$ dikurangi 8 ($5k - 8$). Persamaan: $2k + 7 = 5k - 8$.",
+                6: "Tiga bilangan berurutan: $x$, $(x+1)$, $(x+2)$. Jumlah = $x + x + 1 + x + 2 = 3x + 3 = 45$.",
+                7: "$4x - 9 = 15 \\implies 4x = 24 \\implies x = 6$.",
+                8: "$7x - 3x = 18 - 2 \\implies 4x = 16 \\implies x = 4$. Ditanya $x - 2 = 4 - 2 = 2$.",
+                9: "Model: $4x + 6.000 = 20.000 \\implies 4x = 14.000 \\implies x = 3.500$.",
+                10: "Misal Dika $= x$, Ibu $= 4x$. 5 thn lagi: $(x+5) + (4x+5) = 50 \\implies 5x + 10 = 50 \\implies 5x = 40 \\implies x = 8$ tahun."
+            };
+
+            if (isCorrect) {
+                btn.className = "p-2.5 rounded-xl bg-emerald-500 text-white font-bold transition";
+                feedback.className = "q-feedback text-xs p-3 rounded-xl bg-emerald-950/80 text-emerald-300 border border-emerald-800";
+                feedback.innerHTML = `<strong><i class='fa-solid fa-circle-check'></i> BENAR! (+10 Poin)</strong><br>${explanations[qNum]}`;
+                quizScoreTotal += 10;
+            } else {
+                btn.className = "p-2.5 rounded-xl bg-rose-500 text-white font-bold transition";
+                feedback.className = "q-feedback text-xs p-3 rounded-xl bg-rose-950/80 text-rose-300 border border-rose-800";
+                feedback.innerHTML = `<strong><i class='fa-solid fa-circle-xmark'></i> KURANG TEPAT</strong><br>${explanations[qNum]}`;
+            }
+
+            document.getElementById('quiz-score').textContent = `${quizScoreTotal} / 100`;
+            renderMathInContainer(feedback);
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            renderMathInContainer(document.body);
+            updateBalanceSimulator();
+        });
+
+        window.onload = function() {
+            renderMathInContainer(document.body);
+            updateBalanceSimulator();
+        };
+    </script>
+</body>
+</html>

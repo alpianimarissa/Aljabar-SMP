@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembagian Aljabar - Kelas 7 SMP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax for rendering math -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-bottom: 3px solid #2563eb; color: #2563eb; font-weight: 700; }
+        .step-card { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header Navbar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black flex items-center justify-center text-xl shadow-md">
+                    ÷
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight text-slate-900">Pembagian Aljabar</h1>
+                    <p class="text-xs text-slate-500 font-medium">Matematika Kelas 7 SMP</p>
+                </div>
+            </div>
+            <!-- Progress Tracker -->
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <span class="text-xs font-semibold text-slate-600">Progres Belajar:</span>
+                <div class="w-32 bg-slate-200 rounded-full h-2.5 overflow-hidden flex-1 sm:flex-none">
+                    <div id="learning-progress" class="bg-blue-600 h-2.5 rounded-full w-0 transition-all duration-500"></div>
+                </div>
+                <span id="progress-text" class="text-xs font-bold text-blue-600">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full space-y-12">
+
+        <!-- SECTION 1: TUJUAN PEMBELAJARAN -->
+        <section id="tujuan" class="bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 bg-blue-500/30 px-3 py-1 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-wider mb-3 border border-blue-400/30">
+                    🎯 Target Belajar
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Tujuan Pembelajaran Hari Ini</h2>
+                <div class="grid sm:grid-cols-3 gap-4 text-sm text-slate-100">
+                    <div class="bg-white/10 backdrop-blur border border-white/10 p-4 rounded-xl flex gap-3 items-start">
+                        <span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                        <p><strong class="text-white block font-semibold mb-1">Monomial & Polinomial:</strong> Memahami pembagian suku tunggal dan suku banyak pada bentuk aljabar.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur border border-white/10 p-4 rounded-xl flex gap-3 items-start">
+                        <span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                        <p><strong class="text-white block font-semibold mb-1">Sifat Eksponen:</strong> Menerapkan aturan eksponen $\frac{a^m}{a^n} = a^{m-n}$ dan penyederhanaan koefisien.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur border border-white/10 p-4 rounded-xl flex gap-3 items-start">
+                        <span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                        <p><strong class="text-white block font-semibold mb-1">Penerapan Nyata:</strong> Menyelesaikan persoalan nyata seperti mencari panjang/lebar bangun datar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WARM-UP (6 SOAL APERSEPSI) -->
+        <section id="warmup" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <div class="inline-flex items-center gap-2 text-amber-600 bg-amber-50 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                    ⚡ Uji Ingetan
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Warm-up: Prasyarat Aljabar</h2>
+                <p class="text-slate-600 text-sm mt-1">Selesaikan 6 soal dasar ini sebelum masuk ke pembagian. Klik opsi jawaban yang menurutmu benar!</p>
+            </div>
+
+            <!-- Quiz Grid (6 Soal) -->
+            <div class="grid md:grid-cols-2 gap-4" id="warmup-quiz-container">
+                <!-- Question 1 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q1">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 1 (Penjumlahan)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Sederhanakan: $3x + 5x$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(1, 'A', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$8x^2$</button>
+                        <button onclick="checkWarmup(1, 'B', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$8x$</button>
+                        <button onclick="checkWarmup(1, 'C', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$15x$</button>
+                        <button onclick="checkWarmup(1, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$8$</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q2">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 2 (Pengurangan)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Sederhanakan: $7a - 2a$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(2, 'A', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$5a$</button>
+                        <button onclick="checkWarmup(2, 'B', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$5$</button>
+                        <button onclick="checkWarmup(2, 'C', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$9a$</button>
+                        <button onclick="checkWarmup(2, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$-5a$</button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q3">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 3 (Perkalian Monomial)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Hasil dari: $4x \times 3x$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(3, 'A', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$12x$</button>
+                        <button onclick="checkWarmup(3, 'B', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$12x^2$</button>
+                        <button onclick="checkWarmup(3, 'C', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$7x^2$</button>
+                        <button onclick="checkWarmup(3, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$12$</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q4">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 4 (Perkalian Beda Variabel)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Hasil dari: $2a \times 5b$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(4, 'A', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$7ab$</button>
+                        <button onclick="checkWarmup(4, 'B', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$10a^2b^2$</button>
+                        <button onclick="checkWarmup(4, 'C', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$10ab$</button>
+                        <button onclick="checkWarmup(4, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$10(a+b)$</button>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q5">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 5 (Sifat Perkalian Eksponen)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Aturan eksponen: $a^m \times a^n = ...$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(5, 'A', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$a^{m+n}$</button>
+                        <button onclick="checkWarmup(5, 'B', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$a^{m \times n}$</button>
+                        <button onclick="checkWarmup(5, 'C', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$a^{m-n}$</button>
+                        <button onclick="checkWarmup(5, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$(a \times a)^{m+n}$</button>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between" id="wu-q6">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-400">Soal 6 (Sifat Distributif)</span>
+                            <span class="text-xs font-semibold text-slate-500 badge"></span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base mb-3">Penjabaran dari: $3(2x + 4)$</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="checkWarmup(6, 'A', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$6x + 4$</button>
+                        <button onclick="checkWarmup(6, 'B', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$6x + 12$</button>
+                        <button onclick="checkWarmup(6, 'C', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$5x + 7$</button>
+                        <button onclick="checkWarmup(6, 'D', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm text-center font-medium transition">$18x$</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="warmup-summary" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between">
+                <div>
+                    <h4 class="font-bold text-sm">Hebat! Warm-up Selesai 🎉</h4>
+                    <p class="text-xs">Kamu telah mengingat kembali konsep operasi aljabar dasar. Sekarang mari lanjut ke Pembagian Aljabar!</p>
+                </div>
+                <span id="warmup-score" class="text-lg font-black bg-emerald-600 text-white px-3 py-1 rounded-lg">6/6</span>
+            </div>
+        </section>
+
+        <!-- SECTION 3: KONEKSI NYATA -->
+        <section id="koneksi" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4">
+            <div class="inline-flex items-center gap-2 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                💡 Penerapan Kehidupan Nyata
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Mengapa Perlu Pembagian Aljabar?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 items-center pt-2">
+                <div class="space-y-3 text-slate-600 text-sm leading-relaxed">
+                    <p>Bayangkan seorang arsitek merancang lapangan futsal berstruktur persegi panjang.</p>
+                    <div class="p-4 bg-slate-50 border-l-4 border-emerald-500 rounded-r-xl space-y-2">
+                        <p class="font-bold text-slate-800">Skenario Masalah:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Luas lapangan diketahui: <span class="font-bold text-emerald-700">$12x^2 + 8x$</span> m²</li>
+                            <li>Panjang lapangan diketahui: <span class="font-bold text-emerald-700">$4x$</span> m</li>
+                            <li>Berapa <strong>Lebar</strong> lapangan tersebut?</li>
+                        </ul>
+                    </div>
+                    <p>
+                        Dari rumus dasar <span class="font-semibold text-slate-800">Luas = Panjang × Lebar</span>, kita tahu bahwa:
+                    </p>
+                    <div class="bg-amber-50 p-3 rounded-lg border border-amber-200 text-center font-bold text-amber-900 text-base">
+                        $\text{Lebar} = \frac{\text{Luas}}{\text{Panjang}} = \frac{12x^2 + 8x}{4x}$
+                    </div>
+                    <p>Untuk menyelesaikan masalah ini, kita <strong>wajib</strong> menguasai teknik pembagian aljabar!</p>
+                </div>
+
+                <!-- Visual Diagram -->
+                <div class="bg-emerald-50/50 border border-emerald-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                    <div class="w-full max-w-xs bg-white border-2 border-dashed border-emerald-500 rounded-xl p-6 shadow-sm relative">
+                        <span class="absolute top-2 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400">LUAS LAPANGAN</span>
+                        <div class="my-4 font-black text-xl text-emerald-600">$12x^2 + 8x$</div>
+                        <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-100 pt-2">
+                            <span>Panjang: <strong>$4x$</strong></span>
+                            <span>Lebar: <strong>?</strong></span>
+                        </div>
+                    </div>
+                    <span class="text-xs text-emerald-700 font-medium mt-3">👉 Pembagian aljabar memecah rumus luas menjadi dimensi panjang & lebar.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: MATERI LENGKAP & CONTOH SOAL -->
+        <section id="materi" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+            <div class="border-b border-slate-100 pb-4 flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-blue-600 bg-blue-50 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                        📖 Core Learning
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Materi Lengkap Pembagian Aljabar</h2>
+                </div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex border-b border-slate-200 text-sm font-medium overflow-x-auto">
+                <button onclick="switchTab('monomial')" id="tab-monomial" class="py-3 px-5 whitespace-nowrap tab-active transition">
+                    1. Monomial ÷ Monomial
+                </button>
+                <button onclick="switchTab('polynomial')" id="tab-polynomial" class="py-3 px-5 whitespace-nowrap text-slate-500 hover:text-slate-800 transition">
+                    2. Polinomial ÷ Monomial
+                </button>
+                <button onclick="switchTab('faktor')" id="tab-faktor" class="py-3 px-5 whitespace-nowrap text-slate-500 hover:text-slate-800 transition">
+                    3. Penyederhanaan via Faktorisasi
+                </button>
+            </div>
+
+            <!-- TAB 1: Monomial / Monomial -->
+            <div id="content-monomial" class="space-y-6">
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 space-y-2">
+                    <h3 class="font-bold text-blue-900 text-base">Aturan Utama (Suku Tunggal):</h3>
+                    <p class="text-sm text-blue-800 leading-relaxed">
+                        1. Bagi <strong>Koefisien</strong> dengan koefisien.<br>
+                        2. Bagi <strong>Variabel sejenis</strong> menggunakan sifat eksponen: $\frac{x^a}{x^b} = x^{a-b}$.
+                    </p>
+                </div>
+
+                <!-- Formula Card -->
+                <div class="bg-slate-900 text-white p-4 rounded-xl text-center font-mono text-base shadow-inner">
+                    $\frac{A \cdot x^m}{B \cdot x^n} = \left(\frac{A}{B}\right) \cdot x^{m-n}$
+                </div>
+
+                <!-- Examples with Interactive Accordion Solution -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-800 text-base">Contoh Soal & Pembahasan Lengkap:</h4>
+
+                    <!-- Example 1 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-50 p-4 flex justify-between items-center cursor-pointer hover:bg-slate-100 transition" onclick="toggleSolution('sol-1')">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">Contoh 1</span>
+                                <span class="font-bold text-slate-800 ml-2">Sederhanakan: $\frac{12x^5}{4x^2}$</span>
+                            </div>
+                            <span class="text-xs text-blue-600 font-bold flex items-center gap-1">
+                                Lihat Langkah <svg id="arrow-sol-1" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </div>
+                        <div id="sol-1" class="hidden p-4 bg-white border-t border-slate-200 text-sm space-y-3">
+                            <p class="font-semibold text-slate-700">Langkah Pembahasan:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600">
+                                <li>Pisahkan komponen koefisien dan variabel: $\left(\frac{12}{4}\right) \times \left(\frac{x^5}{x^2}\right)$</li>
+                                <li>Bagi koefisien: $12 \div 4 = 3$</li>
+                                <li>Kurangkan pangkat variabel sejenis: $x^{5-2} = x^3$</li>
+                                <li>Gabungkan hasil: <strong>$3x^3$</strong></li>
+                            </ol>
+                            <div class="p-2 bg-emerald-50 text-emerald-800 text-xs rounded font-semibold">
+                                ✅ Hasil Akhir = $3x^3$
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-50 p-4 flex justify-between items-center cursor-pointer hover:bg-slate-100 transition" onclick="toggleSolution('sol-2')">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">Contoh 2 (Multi-Variabel)</span>
+                                <span class="font-bold text-slate-800 ml-2">Sederhanakan: $\frac{20a^3b^2}{5ab}$</span>
+                            </div>
+                            <span class="text-xs text-blue-600 font-bold flex items-center gap-1">
+                                Lihat Langkah <svg id="arrow-sol-2" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </div>
+                        <div id="sol-2" class="hidden p-4 bg-white border-t border-slate-200 text-sm space-y-3">
+                            <p class="font-semibold text-slate-700">Langkah Pembahasan:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600">
+                                <li>Bagi koefisien: $\frac{20}{5} = 4$</li>
+                                <li>Bagi variabel $a$: $\frac{a^3}{a^1} = a^{3-1} = a^2$</li>
+                                <li>Bagi variabel $b$: $\frac{b^2}{b^1} = b^{2-1} = b^1 = b$</li>
+                                <li>Kalikan semua hasil: $4 \times a^2 \times b = 4a^2b$</li>
+                            </ol>
+                            <div class="p-2 bg-emerald-50 text-emerald-800 text-xs rounded font-semibold">
+                                ✅ Hasil Akhir = $4a^2b$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Polynomial / Monomial -->
+            <div id="content-polynomial" class="hidden space-y-6">
+                <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 space-y-2">
+                    <h3 class="font-bold text-purple-900 text-base">Aturan Pembagian Suku Banyak oleh Suku Tunggal:</h3>
+                    <p class="text-sm text-purple-800 leading-relaxed">
+                        Gunakan sifat pecahan: $\frac{A + B}{C} = \frac{A}{C} + \frac{B}{C}$.<br>
+                        <strong>Pecahkan setiap suku</strong> di pembilang dengan penyebut yang sama, lalu sederhanakan satu per satu.
+                    </p>
+                </div>
+
+                <!-- Example 3 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="bg-slate-50 p-4 flex justify-between items-center cursor-pointer hover:bg-slate-100 transition" onclick="toggleSolution('sol-3')">
+                        <div>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded">Contoh 3</span>
+                            <span class="font-bold text-slate-800 ml-2">Sederhanakan: $\frac{12x^2 + 8x}{4x}$</span>
+                        </div>
+                        <span class="text-xs text-purple-600 font-bold flex items-center gap-1">
+                            Lihat Langkah <svg id="arrow-sol-3" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </div>
+                    <div id="sol-3" class="hidden p-4 bg-white border-t border-slate-200 text-sm space-y-3">
+                        <p class="font-semibold text-slate-700">Langkah Pembahasan (Koneksi Nyata Lapangan):</p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-600">
+                            <li>Pisahkan suku pembilang: $\frac{12x^2 + 8x}{4x} = \frac{12x^2}{4x} + \frac{8x}{4x}$</li>
+                            <li>Bagi suku pertama: $\frac{12x^2}{4x} = 3x^{2-1} = 3x$</li>
+                            <li>Bagi suku kedua: $\frac{8x}{4x} = 2x^{1-1} = 2x^0 = 2$</li>
+                            <li>Gabungkan: <strong>$3x + 2$</strong></li>
+                        </ol>
+                        <div class="p-2 bg-emerald-50 text-emerald-800 text-xs rounded font-semibold">
+                            ✅ Hasil Akhir (Lebar Lapangan) = $3x + 2$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 4 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="bg-slate-50 p-4 flex justify-between items-center cursor-pointer hover:bg-slate-100 transition" onclick="toggleSolution('sol-4')">
+                        <div>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded">Contoh 4</span>
+                            <span class="font-bold text-slate-800 ml-2">Sederhanakan: $\frac{15a^3b - 10a^2b^2}{5ab}$</span>
+                        </div>
+                        <span class="text-xs text-purple-600 font-bold flex items-center gap-1">
+                            Lihat Langkah <svg id="arrow-sol-4" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </span>
+                    </div>
+                    <div id="sol-4" class="hidden p-4 bg-white border-t border-slate-200 text-sm space-y-3">
+                        <p class="font-semibold text-slate-700">Langkah Pembahasan:</p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-600">
+                            <li>Pecah suku: $\frac{15a^3b}{5ab} - \frac{10a^2b^2}{5ab}$</li>
+                            <li>Suku 1: $\frac{15}{5} \cdot a^{3-1} \cdot b^{1-1} = 3a^2$</li>
+                            <li>Suku 2: $\frac{10}{5} \cdot a^{2-1} \cdot b^{2-1} = 2ab$</li>
+                            <li>Hasil gabungan: $3a^2 - 2ab$</li>
+                        </ol>
+                        <div class="p-2 bg-emerald-50 text-emerald-800 text-xs rounded font-semibold">
+                            ✅ Hasil Akhir = $3a^2 - 2ab$
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Penyederhanaan via Faktorisasi Sederhana -->
+            <div id="content-faktor" class="hidden space-y-6">
+                <div class="bg-amber-50 p-4 rounded-xl border border-amber-100 space-y-2">
+                    <h3 class="font-bold text-amber-900 text-base">Aturan Pembagian dengan Mengeluarkan Faktor Persekutuan:</h3>
+                    <p class="text-sm text-amber-800 leading-relaxed">
+                        Jika pembilang dapat difaktorkan dengan sifat distributif $a(b + c)$, keluarkan faktor yang sama pada pembilang terlebih dahulu, lalu sederhanakan (coret) dengan penyebut.
+                    </p>
+                </div>
+
+                <!-- Step-by-Step Visualization -->
+                <div class="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-4">
+                    <h4 class="font-bold text-slate-900 text-base">Contoh 5: Sederhanakan $\frac{6x + 12}{3}$</h4>
+                    
+                    <div class="grid md:grid-cols-3 gap-3 text-xs">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm space-y-1">
+                            <span class="font-bold text-amber-600 block">Langkah 1: Cari FPB</span>
+                            <p class="text-slate-600">FPB dari $6x$ dan $12$ adalah $3$ (atau $6$).</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm space-y-1">
+                            <span class="font-bold text-amber-600 block">Langkah 2: Faktorkan Pembilang</span>
+                            <p class="text-slate-600">Keluarkan angka $3$:</p>
+                            <div class="font-bold text-slate-800">$6x + 12 = 3(2x + 4)$</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm space-y-1">
+                            <span class="font-bold text-amber-600 block">Langkah 3: Coret Faktor Sama</span>
+                            <p class="text-slate-600">Bagi angka $3$ di pembilang & penyebut:</p>
+                            <div class="font-bold text-emerald-700">$\frac{3(2x + 4)}{3} = 2x + 4$</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 text-center space-y-1">
+                        <span class="text-xs text-slate-500 font-bold uppercase">Hasil Akhir:</span>
+                        <div class="p-2 bg-emerald-100 text-emerald-900 rounded font-bold text-sm">
+                            $\frac{6x + 12}{3} = 2x + 4$
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: LATIHAN SOAL TERBIMBING -->
+        <section id="latihan" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+            <div class="border-b border-slate-100 pb-4">
+                <div class="inline-flex items-center gap-2 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                    ✍️ Latihan Mandiri
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900">Latihan Soal Terbimbing</h2>
+                <p class="text-slate-600 text-sm mt-1">Kerjakan soal di bawah ini. Jika kesulitan, klik tombol "Minta Petunjuk"!</p>
+            </div>
+
+            <!-- Guided Problem 1 -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4" id="gp-card-1">
+                <div class="flex justify-between items-start">
+                    <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Soal Terbimbing 1</span>
+                    <span id="gp1-status" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                </div>
+                
+                <p class="font-bold text-slate-800 text-lg">Sederhanakan pembagian berikut: $\frac{18x^4}{6x^2}$</p>
+
+                <!-- Input Interactive Form -->
+                <div class="grid sm:grid-cols-2 gap-3 items-center pt-2">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Ketikkan hasil akhirmu (Contoh format: 3x^2):</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="gp1-input" placeholder="Jawaban..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono">
+                            <button onclick="checkGuided1()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition">Cek</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-start sm:justify-end">
+                        <button onclick="toggleHint('hint-1')" class="text-xs text-indigo-600 font-semibold underline hover:text-indigo-800">
+                            💡 Minta Petunjuk
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hint Box -->
+                <div id="hint-1" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-1">
+                    <strong>Petunjuk:</strong>
+                    <p>1. Bagi koefisien: $18 \div 6 = \dots$</p>
+                    <p>2. Kurangkan pangkat $x$: $4 - 2 = \dots$</p>
+                </div>
+
+                <!-- Feedback Message -->
+                <div id="gp1-feedback" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+
+            <!-- Guided Problem 2 -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4" id="gp-card-2">
+                <div class="flex justify-between items-start">
+                    <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Soal Terbimbing 2 (Soal Cerita)</span>
+                    <span id="gp2-status" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                </div>
+                
+                <p class="text-slate-800 text-sm leading-relaxed">
+                    Kebun Pak Budi berbentuk persegi panjang dengan <strong>Luas = $20x^2y + 15xy^2$</strong> m². Jika <strong>Lebar = $5xy$</strong> m, berapakah <strong>Panjang</strong> kebun Pak Budi?
+                </p>
+
+                <!-- Step Guided Fill in The Blanks -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
+                    <p class="text-xs font-bold text-slate-700">Pecah Rumus: $\text{Panjang} = \frac{20x^2y + 15xy^2}{5xy} = \frac{20x^2y}{5xy} + \frac{15xy^2}{5xy}$</p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-3 text-sm">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-500">Suku Pertama $(\frac{20x^2y}{5xy})$:</span>
+                            <input type="text" id="gp2-suku1" placeholder="..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-mono">
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-500">Suku Kedua $(\frac{15xy^2}{5xy})$:</span>
+                            <input type="text" id="gp2-suku2" placeholder="..." class="w-full px-3 py-1.5 border border-slate-300 rounded-lg text-sm font-mono">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <button onclick="toggleHint('hint-2')" class="text-xs text-indigo-600 font-semibold underline">
+                            💡 Minta Petunjuk
+                        </button>
+                        <button onclick="checkGuided2()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2 rounded-lg text-sm transition">
+                            Verifikasi Langkah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hint Box 2 -->
+                <div id="hint-2" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-1">
+                    <strong>Petunjuk:</strong>
+                    <p>• Suku 1: $20 \div 5 = 4$, $x^{2-1} = x$, $y^{1-1} = 1 \rightarrow 4x$</p>
+                    <p>• Suku 2: $15 \div 5 = 3$, $x^{1-1} = 1$, $y^{2-1} = y \rightarrow 3y$</p>
+                </div>
+
+                <!-- Feedback Message 2 -->
+                <div id="gp2-feedback" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+
+            <!-- Guided Problem 3 -->
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4" id="gp-card-3">
+                <div class="flex justify-between items-start">
+                    <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Soal Terbimbing 3 (Penyederhanaan Pecahan)</span>
+                    <span id="gp3-status" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                </div>
+                
+                <p class="font-bold text-slate-800 text-base">Sederhanakan bentuk aljabar berikut: $\frac{10x + 15}{5}$</p>
+
+                <div class="space-y-3">
+                    <p class="text-xs text-slate-600">Pilih hasil pembagian yang paling tepat:</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="checkGuided3('2x+3', true, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm font-medium">$2x + 3$</button>
+                        <button onclick="checkGuided3('2x+15', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm font-medium">$2x + 15$</button>
+                        <button onclick="checkGuided3('5x+3', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm font-medium">$5x + 3$</button>
+                        <button onclick="checkGuided3('2x+5', false, this)" class="p-2 bg-white hover:bg-slate-100 border border-slate-300 rounded-lg text-sm font-medium">$2x + 5$</button>
+                    </div>
+                </div>
+
+                <div id="gp3-feedback" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- Completion Banner -->
+        <div id="completion-modal" class="hidden bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6 sm:p-8 rounded-2xl text-center space-y-4 shadow-xl">
+            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mx-auto backdrop-blur">
+                🏆
+            </div>
+            <h3 class="text-2xl font-black">Selamat! Kamu Menguasai Pembagian Aljabar</h3>
+            <p class="text-emerald-100 text-sm max-w-xl mx-auto">
+                Kamu telah menyelesaikan warm-up, memahami konsep monomial & polinomial, serta menyelesaikan seluruh latihan soal terbimbing dengan baik!
+            </p>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-white text-emerald-800 font-bold px-6 py-2.5 rounded-xl text-sm shadow hover:bg-emerald-50 transition">
+                🚀 Ulangi Materi / Ke Atas
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+        <p>© 2026 Modul Interaktif Matematika SMP Kelas 7 - Pembagian Aljabar</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // State variables
+        let warmupAnswered = 0;
+        let warmupCorrect = 0;
+        let guidedProgress = { g1: false, g2: false, g3: false };
+
+        // Toggle Tabs in Section 4
+        function switchTab(tabName) {
+            const tabs = ['monomial', 'polynomial', 'faktor'];
+            tabs.forEach(t => {
+                document.getElementById(`content-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('tab-active');
+                document.getElementById(`tab-${t}`).classList.add('text-slate-500');
+            });
+
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            const activeTabBtn = document.getElementById(`tab-${tabName}`);
+            activeTabBtn.classList.add('tab-active');
+            activeTabBtn.classList.remove('text-slate-500');
+            
+            // Re-render MathJax if necessary
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Toggle Solutions in Materi Section
+        function toggleSolution(id) {
+            const sol = document.getElementById(id);
+            const arrow = document.getElementById(`arrow-${id}`);
+            if (sol.classList.contains('hidden')) {
+                sol.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                sol.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        // Toggle Hints in Guided Practice
+        function toggleHint(id) {
+            const hint = document.getElementById(id);
+            hint.classList.toggle('hidden');
+        }
+
+        // Warmup Quiz Logic
+        function checkWarmup(qNum, choice, isCorrect, btnElement) {
+            const card = document.getElementById(`wu-q${qNum}`);
+            const buttons = card.querySelectorAll('button');
+            const badge = card.querySelector('.badge');
+
+            // Disable all buttons in this question
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-slate-100');
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+            btnElement.classList.remove('opacity-50');
+
+            if (isCorrect) {
+                btnElement.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
+                badge.textContent = '✅ Benar';
+                badge.classList.add('text-emerald-600');
+                warmupCorrect++;
+            } else {
+                btnElement.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                badge.textContent = '❌ Salah';
+                badge.classList.add('text-rose-600');
+            }
+
+            warmupAnswered++;
+
+            if (warmupAnswered === 6) {
+                const summary = document.getElementById('warmup-summary');
+                const scoreTag = document.getElementById('warmup-score');
+                summary.classList.remove('hidden');
+                scoreTag.textContent = `${warmupCorrect}/6`;
+                updateTotalProgress();
+            }
+        }
+
+        // Guided Problem 1 Validation
+        function checkGuided1() {
+            const input = document.getElementById('gp1-input').value.trim().toLowerCase().replace(/\s+/g, '');
+            const feedback = document.getElementById('gp1-feedback');
+            const status = document.getElementById('gp1-status');
+
+            // Valid correct variations: "3x^2", "3x²"
+            if (input === '3x^2' || input === '3x²') {
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-100 text-emerald-800";
+                feedback.textContent = "✅ Tepat Sekali! 18:6 = 3 dan x^(4-2) = x^2. Hasil = 3x^2";
+                feedback.classList.remove('hidden');
+                status.textContent = "✅ Selesai";
+                status.className = "text-xs font-bold text-emerald-600";
+                guidedProgress.g1 = true;
+            } else {
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-rose-100 text-rose-800";
+                feedback.textContent = "❌ Belum tepat. Coba periksa lagi pembagian koefisien dan pengurangan pangkatnya.";
+                feedback.classList.remove('hidden');
+            }
+            updateTotalProgress();
+        }
+
+        // Guided Problem 2 Validation
+        function checkGuided2() {
+            const suku1 = document.getElementById('gp2-suku1').value.trim().toLowerCase().replace(/\s+/g, '');
+            const suku2 = document.getElementById('gp2-suku2').value.trim().toLowerCase().replace(/\s+/g, '');
+            const feedback = document.getElementById('gp2-feedback');
+            const status = document.getElementById('gp2-status');
+
+            const isSuku1Correct = (suku1 === '4x');
+            const isSuku2Correct = (suku2 === '3y');
+
+            if (isSuku1Correct && isSuku2Correct) {
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-100 text-emerald-800";
+                feedback.textContent = "🎉 Luar Biasa! Kedua suku benar. Jadi Panjang Kebun Pak Budi = 4x + 3y meter.";
+                feedback.classList.remove('hidden');
+                status.textContent = "✅ Selesai";
+                status.className = "text-xs font-bold text-emerald-600";
+                guidedProgress.g2 = true;
+            } else {
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-rose-100 text-rose-800";
+                feedback.textContent = "⚠️ Masih ada yang kurang pas. Suku 1 harusnya (20/5)*(x^2/x)*(y/y) dan Suku 2: (15/5)*(x/x)*(y^2/y).";
+                feedback.classList.remove('hidden');
+            }
+            updateTotalProgress();
+        }
+
+        // Guided Problem 3 Validation
+        function checkGuided3(choice, isCorrect, btnElement) {
+            const parent = btnElement.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            const feedback = document.getElementById('gp3-feedback');
+            const status = document.getElementById('gp3-status');
+
+            buttons.forEach(b => b.classList.remove('bg-indigo-600', 'text-white', 'bg-rose-500'));
+
+            if (isCorrect) {
+                btnElement.classList.add('bg-emerald-600', 'text-white');
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-100 text-emerald-800";
+                feedback.textContent = "✅ Tepat Sekali! (10x ÷ 5) + (15 ÷ 5) = 2x + 3.";
+                feedback.classList.remove('hidden');
+                status.textContent = "✅ Selesai";
+                status.className = "text-xs font-bold text-emerald-600";
+                guidedProgress.g3 = true;
+            } else {
+                btnElement.classList.add('bg-rose-500', 'text-white');
+                feedback.className = "p-3 rounded-xl text-xs font-semibold bg-rose-100 text-rose-800";
+                feedback.textContent = "❌ Kurang tepat. Jangan lupa membagi kedua suku (10x dan 15) dengan 5!";
+                feedback.classList.remove('hidden');
+            }
+            updateTotalProgress();
+        }
+
+        // Total Learning Progress Calculation
+        function updateTotalProgress() {
+            let score = 0;
+
+            // Warmup contributes 25%
+            if (warmupAnswered === 6) score += 25;
+
+            // Guided exercises contribute 25% each
+            if (guidedProgress.g1) score += 25;
+            if (guidedProgress.g2) score += 25;
+            if (guidedProgress.g3) score += 25;
+
+            // Update UI Progress Bar
+            document.getElementById('learning-progress').style.width = `${score}%`;
+            document.getElementById('progress-text').textContent = `${score}%`;
+
+            // Show completion modal if 100%
+            if (score === 100) {
+                document.getElementById('completion-modal').classList.remove('hidden');
+                document.getElementById('completion-modal').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>

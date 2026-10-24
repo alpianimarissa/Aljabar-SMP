@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faktorisasi Ekspresi Aljabar - Metode FPB | SMP Kelas 7</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+        .tab-btn.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b border-indigo-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md">
+                    <i class="fa-solid fa-shapes text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold font-heading text-indigo-900 leading-tight">Aljabar Ceria SMP</h1>
+                    <p class="text-xs text-indigo-600 font-semibold">Kelas 7 • Faktorisasi Metode FPB</p>
+                </div>
+            </div>
+
+            <!-- Tab Quick Navigation (Desktop) -->
+            <nav class="hidden md:flex space-x-1 bg-indigo-50/80 p-1 rounded-2xl border border-indigo-100 text-xs font-bold">
+                <button onclick="switchTab('tujuan')" id="tab-tujuan" class="tab-btn active px-3.5 py-2 rounded-xl transition-all">Tujuan</button>
+                <button onclick="switchTab('warmup')" id="tab-warmup" class="tab-btn px-3.5 py-2 rounded-xl transition-all">Warm-Up</button>
+                <button onclick="switchTab('materi')" id="tab-materi" class="tab-btn px-3.5 py-2 rounded-xl transition-all">Materi & Contoh</button>
+                <button onclick="switchTab('latihan')" id="tab-latihan" class="tab-btn px-3.5 py-2 rounded-xl transition-all">Latihan Terbimbing</button>
+            </nav>
+        </div>
+
+        <!-- Tab Mobile Navigation -->
+        <div class="flex md:hidden border-t border-slate-100 bg-indigo-50/50 p-1 text-xs font-bold justify-around">
+            <button onclick="switchTab('tujuan')" id="tab-tujuan-m" class="px-2.5 py-1.5 rounded-lg text-indigo-700">Tujuan</button>
+            <button onclick="switchTab('warmup')" id="tab-warmup-m" class="px-2.5 py-1.5 rounded-lg text-slate-600">Warm-Up</button>
+            <button onclick="switchTab('materi')" id="tab-materi-m" class="px-2.5 py-1.5 rounded-lg text-slate-600">Materi</button>
+            <button onclick="switchTab('latihan')" id="tab-latihan-m" class="px-2.5 py-1.5 rounded-lg text-slate-600">Latihan</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- ================= BAGIAN 1: TUJUAN PEMBELAJARAN ================= -->
+        <section id="sec-tujuan" class="space-y-6">
+            <div class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-6 md:p-8 text-white card-shadow relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <span class="bg-indigo-500/40 text-indigo-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-400/30">Modul Interaktif</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold font-heading">Faktorisasi Ekspresi Aljabar Menggunakan Metode FPB</h2>
+                    <p class="text-indigo-100 text-sm md:text-base leading-relaxed max-w-2xl">
+                        Halo Sahabat Matematika! Mari belajar membongkar ekspresi aljabar menjadi bentuk perkalian faktor-faktornya menggunakan bantuan FPB (Faktor Persekutuan Terbesar).
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-indigo-100 card-shadow space-y-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 font-heading">
+                    <i class="fa-solid fa-bullseye text-indigo-600"></i> Tujuan Pembelajaran Hari Ini
+                </h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Setelah menyelesaikan modul pembelajaran interaktif ini, kamu diharapkan mampu:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="flex items-start gap-3 p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-indigo-950 text-sm">Menentukan FPB Suku Aljabar</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Mencari FPB dari koefisien angka dan variabel (huruf) pada suku-suku aljabar.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-indigo-950 text-sm">Memahami Sifat Distributif</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Menggunakan pemahaman sifat distributif perkalian untuk proses faktorisasi.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-indigo-950 text-sm">Melakukan Faktorisasi</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Mengubah bentuk penjumlahan/pengurangan suku aljabar menjadi bentuk perkalian faktor.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">4</div>
+                        <div>
+                            <h4 class="font-bold text-indigo-950 text-sm">Menyelesaikan Masalah</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">Menyelesaikan soal-soal latihan secara mandiri dengan bimbingan petunjuk langkah demi langkah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button onclick="switchTab('warmup')" class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md flex items-center gap-2">
+                        Mulai Warm-Up Kuis <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BAGIAN 2: WARM-UP (4 SOAL) ================= -->
+        <section id="sec-warmup" class="hidden space-y-6">
+            <div class="bg-amber-50 border border-amber-200 p-5 rounded-3xl flex items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-amber-500 text-white p-3 rounded-2xl">
+                        <i class="fa-solid fa-fire text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-amber-900 font-heading">Kuis Warm-Up (4 Soal Prasarat)</h3>
+                        <p class="text-xs text-amber-700">Uji ingatanmu tentang FPB angka & perkalian suku aljabar dasar sebelum masuk materi utama!</p>
+                    </div>
+                </div>
+                <div class="bg-white px-3.5 py-1.5 rounded-xl border border-amber-200 text-right">
+                    <span class="text-[10px] text-amber-600 font-bold uppercase block">Skor Kamu</span>
+                    <span id="warmup-score" class="text-lg font-extrabold text-amber-600">0 / 4</span>
+                </div>
+            </div>
+
+            <!-- Warmup Question Container -->
+            <div id="warmup-container" class="space-y-6">
+                <!-- JS akan merender 4 soal warm up di sini -->
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+                <button onclick="switchTab('tujuan')" class="px-5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-600 hover:bg-slate-100 text-sm">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Kembali
+                </button>
+                <button onclick="switchTab('materi')" class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md flex items-center gap-2">
+                    Lanjut ke Materi Lengkap <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= BAGIAN 3: MATERI LENGKAP & CONTOH SOAL ================= -->
+        <section id="sec-materi" class="hidden space-y-6">
+            <!-- Penjelasan Konsep -->
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-indigo-100 card-shadow space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-wider">Konsep Dasar</span>
+                    <h2 class="text-2xl font-bold text-slate-800 font-heading mt-2">Apa itu Faktorisasi Aljabar?</h2>
+                </div>
+
+                <div class="text-sm text-slate-700 leading-relaxed space-y-4">
+                    <p>
+                        <strong>Faktorisasi (pemfaktoran)</strong> adalah proses menyatakan bentuk penjumlahan/pengurangan aljabar menjadi <strong>bentuk perkalian faktor-faktornya</strong>.
+                    </p>
+                    <p>
+                        Ingat kembali <strong>Sifat Distributif</strong> yang pernah kamu pelajari:
+                    </p>
+                    <div class="p-4 bg-indigo-50/80 rounded-2xl border border-indigo-200 text-center text-indigo-950 font-mono text-base md:text-lg font-bold">
+                        a × (b + c) = (a × b) + (a × c)
+                    </div>
+                    <p>
+                        Proses <strong>Faktorisasi</strong> adalah kebalikan dari ekspansi distributif tersebut:
+                    </p>
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-center text-emerald-950 font-mono text-base md:text-lg font-bold">
+                        ab + ac = a(b + c)
+                    </div>
+                    <p class="text-xs text-slate-500 italic text-center">
+                        *Di mana <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 font-bold">a</code> adalah FPB dari suku <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 font-bold">ab</code> dan <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 font-bold">ac</code>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Langkah-langkah Memfaktorkan dengan FPB -->
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-indigo-100 card-shadow space-y-5">
+                <h3 class="text-xl font-bold text-slate-800 font-heading flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-indigo-600"></i> Langkah Praktis Memfaktorkan Metode FPB
+                </h3>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">1</div>
+                        <div class="text-sm">
+                            <h4 class="font-bold text-slate-800">Cari FPB Angka (Koefisien)</h4>
+                            <p class="text-slate-600 text-xs mt-1">Tentukan FPB dari semua koefisien angka pada setiap suku ekspresi aljabar.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">2</div>
+                        <div class="text-sm">
+                            <h4 class="font-bold text-slate-800">Cari FPB Variabel (Huruf)</h4>
+                            <p class="text-slate-600 text-xs mt-1">Pilih variabel yang <strong>ada di setiap suku</strong>, lalu ambil variabel dengan <strong>pangkat terkecil</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">3</div>
+                        <div class="text-sm">
+                            <h4 class="font-bold text-slate-800">Kalikan FPB Koefisien & Variabel</h4>
+                            <p class="text-slate-600 text-xs mt-1">Gabungkan FPB angka dan FPB variabel sebagai <strong>Faktor Luar</strong> (FPB Total).</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold flex items-center justify-center shrink-0">4</div>
+                        <div class="text-sm">
+                            <h4 class="font-bold text-slate-800">Bagi Setiap Suku Asli dengan FPB Total</h4>
+                            <p class="text-slate-600 text-xs mt-1">Hasil pembagian suku-suku asli dimasukkan ke dalam tanda kurung <code class="bg-indigo-100 text-indigo-800 px-1 rounded">( ... )</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh Soal Terperinci -->
+            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 md:p-8 rounded-3xl border border-indigo-100 card-shadow space-y-6">
+                <div class="flex items-center justify-between border-b border-indigo-200/60 pb-3">
+                    <h3 class="text-xl font-bold text-indigo-950 font-heading flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-indigo-600"></i> Contoh Soal & Pembahasan Lengkap
+                    </h3>
+                    <span class="text-xs font-bold text-indigo-700 bg-indigo-100/80 px-3 py-1 rounded-full">4 Model Soal</span>
+                </div>
+
+                <!-- Contoh 1: Sederhana (Angka saja) -->
+                <div class="bg-white p-5 rounded-2xl border border-indigo-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Contoh 1</span>
+                            <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Satu Variabel + Konstanta</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">Faktorkan bentuk aljabar: <code class="text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-mono">6x + 15</code></h4>
+
+                    <div class="text-xs md:text-sm text-slate-600 space-y-2 pt-1 font-sans leading-relaxed">
+                        <p class="font-bold text-slate-800">Pembahasan Step-by-Step:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><strong>FPB Angka (6 dan 15):</strong> Faktor 6 = {1, 2, <strong>3</strong>, 6}, Faktor 15 = {1, <strong>3</strong>, 5, 15}. FPB = <strong class="text-indigo-600">3</strong>.</li>
+                            <li><strong>FPB Variabel:</strong> Suku <code class="bg-slate-100 px-1">15</code> tidak memiliki variabel <code class="bg-slate-100 px-1">x</code>, jadi FPB variabel tidak ada.</li>
+                            <li><strong>FPB Total = 3</strong>. Letakkan 3 di luar tanda kurung.</li>
+                            <li><strong>Bagi tiap suku dengan 3:</strong>
+                                <div class="my-1.5 p-2 bg-slate-50 rounded-xl font-mono text-center text-xs border border-slate-100">
+                                    (6x ÷ 3) + (15 ÷ 3) = <strong>2x + 5</strong>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold text-center text-sm mt-2">
+                            Hasil Akhir: 6x + 15 = 3(2x + 5)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 2: Dua Variabel dengan Pangkat Berbeda -->
+                <div class="bg-white p-5 rounded-2xl border border-indigo-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Contoh 2</span>
+                            <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Dua Variabel & Pangkat</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">Faktorkan bentuk aljabar: <code class="text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-mono">12a²b - 8ab²</code></h4>
+
+                    <div class="text-xs md:text-sm text-slate-600 space-y-2 pt-1 font-sans leading-relaxed">
+                        <p class="font-bold text-slate-800">Pembahasan Step-by-Step:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><strong>FPB Angka (12 dan 8):</strong> FPB(12, 8) = <strong class="text-indigo-600">4</strong>.</li>
+                            <li><strong>FPB Variabel a:</strong> Antara <code class="bg-slate-100 px-1">a²</code> dan <code class="bg-slate-100 px-1">a</code>, pilih pangkat terkecil = <strong class="text-indigo-600">a</strong>.</li>
+                            <li><strong>FPB Variabel b:</strong> Antara <code class="bg-slate-100 px-1">b</code> dan <code class="bg-slate-100 px-1">b²</code>, pilih pangkat terkecil = <strong class="text-indigo-600">b</strong>.</li>
+                            <li><strong>FPB Total = 4ab</strong>.</li>
+                            <li><strong>Bagi tiap suku dengan 4ab:</strong>
+                                <div class="my-1.5 p-2 bg-slate-50 rounded-xl font-mono text-center text-xs border border-slate-100">
+                                    (12a²b ÷ 4ab) - (8ab² ÷ 4ab) = <strong>3a - 2b</strong>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold text-center text-sm mt-2">
+                            Hasil Akhir: 12a²b - 8ab² = 4ab(3a - 2b)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 3: Faktorisasi 3 Suku Suku Banyak -->
+                <div class="bg-white p-5 rounded-2xl border border-indigo-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Contoh 3</span>
+                            <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Trinomial (3 Suku)</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">Faktorkan bentuk aljabar: <code class="text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-mono">15m³ - 10m² + 20m</code></h4>
+
+                    <div class="text-xs md:text-sm text-slate-600 space-y-2 pt-1 font-sans leading-relaxed">
+                        <p class="font-bold text-slate-800">Pembahasan Step-by-Step:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><strong>FPB Angka (15, 10, dan 20):</strong> FPB(15, 10, 20) = <strong class="text-indigo-600">5</strong>.</li>
+                            <li><strong>FPB Variabel m:</strong> Dari <code class="bg-slate-100 px-1">m³</code>, <code class="bg-slate-100 px-1">m²</code>, dan <code class="bg-slate-100 px-1">m</code>, pilih pangkat terkecil = <strong class="text-indigo-600">m</strong>.</li>
+                            <li><strong>FPB Total = 5m</strong>.</li>
+                            <li><strong>Bagi tiap suku dengan 5m:</strong>
+                                <div class="my-1.5 p-2 bg-slate-50 rounded-xl font-mono text-center text-xs border border-slate-100">
+                                    (15m³ ÷ 5m) - (10m² ÷ 5m) + (20m ÷ 5m) = <strong>3m² - 2m + 4</strong>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold text-center text-sm mt-2">
+                            Hasil Akhir: 15m³ - 10m² + 20m = 5m(3m² - 2m + 4)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh 4: Dengan Tanda Negatif di Suku Depan -->
+                <div class="bg-white p-5 rounded-2xl border border-indigo-100 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Contoh 4</span>
+                            <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Faktor Negatif</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">Faktorkan bentuk aljabar: <code class="text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-mono">-14x²y - 21xy²</code></h4>
+
+                    <div class="text-xs md:text-sm text-slate-600 space-y-2 pt-1 font-sans leading-relaxed">
+                        <p class="font-bold text-slate-800">Pembahasan Step-by-Step:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><strong>FPB Angka (-14 dan -21):</strong> Kita bisa mengeluarkan faktor negatif <strong class="text-indigo-600">-7</strong> agar suku di dalam kurung menjadi positif.</li>
+                            <li><strong>FPB Variabel:</strong> Untuk <code class="bg-slate-100 px-1">x</code> (pangkat terkecil = <strong class="text-indigo-600">x</strong>), untuk <code class="bg-slate-100 px-1">y</code> (pangkat terkecil = <strong class="text-indigo-600">y</strong>).</li>
+                            <li><strong>FPB Total = -7xy</strong>.</li>
+                            <li><strong>Bagi tiap suku dengan -7xy:</strong>
+                                <div class="my-1.5 p-2 bg-slate-50 rounded-xl font-mono text-center text-xs border border-slate-100">
+                                    (-14x²y ÷ -7xy) + (-21xy² ÷ -7xy) = <strong>2x + 3y</strong>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 font-bold text-center text-sm mt-2">
+                            Hasil Akhir: -14x²y - 21xy² = -7xy(2x + 3y)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+                <button onclick="switchTab('warmup')" class="px-5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-600 hover:bg-slate-100 text-sm">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Kembali
+                </button>
+                <button onclick="switchTab('latihan')" class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md flex items-center gap-2">
+                    Lanjut ke Latihan Terbimbing <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= BAGIAN 4: LATIHAN SOAL TERBIMBING ================= -->
+        <section id="sec-latihan" class="hidden space-y-6">
+            <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-3xl flex items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-emerald-600 text-white p-3 rounded-2xl">
+                        <i class="fa-solid fa-pen-ruler text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-emerald-950 font-heading">Latihan Soal Terbimbing</h3>
+                        <p class="text-xs text-emerald-800">Kerjakan latihan ini! Kamu bisa membuka "Petunjuk Step-by-Step" jika butuh bantuan.</p>
+                    </div>
+                </div>
+                <div class="bg-white px-3.5 py-1.5 rounded-xl border border-emerald-200 text-right">
+                    <span class="text-[10px] text-emerald-600 font-bold uppercase block">Progres Soal</span>
+                    <span id="latihan-progress" class="text-lg font-extrabold text-emerald-600">0 / 6</span>
+                </div>
+            </div>
+
+            <!-- Quiz Latihan Terbimbing Container -->
+            <div id="latihan-container" class="space-y-6">
+                <!-- JS akan merender 6 latihan terbimbing di sini -->
+            </div>
+
+            <!-- Modal / Banner Selesai Pembelajaran -->
+            <div id="latihan-complete-banner" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-6 rounded-3xl text-center space-y-3 card-shadow">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-trophy text-amber-300"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-heading">Luar Biasa! Kamu Hebat!</h3>
+                <p class="text-sm text-emerald-100 max-w-lg mx-auto">
+                    Kamu telah menyelesaikan semua kuis dan latihan terbimbing materi Faktorisasi Aljabar dengan Metode FPB.
+                </p>
+                <button onclick="resetAllQuiz()" class="mt-2 px-5 py-2.5 rounded-xl bg-white text-emerald-800 font-bold text-xs hover:bg-emerald-50 transition-all shadow-md">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Latihan
+                </button>
+            </div>
+
+            <div class="flex justify-start items-center pt-2">
+                <button onclick="switchTab('materi')" class="px-5 py-2.5 rounded-xl border border-slate-300 font-bold text-slate-600 hover:bg-slate-100 text-sm">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Materi
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-indigo-100 py-4 text-center text-xs text-slate-500">
+        <p>© 2026 Pembelajaran Matematika SMP Kelas 7 • Faktorisasi Ekspresi Aljabar</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Data Kuis Warm-up (4 Soal)
+        const warmupData = [
+            {
+                id: 1,
+                q: "Berapakah FPB dari angka <strong>12</strong> dan <strong>18</strong>?",
+                options: ["2", "3", "6", "12"],
+                correct: 2, // 6
+                explanation: "Faktor 12 = {1,2,3,4,6,12}. Faktor 18 = {1,2,3,6,9,18}. Faktor persekutuan terbesar (FPB) adalah 6."
+            },
+            {
+                id: 2,
+                q: "Manakah variabel dengan <strong>pangkat terkecil</strong> di antara suku <code class='bg-slate-100 px-1.5 py-0.5 rounded'>x³</code> dan <code class='bg-slate-100 px-1.5 py-0.5 rounded'>x²</code>?",
+                options: ["x³", "x²", "x", "x⁵"],
+                correct: 1, // x²
+                explanation: "Untuk menentukan FPB variabel, kita pilih variabel yang sama dengan pangkat terkecil, yaitu x²."
+            },
+            {
+                id: 3,
+                q: "Hasil dari perkalian distributif <code class='bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold'>4(2x + 3)</code> adalah...",
+                options: ["8x + 3", "8x + 12", "6x + 7", "8x + 7"],
+                correct: 1, // 8x + 12
+                explanation: "4 × (2x + 3) = (4 × 2x) + (4 × 3) = 8x + 12."
+            },
+            {
+                id: 4,
+                q: "Hasil pembagian suku aljabar <code class='bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold'>15x²y ÷ 3xy</code> adalah...",
+                options: ["5x", "5y", "5xy", "5x²"],
+                correct: 0, // 5x
+                explanation: "(15÷3 = 5), (x²÷x = x), (y÷y = 1). Jadi hasilnya adalah 5x."
+            }
+        ];
+
+        // Data Latihan Terbimbing (6 Soal Variatif)
+        const latihanData = [
+            {
+                id: 1,
+                title: "Latihan 1: Faktorisasi Sederhana",
+                q: "Faktorkan ekspresi aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>8a + 20</strong>",
+                options: [
+                    "2(4a + 10)",
+                    "4(2a + 5)",
+                    "8(a + 2)",
+                    "4(2a + 20)"
+                ],
+                correct: 1, // 4(2a + 5)
+                hints: [
+                    "Langkah 1: Cari FPB dari angka 8 dan 20. FPB(8, 20) = 4.",
+                    "Langkah 2: Suku 20 tidak memuat variabel 'a', jadi FPB total = 4.",
+                    "Langkah 3: Bagi masing-masing suku dengan 4. (8a ÷ 4 = 2a) dan (20 ÷ 4 = 5).",
+                    "Langkah 4: Tulis dalam bentuk 4(2a + 5)."
+                ]
+            },
+            {
+                id: 2,
+                title: "Latihan 2: Faktorisasi Memuat Satu Variabel",
+                q: "Faktorkan ekspresi aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>15x² - 10x</strong>",
+                options: [
+                    "5x(3x - 2)",
+                    "5(3x² - 2x)",
+                    "x(15x - 10)",
+                    "5x(3x + 2)"
+                ],
+                correct: 0, // 5x(3x - 2)
+                hints: [
+                    "Langkah 1: FPB dari angka 15 dan 10 adalah 5.",
+                    "Langkah 2: FPB dari variabel x² dan x (pangkat terkecil) adalah x.",
+                    "Langkah 3: FPB Total = 5x.",
+                    "Langkah 4: Bagi suku dengan 5x: (15x² ÷ 5x = 3x) dan (-10x ÷ 5x = -2). Hasil: 5x(3x - 2)."
+                ]
+            },
+            {
+                id: 3,
+                title: "Latihan 3: Faktorisasi Dua Variabel",
+                q: "Faktorkan ekspresi aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>12p²q + 18pq²</strong>",
+                options: [
+                    "6p(2p + 3q)",
+                    "6pq(2p + 3q)",
+                    "6pq(2p - 3q)",
+                    "12pq(p + q)"
+                ],
+                correct: 1, // 6pq(2p + 3q)
+                hints: [
+                    "Langkah 1: FPB(12, 18) = 6.",
+                    "Langkah 2: FPB untuk variabel 'p' (p² dan p) = p. FPB untuk 'q' (q dan q²) = q.",
+                    "Langkah 3: FPB Total = 6pq.",
+                    "Langkah 4: Bagi tiap suku: (12p²q ÷ 6pq = 2p) dan (18pq² ÷ 6pq = 3q). Hasil: 6pq(2p + 3q)."
+                ]
+            },
+            {
+                id: 4,
+                title: "Latihan 4: Faktorisasi Tiga Suku",
+                q: "Faktorkan ekspresi aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>6y³ - 9y² + 12y</strong>",
+                options: [
+                    "3y(2y² - 3y + 4)",
+                    "3(2y³ - 3y² + 4y)",
+                    "3y²(2y - 3 + 4)",
+                    "6y(y² - 2y + 2)"
+                ],
+                correct: 0, // 3y(2y² - 3y + 4)
+                hints: [
+                    "Langkah 1: FPB dari angka (6, 9, 12) adalah 3.",
+                    "Langkah 2: Pilih variabel 'y' pangkat terkecil dari y³, y², dan y, yaitu y.",
+                    "Langkah 3: FPB Total = 3y.",
+                    "Langkah 4: Bagi suku-suku dengan 3y: (6y³÷3y = 2y²), (-9y²÷3y = -3y), (12y÷3y = 4). Hasil: 3y(2y² - 3y + 4)."
+                ]
+            },
+            {
+                id: 5,
+                title: "Latihan 5: Faktorisasi dengan Faktor Negatif",
+                q: "Faktorkan bentuk aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>-16k² - 24k</strong>",
+                options: [
+                    "-8k(2k + 3)",
+                    "-8(2k² + 3k)",
+                    "8k(-2k + 3)",
+                    "-4k(4k - 6)"
+                ],
+                correct: 0, // -8k(2k + 3)
+                hints: [
+                    "Langkah 1: Karena kedua suku bernilai negatif, keluarkan tanda negatif. FPB dari -16 dan -24 adalah -8.",
+                    "Langkah 2: FPB variabel dari k² dan k adalah k.",
+                    "Langkah 3: FPB Total = -8k.",
+                    "Langkah 4: Bagi tiap suku dengan -8k: (-16k² ÷ -8k = 2k) dan (-24k ÷ -8k = +3). Hasil: -8k(2k + 3)."
+                ]
+            },
+            {
+                id: 6,
+                title: "Latihan 6: Variabel Kompleks Tiga Suku",
+                q: "Faktorkan bentuk aljabar berikut: <strong class='text-indigo-700 text-lg block mt-1 font-mono'>14x³y² + 21x²y³ - 7x²y²</strong>",
+                options: [
+                    "7x²y²(2x + 3y - 1)",
+                    "7xy(2x²y + 3xy² - xy)",
+                    "7x²y²(2x + 3y)",
+                    "14x²y²(x + 1.5y - 0.5)"
+                ],
+                correct: 0, // 7x²y²(2x + 3y - 1)
+                hints: [
+                    "Langkah 1: FPB angka (14, 21, 7) adalah 7.",
+                    "Langkah 2: Variabel 'x' pangkat terkecil adalah x². Variabel 'y' pangkat terkecil adalah y².",
+                    "Langkah 3: FPB Total = 7x²y².",
+                    "Langkah 4: Bagi tiap suku dengan 7x²y²: (14x³y² ÷ 7x²y² = 2x), (21x²y³ ÷ 7x²y² = 3y), dan (-7x²y² ÷ 7x²y² = -1). Hasil: 7x²y²(2x + 3y - 1)."
+                ]
+            }
+        ];
+
+        // State Jawaban User
+        let warmupState = {};
+        let latihanState = {};
+
+        // Switch Tab Navigation
+        function switchTab(tabName) {
+            const tabs = ['tujuan', 'warmup', 'materi', 'latihan'];
+            tabs.forEach(t => {
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+                
+                // Desktop Tab Button
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+
+                // Mobile Tab Button
+                const btnM = document.getElementById(`tab-${t}-m`);
+                if (btnM) {
+                    if (t === tabName) {
+                        btnM.className = "px-2.5 py-1.5 rounded-lg text-indigo-700 bg-indigo-100 font-bold";
+                    } else {
+                        btnM.className = "px-2.5 py-1.5 rounded-lg text-slate-600 font-bold";
+                    }
+                }
+            });
+
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Kuis Warm Up
+        function renderWarmup() {
+            const container = document.getElementById('warmup-container');
+            container.innerHTML = '';
+
+            warmupData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-3xl border border-indigo-100 card-shadow space-y-4";
+                
+                const isAnswered = warmupState.hasOwnProperty(idx);
+                const userChoice = warmupState[idx];
+
+                let optionsHTML = '';
+                item.options.forEach((opt, optIdx) => {
+                    let btnStyle = "border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-300 text-slate-800";
+                    let iconHTML = '';
+
+                    if (isAnswered) {
+                        if (optIdx === item.correct) {
+                            btnStyle = "border-emerald-500 bg-emerald-100/80 text-emerald-950 font-bold";
+                            iconHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
+                        } else if (optIdx === userChoice) {
+                            btnStyle = "border-rose-500 bg-rose-100/80 text-rose-950 font-bold";
+                            iconHTML = '<i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>';
+                        } else {
+                            btnStyle = "border-slate-200 bg-slate-50 opacity-40";
+                        }
+                    }
+
+                    optionsHTML += `
+                        <button ${isAnswered ? 'disabled' : ''} onclick="answerWarmup(${idx}, ${optIdx})" 
+                            class="w-full text-left p-3.5 rounded-2xl border transition-all flex items-center justify-between font-semibold text-sm ${btnStyle}">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 rounded-lg bg-white border border-slate-300 flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">
+                                    ${String.fromCharCode(65 + optIdx)}
+                                </span>
+                                <span>${opt}</span>
+                            </div>
+                            ${iconHTML}
+                        </button>
+                    `;
+                });
+
+                let feedbackHTML = '';
+                if (isAnswered) {
+                    const isCorrect = userChoice === item.correct;
+                    feedbackHTML = `
+                        <div class="p-4 rounded-2xl border ${isCorrect ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'} text-xs space-y-1 mt-3">
+                            <div class="font-bold flex items-center gap-1.5 text-sm">
+                                ${isCorrect ? '<i class="fa-solid fa-circle-check text-emerald-600"></i> Jawaban Tepat!' : '<i class="fa-solid fa-circle-xmark text-rose-600"></i> Kurang Tepat!'}
+                            </div>
+                            <p class="pt-0.5 leading-relaxed"><strong>Pembahasan:</strong> ${item.explanation}</p>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase">Soal Warm-Up ${idx + 1}</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-800 leading-relaxed">${item.q}</h4>
+                    <div class="space-y-2.5 pt-1">${optionsHTML}</div>
+                    ${feedbackHTML}
+                `;
+
+                container.appendChild(card);
+            });
+
+            updateWarmupScore();
+        }
+
+        function answerWarmup(questionIdx, optionIdx) {
+            warmupState[questionIdx] = optionIdx;
+            
+            // Trigger Confetti jika benar
+            if (optionIdx === warmupData[questionIdx].correct) {
+                confetti({
+                    particleCount: 40,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+            }
+
+            renderWarmup();
+        }
+
+        function updateWarmupScore() {
+            let correctCount = 0;
+            Object.keys(warmupState).forEach(qIdx => {
+                if (warmupState[qIdx] === warmupData[qIdx].correct) {
+                    correctCount++;
+                }
+            });
+            document.getElementById('warmup-score').innerText = `${correctCount} / ${warmupData.length}`;
+        }
+
+        // Render Latihan Terbimbing
+        function renderLatihan() {
+            const container = document.getElementById('latihan-container');
+            container.innerHTML = '';
+
+            latihanData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-3xl border border-indigo-100 card-shadow space-y-4";
+
+                const isAnswered = latihanState.hasOwnProperty(idx);
+                const userChoice = latihanState[idx];
+
+                let optionsHTML = '';
+                item.options.forEach((opt, optIdx) => {
+                    let btnStyle = "border-slate-200 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-300 text-slate-800";
+                    let iconHTML = '';
+
+                    if (isAnswered) {
+                        if (optIdx === item.correct) {
+                            btnStyle = "border-emerald-500 bg-emerald-100/80 text-emerald-950 font-bold";
+                            iconHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>';
+                        } else if (optIdx === userChoice) {
+                            btnStyle = "border-rose-500 bg-rose-100/80 text-rose-950 font-bold";
+                            iconHTML = '<i class="fa-solid fa-circle-xmark text-rose-600 text-lg"></i>';
+                        } else {
+                            btnStyle = "border-slate-200 bg-slate-50 opacity-40";
+                        }
+                    }
+
+                    optionsHTML += `
+                        <button ${isAnswered ? 'disabled' : ''} onclick="answerLatihan(${idx}, ${optIdx})" 
+                            class="w-full text-left p-3.5 rounded-2xl border transition-all flex items-center justify-between font-semibold text-sm ${btnStyle}">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-6 h-6 rounded-lg bg-white border border-slate-300 flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">
+                                    ${String.fromCharCode(65 + optIdx)}
+                                </span>
+                                <span>${opt}</span>
+                            </div>
+                            ${iconHTML}
+                        </button>
+                    `;
+                });
+
+                // Hints Collapsible Component
+                let hintsHTML = `
+                    <div class="pt-2">
+                        <button onclick="toggleHint(${idx})" class="text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i> <span id="hint-btn-text-${idx}">Buka Petunjuk Langkah demi Langkah</span>
+                        </button>
+                        <div id="hint-box-${idx}" class="hidden mt-3 p-4 bg-amber-50/70 border border-amber-200 rounded-2xl text-xs text-amber-900 space-y-1.5">
+                            <p class="font-bold border-b border-amber-200 pb-1 text-amber-950"><i class="fa-solid fa-circle-info mr-1"></i> Bimbingan Soal:</p>
+                            <ul class="list-disc list-inside space-y-1 pt-1 leading-relaxed">
+                                ${item.hints.map(h => `<li>${h}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full uppercase">${item.title}</span>
+                    </div>
+                    <div class="text-slate-800 text-sm md:text-base font-medium leading-relaxed">${item.q}</div>
+                    ${hintsHTML}
+                    <div class="space-y-2.5 pt-2">${optionsHTML}</div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            updateLatihanProgress();
+        }
+
+        function toggleHint(idx) {
+            const box = document.getElementById(`hint-box-${idx}`);
+            const btnText = document.getElementById(`hint-btn-text-${idx}`);
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                btnText.innerText = "Sembunyikan Petunjuk";
+            } else {
+                box.classList.add('hidden');
+                btnText.innerText = "Buka Petunjuk Langkah demi Langkah";
+            }
+        }
+
+        function answerLatihan(questionIdx, optionIdx) {
+            latihanState[questionIdx] = optionIdx;
+
+            // Trigger Confetti jika benar
+            if (optionIdx === latihanData[questionIdx].correct) {
+                confetti({
+                    particleCount: 50,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+
+            renderLatihan();
+        }
+
+        function updateLatihanProgress() {
+            const answeredCount = Object.keys(latihanState).length;
+            document.getElementById('latihan-progress').innerText = `${answeredCount} / ${latihanData.length}`;
+
+            if (answeredCount === latihanData.length) {
+                document.getElementById('latihan-complete-banner').classList.remove('hidden');
+                confetti({
+                    particleCount: 100,
+                    spread: 100,
+                    origin: { y: 0.5 }
+                });
+            }
+        }
+
+        function resetAllQuiz() {
+            warmupState = {};
+            latihanState = {};
+            document.getElementById('latihan-complete-banner').classList.add('hidden');
+            renderWarmup();
+            renderLatihan();
+            switchTab('warmup');
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderWarmup();
+            renderLatihan();
+        };
+    </script>
+</body>
+</html>

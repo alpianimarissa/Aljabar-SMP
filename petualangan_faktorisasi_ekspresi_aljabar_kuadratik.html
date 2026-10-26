@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Faktorisasi Ekspresi Aljabar Kuadratik - Kelas 7 SMP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between" x-data="algebraApp()" x-init="initApp()">
+
+    <!-- Header Navbar -->
+    <header class="bg-gradient-to-r from-indigo-700 via-purple-700 to-sky-700 text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/20 p-2.5 rounded-2xl backdrop-blur-md">
+                    <span class="text-2xl">🧩</span>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight">Faktorisasi Bentuk Kuadratik</h1>
+                    <p class="text-xs text-indigo-100">Matematika Aljabar • SMP Kelas 7</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex flex-wrap justify-center gap-1.5 bg-black/20 p-1.5 rounded-2xl backdrop-blur-sm text-xs sm:text-sm font-semibold">
+                <button @click="setTab('tujuan')" :class="activeTab === 'tujuan' ? 'bg-white text-indigo-900 shadow-md' : 'text-indigo-100 hover:bg-white/10'" class="px-3 py-1.5 rounded-xl transition-all duration-200">🎯 Tujuan</button>
+                <button @click="setTab('warmup')" :class="activeTab === 'warmup' ? 'bg-white text-indigo-900 shadow-md' : 'text-indigo-100 hover:bg-white/10'" class="px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1">
+                    <span>⚡ Warm-Up</span>
+                    <span class="bg-amber-400 text-slate-900 text-[10px] px-1.5 py-0.2 rounded-full font-bold" x-text="warmupScore + '/4'"></span>
+                </button>
+                <button @click="setTab('koneksi')" :class="activeTab === 'koneksi' ? 'bg-white text-indigo-900 shadow-md' : 'text-indigo-100 hover:bg-white/10'" class="px-3 py-1.5 rounded-xl transition-all duration-200">🌍 Manfaat Nyata</button>
+                <button @click="setTab('materi')" :class="activeTab === 'materi' ? 'bg-white text-indigo-900 shadow-md' : 'text-indigo-100 hover:bg-white/10'" class="px-3 py-1.5 rounded-xl transition-all duration-200">📚 Materi & Contoh</button>
+                <button @click="setTab('latihan')" :class="activeTab === 'latihan' ? 'bg-white text-indigo-900 shadow-md' : 'text-indigo-100 hover:bg-white/10'" class="px-3 py-1.5 rounded-xl transition-all duration-200">📝 Latihan Soal</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full" id="katex-container">
+
+        <!-- 1. TUJUAN PEMBELAJARAN -->
+        <section x-show="activeTab === 'tujuan'" class="space-y-6" x-transition.duration.300ms>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center gap-4 border-b pb-4 border-slate-100">
+                    <div class="bg-indigo-100 p-4 rounded-2xl text-indigo-600 text-3xl">🎯</div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Tujuan Pembelajaran</h2>
+                        <p class="text-slate-500 text-sm">Peta jalan penguasaan faktorisasi bentuk kuadratik kelas 7 SMP</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-sky-50/80 p-5 rounded-2xl border border-sky-200 flex items-start gap-3">
+                        <span class="bg-sky-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                        <div>
+                            <h4 class="font-bold text-sky-900 text-sm mb-1">Mengingat Kembali FPB</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm">Mengaitkan konsep faktorisasi suku tunggal (FPB) yang telah dipelajari sebelumnya sebagai landasan faktorisasi kuadratik.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50/80 p-5 rounded-2xl border border-emerald-200 flex items-start gap-3">
+                        <span class="bg-emerald-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                        <div>
+                            <h4 class="font-bold text-emerald-900 text-sm mb-1">Faktorisasi Bentuk \(x^2 + bx + c\)</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm">Mampu mencari pasangan faktor \((x + p)(x + q)\) dengan syarat \(p + q = b\) dan \(p \times q = c\).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50/80 p-5 rounded-2xl border border-purple-200 flex items-start gap-3">
+                        <span class="bg-purple-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold text-sm shrink-0">3</span>
+                        <div>
+                            <h4 class="font-bold text-purple-900 text-sm mb-1">Faktorisasi Bentuk \(ax^2 + bx + c\) (\(a \neq 1\))</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm">Memahami metode pemecahan suku tengah (pengelompokan) saat koefisien \(x^2\) bernilai lebih besar dari 1.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50/80 p-5 rounded-2xl border border-amber-200 flex items-start gap-3">
+                        <span class="bg-amber-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold text-sm shrink-0">4</span>
+                        <div>
+                            <h4 class="font-bold text-amber-900 text-sm mb-1">Penerapan & Penguasaan Konsep</h4>
+                            <p class="text-slate-600 text-xs sm:text-sm">Menyelesaikan masalah kontekstual nyata dan latihan mandiri secara akurat melalui umpan balik interaktif.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Concept Map Diagram -->
+                <div class="bg-gradient-to-r from-slate-900 to-indigo-950 p-6 rounded-2xl text-white space-y-4">
+                    <h3 class="font-bold text-sm text-indigo-300 flex items-center gap-2">
+                        <span>🗺️</span> Peta Perjalanan Faktorisasi Aljabar
+                    </h3>
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-center text-xs">
+                        <div class="bg-white/10 p-3 rounded-xl border border-white/10 w-full">
+                            <span class="block text-indigo-300 font-bold mb-1">Tahap 1 (Lalu)</span>
+                            <span class="font-bold text-sm">Faktorisasi FPB</span>
+                            <p class="text-[11px] text-slate-300 mt-1">\(3x^2 + 6x = 3x(x + 2)\)</p>
+                        </div>
+                        <span class="text-2xl text-indigo-400">➔</span>
+                        <div class="bg-indigo-600/50 p-3 rounded-xl border border-indigo-400/30 w-full ring-2 ring-indigo-400">
+                            <span class="block text-amber-300 font-bold mb-1">Tahap 2 (Hari Ini)</span>
+                            <span class="font-bold text-sm">Bentuk Kuadratik</span>
+                            <p class="text-[11px] text-indigo-100 mt-1">\(x^2 + 5x + 6 = (x+2)(x+3)\)</p>
+                        </div>
+                        <span class="text-2xl text-indigo-400">➔</span>
+                        <div class="bg-white/10 p-3 rounded-xl border border-white/10 w-full">
+                            <span class="block text-emerald-300 font-bold mb-1">Tahap 3 (Mendatang)</span>
+                            <span class="font-bold text-sm">Persamaan Kuadrat</span>
+                            <p class="text-[11px] text-slate-300 mt-1">Mencari akar: \(x_1, x_2\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <button @click="setTab('warmup')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-2xl shadow-lg hover:shadow-indigo-300/50 transition transform hover:-translate-y-0.5">
+                        Mulai Pemanasan FPB! 🚀
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. WARM-UP (4 SOAL FAKTORISASI FPB) -->
+        <section x-show="activeTab === 'warmup'" class="space-y-6" x-transition.duration.300ms>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-amber-100 space-y-6">
+                <div class="flex items-center justify-between border-b pb-4 border-slate-100 flex-wrap gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-amber-100 p-4 rounded-2xl text-amber-600 text-3xl">⚡</div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Warm-Up (Pemanasan FPB)</h2>
+                            <p class="text-slate-500 text-sm">Uji ingatanmu tentang Faktorisasi FPB yang sudah dipelajari sebelumnya (4 Soal)</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 px-4 py-2 rounded-2xl border border-amber-200 text-amber-900 font-extrabold text-sm flex items-center gap-2">
+                        <span>🏆 Skor FPB:</span>
+                        <span class="text-indigo-600 text-lg" x-text="warmupScore"></span>
+                        <span>/ 4</span>
+                    </div>
+                </div>
+
+                <!-- Soal Warm-Up Loop -->
+                <div class="grid grid-cols-1 gap-6">
+                    <template x-for="(q, idx) in warmupQuestions" :key="q.id">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-indigo-100 text-indigo-700 font-bold text-xs px-3 py-1 rounded-full" x-text="'Soal ' + (idx + 1)"></span>
+                                <span class="text-xs font-semibold text-slate-400">FPB Faktorisasi</span>
+                            </div>
+
+                            <p class="font-bold text-slate-800 text-base" x-html="q.question"></p>
+
+                            <!-- Options Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                <template x-for="(opt, oIdx) in q.options" :key="oIdx">
+                                    <button @click="answerWarmup(q.id, oIdx)"
+                                        :disabled="warmupAnswers[q.id] !== undefined"
+                                        :class="{
+                                            'bg-emerald-100 border-emerald-500 text-emerald-900 font-bold': warmupAnswers[q.id] !== undefined && oIdx === q.correct,
+                                            'bg-rose-100 border-rose-500 text-rose-900 font-bold': warmupAnswers[q.id] !== undefined && warmupAnswers[q.id] === oIdx && oIdx !== q.correct,
+                                            'bg-white border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-slate-700': warmupAnswers[q.id] === undefined,
+                                            'opacity-50 cursor-not-allowed': warmupAnswers[q.id] !== undefined && oIdx !== q.correct && warmupAnswers[q.id] !== oIdx
+                                        }"
+                                        class="p-3.5 rounded-xl border-2 text-left text-sm font-medium transition flex items-center justify-between">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-6 h-6 rounded-lg bg-slate-100 font-bold text-xs flex items-center justify-center shrink-0" x-text="['A','B','C','D'][oIdx]"></span>
+                                            <span x-html="opt"></span>
+                                        </div>
+                                        <span x-show="warmupAnswers[q.id] !== undefined && oIdx === q.correct" class="text-emerald-600 font-bold">✓</span>
+                                        <span x-show="warmupAnswers[q.id] !== undefined && warmupAnswers[q.id] === oIdx && oIdx !== q.correct" class="text-rose-600 font-bold">✗</span>
+                                    </button>
+                                </template>
+                            </div>
+
+                            <!-- Explanation -->
+                            <div x-show="warmupAnswers[q.id] !== undefined" class="p-4 rounded-xl bg-indigo-50/80 border border-indigo-100 text-xs text-indigo-950 space-y-1">
+                                <p class="font-bold flex items-center gap-1">💡 Pembahasan FPB:</p>
+                                <p x-html="q.explanation"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button @click="setTab('tujuan')" class="text-slate-500 hover:text-indigo-600 font-bold text-xs sm:text-sm">← Kembali ke Tujuan</button>
+                    <button @click="setTab('koneksi')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+                        Lanjut ke Manfaat Nyata →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. KONEKSI NYATA DAN PENERAPAN KEDEPANNYA -->
+        <section x-show="activeTab === 'koneksi'" class="space-y-6" x-transition.duration.300ms>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center gap-4 border-b pb-4 border-slate-100">
+                    <div class="bg-emerald-100 p-4 rounded-2xl text-emerald-600 text-3xl">🌍</div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Koneksi Nyata & Penerapan Masa Depan</h2>
+                        <p class="text-slate-500 text-sm">Mengapa anak SMP harus belajar faktorisasi kuadratik?</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Real World 1: Geometry & Architecture -->
+                    <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🏞️</span>
+                            <h3 class="font-bold text-blue-900 text-base">1. Merancang Luas Tanah & Bangunan</h3>
+                        </div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Seorang arsitek mengetahui bahwa luas tanah taman adalah \(x^2 + 7x + 12\). Dengan faktorisasi kuadratik, arsitek dapat memecahnya menjadi panjang \((x + 4)\) dan lebar \((x + 3)\) secara langsung untuk menentukan pemagaran.
+                        </p>
+                        <div class="p-3 bg-white/80 rounded-xl border border-blue-200 text-xs text-blue-900 font-mono">
+                            $$\text{Luas} = (x + 4) \times (x + 3)$$
+                        </div>
+                    </div>
+
+                    <!-- Real World 2: Physics & Games -->
+                    <div class="p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-200 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">🚀</span>
+                            <h3 class="font-bold text-purple-900 text-base">2. Game Physics & Lintasan Roket</h3>
+                        </div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Dalam membuat game (seperti <i>Angry Birds</i> atau bola basket), lintasan parabola mengikuti fungsi kuadrat. Faktorisasi digunakan pemrogram untuk menentukan kapan bola menyentuh tanah (saat nilai tinggi = 0).
+                        </p>
+                        <div class="p-3 bg-white/80 rounded-xl border border-purple-200 text-xs text-purple-900 font-mono">
+                            $$\text{Ketinggian } h(t) = -5t^2 + 20t = 0$$
+                        </div>
+                    </div>
+
+                    <!-- Future 1: Calculus & Senior High School -->
+                    <div class="p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">📈</span>
+                            <h3 class="font-bold text-amber-900 text-base">3. Persiapan Matematika SMA (Kalkulus)</h3>
+                        </div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Di SMA nanti, kamu akan belajar Limit, Turunan, dan Integral. Semua topik tingkat lanjut tersebut membutuhkan penyederhanaan pecahan aljabar yang <b>wajib</b> difaktorkan lebih dahulu!
+                        </p>
+                        <div class="p-3 bg-white/80 rounded-xl border border-amber-200 text-xs text-amber-900 font-mono">
+                            $$\frac{x^2 - 9}{x - 3} = \frac{(x - 3)(x + 3)}{x - 3} = x + 3$$
+                        </div>
+                    </div>
+
+                    <!-- Future 2: Profit & Economics -->
+                    <div class="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-200 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">📊</span>
+                            <h3 class="font-bold text-emerald-900 text-base">4. Optimalisasi Keuntungan Bisnis</h3>
+                        </div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            Menghitung jumlah produk optimum agar bisnis memperoleh laba paling maksimal tanpa merugi. Pemodelan grafik kuadratik bergantung pada pemahaman faktor-faktor pembentuknya.
+                        </p>
+                        <div class="p-3 bg-white/80 rounded-xl border border-emerald-200 text-xs text-emerald-900 font-mono">
+                            $$\text{Keuntungan } L(x) = (x - 10)(50 - x)$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button @click="setTab('warmup')" class="text-slate-500 hover:text-indigo-600 font-bold text-xs sm:text-sm">← Kembali ke Warm-Up</button>
+                    <button @click="setTab('materi')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+                        Masuk ke Materi Utama →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MATERI LENGKAP BESERTA CONTOH SOAL RINCI -->
+        <section x-show="activeTab === 'materi'" class="space-y-8" x-transition.duration.300ms>
+            
+            <!-- Sub-tab selector for Quadratic Types -->
+            <div class="flex justify-center gap-2 sm:gap-4 flex-wrap">
+                <button @click="setSubMateri('konsep')" :class="subMateri === 'konsep' ? 'bg-indigo-600 text-white shadow-md font-bold' : 'bg-white text-slate-700 border hover:bg-indigo-50'" class="px-4 py-2 rounded-xl text-xs sm:text-sm transition">
+                    🧩 1. Konsep Dasar & Algebra Tiles
+                </button>
+                <button @click="setSubMateri('a1')" :class="subMateri === 'a1' ? 'bg-indigo-600 text-white shadow-md font-bold' : 'bg-white text-slate-700 border hover:bg-indigo-50'" class="px-4 py-2 rounded-xl text-xs sm:text-sm transition">
+                    ⚡ 2. Bentuk \(x^2 + bx + c\) (\(a=1\))
+                </button>
+                <button @click="setSubMateri('aBeda')" :class="subMateri === 'aBeda' ? 'bg-indigo-600 text-white shadow-md font-bold' : 'bg-white text-slate-700 border hover:bg-indigo-50'" class="px-4 py-2 rounded-xl text-xs sm:text-sm transition">
+                    🔥 3. Bentuk \(ax^2 + bx + c\) (\(a \neq 1\))
+                </button>
+            </div>
+
+            <!-- SUB 1: KONSEP DASAR & GEOMETRI ALGEBRA TILES -->
+            <div x-show="subMateri === 'konsep'" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-indigo-100 p-4 rounded-2xl text-indigo-600 text-3xl">🧩</div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">1. Konsep Geometri Faktorisasi</h2>
+                        <p class="text-slate-500 text-sm">Faktorisasi adalah kebalikan dari perkalian suku dua!</p>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-indigo-50/60 rounded-2xl border border-indigo-100 space-y-4">
+                    <h3 class="font-bold text-indigo-900 text-base">Apa Hubungan Perkalian dan Faktorisasi?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                        <div class="bg-white p-4 rounded-xl border border-indigo-200 text-center space-y-2">
+                            <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold">Perkalian (Membuka Kurung)</span>
+                            <p class="font-mono text-base font-bold text-slate-800 pt-2">\((x + 2)(x + 3)\)</p>
+                            <p class="text-slate-500">\(x^2 + 3x + 2x + 6\)</p>
+                            <p class="font-mono font-bold text-indigo-600 text-base">\(x^2 + 5x + 6\)</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-indigo-200 text-center space-y-2">
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-bold">Faktorisasi (Membuat Kurung)</span>
+                            <p class="font-mono text-base font-bold text-indigo-600 pt-2">\(x^2 + 5x + 6\)</p>
+                            <p class="text-slate-500">Cari dua faktor perkalian</p>
+                            <p class="font-mono font-bold text-slate-800 text-base">\((x + 2)(x + 3)\)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SVG Visual Illustration of Area -->
+                <div class="space-y-3">
+                    <h3 class="font-bold text-slate-800 text-base">Ilustrasi Visual Model Luas (Algebra Tiles):</h3>
+                    <div class="bg-slate-900 p-6 rounded-2xl text-white flex flex-col items-center justify-center space-y-3">
+                        <svg width="280" height="220" viewBox="0 0 280 220" class="max-w-full">
+                            <!-- Outer Rectangle Border -->
+                            <rect x="40" y="40" width="200" height="150" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="4,4" />
+
+                            <!-- x^2 Tile (Blue) -->
+                            <rect x="40" y="40" width="110" height="90" fill="#3b82f6" opacity="0.8" rx="4"/>
+                            <text x="95" y="90" fill="white" font-weight="bold" text-anchor="middle" font-size="16">x²</text>
+
+                            <!-- 3x Tile (Right, Pink) -->
+                            <rect x="150" y="40" width="90" height="90" fill="#ec4899" opacity="0.8" rx="4"/>
+                            <text x="195" y="90" fill="white" font-weight="bold" text-anchor="middle" font-size="14">3x</text>
+
+                            <!-- 2x Tile (Bottom, Purple) -->
+                            <rect x="40" y="130" width="110" height="60" fill="#a855f7" opacity="0.8" rx="4"/>
+                            <text x="95" y="165" fill="white" font-weight="bold" text-anchor="middle" font-size="14">2x</text>
+
+                            <!-- 6 Tile (Bottom Right, Emerald) -->
+                            <rect x="150" y="130" width="90" height="60" fill="#10b981" opacity="0.8" rx="4"/>
+                            <text x="195" y="165" fill="white" font-weight="bold" text-anchor="middle" font-size="14">6</text>
+
+                            <!-- Dimension Labels -->
+                            <!-- Top: x + 3 -->
+                            <text x="95" y="25" fill="#a5f3fc" font-weight="bold" text-anchor="middle" font-size="13">x</text>
+                            <text x="195" y="25" fill="#fbcfe8" font-weight="bold" text-anchor="middle" font-size="13">+ 3</text>
+
+                            <!-- Left: x + 2 -->
+                            <text x="20" y="90" fill="#a5f3fc" font-weight="bold" text-anchor="middle" font-size="13">x</text>
+                            <text x="20" y="165" fill="#e9d5ff" font-weight="bold" text-anchor="middle" font-size="13">+ 2</text>
+                        </svg>
+                        <p class="text-xs text-slate-300 text-center">
+                            Luas Total = \(x^2 + 3x + 2x + 6 = x^2 + 5x + 6\)<br>
+                            Sisi Panjang \(\times\) Sisi Lebar = \((x + 3)(x + 2)\)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB 2: BENTUK x^2 + bx + c (a = 1) -->
+            <div x-show="subMateri === 'a1'" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-indigo-100 p-4 rounded-2xl text-indigo-600 text-3xl">⚡</div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">2. Faktorisasi Bentuk \(x^2 + bx + c\)</h2>
+                        <p class="text-slate-500 text-sm">Metode Rahasia: Mencari Pasangan Angka Ajaib \(p\) dan \(q\)</p>
+                    </div>
+                </div>
+
+                <!-- Formula Card -->
+                <div class="p-6 bg-gradient-to-r from-indigo-900 to-slate-900 rounded-2xl text-white space-y-3">
+                    <h3 class="font-bold text-amber-300 text-sm">Aturan Emas Faktorisasi (\(a = 1\)):</h3>
+                    <div class="text-lg sm:text-xl font-mono text-center bg-white/10 p-3 rounded-xl border border-white/20">
+                        $$x^2 + \mathbf{b}x + \mathbf{c} = (x + p)(x + q)$$
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-indigo-100 pt-1">
+                        <div class="bg-white/10 p-2.5 rounded-lg flex items-center gap-2">
+                            <span class="text-amber-400 font-bold text-base">1.</span>
+                            <span>\(p \times q = \mathbf{c}\) (Hasil Kali = Suku Konstanta)</span>
+                        </div>
+                        <div class="bg-white/10 p-2.5 rounded-lg flex items-center gap-2">
+                            <span class="text-amber-400 font-bold text-base">2.</span>
+                            <span>\(p + q = \mathbf{b}\) (Hasil Jumlah = Koefisien \(x\))</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Worked Examples with Step-by-Step Toggle -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base">Contoh Soal Rinci:</h3>
+
+                    <!-- Example 1: Positive C -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Contoh 1 (Tanda Positif)</span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base">Faktorkanlah bentuk aljabar: \(x^2 + 8x + 12\)</p>
+
+                        <div class="space-y-2 text-xs sm:text-sm text-slate-700 bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="font-bold text-indigo-900">Langkah 1: Identifikasi nilai \(b\) dan \(c\)</p>
+                            <p class="pl-3">\(b = 8\), \(c = 12\)</p>
+
+                            <p class="font-bold text-indigo-900 pt-2">Langkah 2: Cari pasangan faktor dari \(12\) yang jumlahnya \(8\)</p>
+                            <div class="overflow-x-auto my-2">
+                                <table class="w-full text-center text-xs border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-100 border-b">
+                                            <th class="p-2">Pasangan Faktor (\(p, q\))</th>
+                                            <th class="p-2">Hasil Perkalian (\(p \times q\))</th>
+                                            <th class="p-2">Hasil Penjumlahan (\(p + q\))</th>
+                                            <th class="p-2">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b">
+                                            <td class="p-2">1 dan 12</td>
+                                            <td class="p-2">12</td>
+                                            <td class="p-2">13</td>
+                                            <td class="p-2 text-rose-500 font-bold">Salah (\(\neq 8\))</td>
+                                        </tr>
+                                        <tr class="border-b bg-emerald-50">
+                                            <td class="p-2 font-bold text-emerald-700">2 dan 6</td>
+                                            <td class="p-2 font-bold text-emerald-700">12</td>
+                                            <td class="p-2 font-bold text-emerald-700">8</td>
+                                            <td class="p-2 text-emerald-600 font-bold">✓ COCOK!</td>
+                                        </tr>
+                                        <tr class="border-b">
+                                            <td class="p-2">3 dan 4</td>
+                                            <td class="p-2">12</td>
+                                            <td class="p-2">7</td>
+                                            <td class="p-2 text-rose-500 font-bold">Salah (\(\neq 8\))</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p class="font-bold text-indigo-900 pt-2">Langkah 3: Tuliskan hasil faktorisasi</p>
+                            <p class="pl-3 font-mono text-base font-bold text-emerald-600">$$x^2 + 8x + 12 = (x + 2)(x + 6)$$</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 2: Negative C -->
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Contoh 2 (Tanda Negatif)</span>
+                        </div>
+                        <p class="font-bold text-slate-800 text-base">Faktorkanlah bentuk aljabar: \(x^2 - 3x - 10\)</p>
+
+                        <div class="space-y-2 text-xs sm:text-sm text-slate-700 bg-white p-4 rounded-xl border border-slate-200">
+                            <p class="font-bold text-indigo-900">Langkah 1: Identifikasi nilai \(b\) dan \(c\)</p>
+                            <p class="pl-3">\(b = -3\), \(c = -10\)</p>
+
+                            <p class="font-bold text-indigo-900 pt-2">Langkah 2: Cari pasangan faktor dari \(-10\) yang jumlahnya \(-3\)</p>
+                            <p class="pl-3 text-slate-600">Karena hasil kali negatif, maka satu angka positif dan satu angka negatif.</p>
+                            <p class="pl-3 font-semibold text-indigo-700">Pasangan yang tepat: \(2\) dan \(-5\) (karena \(2 \times (-5) = -10\) dan \(2 + (-5) = -3\)).</p>
+
+                            <p class="font-bold text-indigo-900 pt-2">Langkah 3: Tuliskan hasil faktorisasi</p>
+                            <p class="pl-3 font-mono text-base font-bold text-emerald-600">$$x^2 - 3x - 10 = (x + 2)(x - 5)$$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Playground Calculator (a=1) -->
+                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-200 space-y-4">
+                    <h3 class="font-bold text-indigo-900 text-base flex items-center gap-2">
+                        <span>🧪</span> Lab Interaktif: Uji Coba Pasangan Faktor (\(a = 1\))
+                    </h3>
+                    <p class="text-xs text-slate-600">Masukkan nilai \(b\) dan \(c\) untuk melihat simulasi pencarian faktor otomatis!</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nilai b (Koefisien x):</label>
+                            <input type="number" x-model.number="calcB" @input="renderKaTeX()" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nilai c (Konstanta):</label>
+                            <input type="number" x-model.number="calcC" @input="renderKaTeX()" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 space-y-2 text-center">
+                        <span class="text-xs font-semibold text-slate-400">Hasil Faktorisasi Otomatis:</span>
+                        <div class="text-lg sm:text-xl font-mono font-extrabold text-indigo-700" x-html="computeFactorA1()"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB 3: BENTUK ax^2 + bx + c (a != 1) -->
+            <div x-show="subMateri === 'aBeda'" class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-purple-100 p-4 rounded-2xl text-purple-600 text-3xl">🔥</div>
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">3. Faktorisasi Bentuk \(ax^2 + bx + c\) (\(a \neq 1\))</h2>
+                        <p class="text-slate-500 text-sm">Metode Pengelompokan (Pemecahan Suku Tengah)</p>
+                    </div>
+                </div>
+
+                <!-- Explanation Rule -->
+                <div class="p-5 bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-2xl space-y-3">
+                    <h3 class="font-bold text-amber-300 text-sm">Langkah Pengelompokan Saat \(a \neq 1\):</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-purple-100">
+                        <li>Kalikan nilai \(a \times c\).</li>
+                        <li>Cari dua angka \(p\) dan \(q\) yang jika <b>dikalikan = \(a \times c\)</b> dan jika <b>dijumlahkan = \(b\)</b>.</li>
+                        <li>Pecah suku tengah \(bx\) menjadi \(px + qx\).</li>
+                        <li>Kelompokkan dua suku pertama dan dua suku terakhir, lalu keluarkan FPB-nya!</li>
+                    </ol>
+                </div>
+
+                <!-- Detailed Worked Example -->
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">Contoh Soal Langkah Demi Langkah</span>
+                    <p class="font-bold text-slate-800 text-base">Faktorkanlah: \(2x^2 + 7x + 3\)</p>
+
+                    <div class="space-y-3 text-xs sm:text-sm text-slate-700 bg-white p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <p class="font-bold text-purple-900">Langkah 1: Hitung \(a \times c\)</p>
+                            <p class="pl-3">\(a = 2\), \(b = 7\), \(c = 3\)</p>
+                            <p class="pl-3 font-semibold text-indigo-700">\(a \times c = 2 \times 3 = 6\)</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-purple-900">Langkah 2: Cari pasangan faktor dari \(6\) yang jumlahnya \(7\)</p>
+                            <p class="pl-3 text-emerald-600 font-bold">Angka yang cocok: \(1\) dan \(6\) (karena \(1 \times 6 = 6\) dan \(1 + 6 = 7\))</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-purple-900">Langkah 3: Pecah suku tengah \(7x\) menjadi \(1x + 6x\)</p>
+                            <p class="pl-3 font-mono text-base font-bold text-slate-800">\(2x^2 + \mathbf{6x} + \mathbf{1x} + 3\)</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-purple-900">Langkah 4: Kelompokkan dan faktorkan FPB masing-masing kelompok</p>
+                            <p class="pl-3 font-mono text-slate-700">\(= (2x^2 + 6x) + (1x + 3)\)</p>
+                            <p class="pl-3 font-mono text-slate-700">\(= 2x(x + 3) + 1(x + 3)\)</p>
+                            <p class="pl-3 font-semibold text-slate-500 text-xs">Perhatikan bahwa \((x + 3)\) sudah sama di kedua kelompok!</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-purple-900">Langkah 5: Tuliskan bentuk faktorisasi akhir</p>
+                            <p class="pl-3 font-mono text-base font-bold text-purple-700">\(= (2x + 1)(x + 3)\)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-4">
+                <button @click="setTab('koneksi')" class="text-slate-500 hover:text-indigo-600 font-bold text-xs sm:text-sm">← Kembali ke Manfaat Nyata</button>
+                <button @click="setTab('latihan')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs sm:text-sm shadow transition">
+                    Uji Pemahaman di Latihan Soal →
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. LATIHAN SOAL TERBIMBING INTERAKTIF -->
+        <section x-show="activeTab === 'latihan'" class="space-y-6" x-transition.duration.300ms>
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-100 space-y-6">
+                <div class="flex items-center justify-between border-b pb-4 border-slate-100 flex-wrap gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-100 p-4 rounded-2xl text-indigo-600 text-3xl">📝</div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800">Latihan Soal Terbimbing</h2>
+                            <p class="text-slate-500 text-sm">Asah keterampilan faktorisasi kuadratik dengan umpan balik langsung (5 Soal)</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 px-4 py-2 rounded-2xl border border-indigo-200 text-indigo-900 font-extrabold text-sm flex items-center gap-2">
+                        <span>🏆 Skor Latihan:</span>
+                        <span class="text-indigo-600 text-lg" x-text="quizScore"></span>
+                        <span>/ 5</span>
+                    </div>
+                </div>
+
+                <!-- Soal Practice Loop -->
+                <div class="space-y-6">
+                    <template x-for="(q, idx) in practiceQuestions" :key="q.id">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full" x-text="'Soal ' + (idx + 1) + ' (' + q.type + ')'"></span>
+                                <span class="text-xs text-slate-400 font-semibold">Tingkat SMP Kelas 7</span>
+                            </div>
+
+                            <p class="font-bold text-slate-800 text-base" x-html="q.question"></p>
+
+                            <!-- Options Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <template x-for="(opt, oIdx) in q.options" :key="oIdx">
+                                    <button @click="answerQuiz(q.id, oIdx)"
+                                        :disabled="quizAnswers[q.id] !== undefined"
+                                        :class="{
+                                            'bg-emerald-100 border-emerald-500 text-emerald-900 font-bold': quizAnswers[q.id] !== undefined && oIdx === q.correct,
+                                            'bg-rose-100 border-rose-500 text-rose-900 font-bold': quizAnswers[q.id] !== undefined && quizAnswers[q.id] === oIdx && oIdx !== q.correct,
+                                            'bg-white border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 text-slate-700': quizAnswers[q.id] === undefined,
+                                            'opacity-50 cursor-not-allowed': quizAnswers[q.id] !== undefined && oIdx !== q.correct && quizAnswers[q.id] !== oIdx
+                                        }"
+                                        class="p-3.5 rounded-xl border-2 text-left text-sm font-medium transition flex items-center justify-between">
+                                        <div class="flex items-center gap-2.5">
+                                            <span class="w-6 h-6 rounded-lg bg-slate-100 font-bold text-xs flex items-center justify-center shrink-0" x-text="['A','B','C','D'][oIdx]"></span>
+                                            <span x-html="opt"></span>
+                                        </div>
+                                        <span x-show="quizAnswers[q.id] !== undefined && oIdx === q.correct" class="text-emerald-600 font-bold">✓</span>
+                                        <span x-show="quizAnswers[q.id] !== undefined && quizAnswers[q.id] === oIdx && oIdx !== q.correct" class="text-rose-600 font-bold">✗</span>
+                                    </button>
+                                </template>
+                            </div>
+
+                            <!-- Detailed Guided Feedback -->
+                            <div x-show="quizAnswers[q.id] !== undefined" x-transition class="p-4 rounded-xl text-xs sm:text-sm space-y-2 border"
+                                :class="quizAnswers[q.id] === q.correct ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'">
+                                <p class="font-bold text-sm" x-text="quizAnswers[q.id] === q.correct ? '🎉 Luar Biasa! Jawabanmu Benar!' : '❌ Belum Tepat, Mari Pelajari Pembahasannya:'"></p>
+                                <div class="text-xs leading-relaxed space-y-1" x-html="q.explanation"></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Completion Card -->
+                <div x-show="Object.keys(quizAnswers).length === practiceQuestions.length" class="p-6 bg-indigo-50 rounded-2xl border border-indigo-200 text-center space-y-3">
+                    <h3 class="text-xl font-extrabold text-indigo-900">🏆 Latihan Selesai!</h3>
+                    <p class="text-sm text-slate-600">Kamu mendapatkan skor <span class="font-bold text-indigo-600" x-text="quizScore"></span> dari 5 soal.</p>
+                    <button @click="resetQuiz()" class="bg-indigo-600 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-indigo-700 transition text-xs sm:text-sm shadow">
+                        🔄 Ulangi Latihan Soal
+                    </button>
+                </div>
+
+                <div class="flex justify-start pt-4 border-t border-slate-100">
+                    <button @click="setTab('materi')" class="text-slate-500 hover:text-indigo-600 font-bold text-xs sm:text-sm">← Kembali ke Materi</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-400 text-xs mt-12">
+        <p>✨ Media Pembelajaran Matematika Interaktif SMP Kelas 7 • Faktorisasi Kuadratik ✨</p>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        function algebraApp() {
+            return {
+                activeTab: 'tujuan',
+                subMateri: 'konsep',
+
+                // Calculator state (a=1)
+                calcB: 7,
+                calcC: 12,
+
+                // Warm-up Questions (4 FPB Questions) - KaTeX formatted
+                warmupScore: 0,
+                warmupAnswers: {},
+                warmupQuestions: [
+                    {
+                        id: 1,
+                        question: 'Faktorkanlah bentuk suku tunggal/FPB berikut: \\(4x + 12\\)',
+                        options: ['\\(4(x + 3)\\)', '\\(4(x + 12)\\)', '\\(2(2x + 3)\\)', '\\(x(4 + 12)\\)'],
+                        correct: 0,
+                        explanation: 'FPB dari 4 dan 12 adalah <b>4</b>. Keluarkan angka 4:<br>\\(4x + 12 = 4(x + 3)\\).'
+                    },
+                    {
+                        id: 2,
+                        question: 'Faktorkanlah bentuk aljabar: \\(6x^2 - 9x\\)',
+                        options: ['\\(3(2x^2 - 3x)\\)', '\\(3x(2x - 3)\\)', '\\(6x(x - 9)\\)', '\\(x(6x - 9)\\)'],
+                        correct: 1,
+                        explanation: 'FPB dari 6 dan 9 adalah 3, dan FPB dari \\(x^2\\) dan \\(x\\) adalah \\(x\\). Maka FPB total = <b>3x</b>.<br>\\(6x^2 - 9x = 3x(2x - 3)\\).'
+                    },
+                    {
+                        id: 3,
+                        question: 'Bentuk sederhana dari faktorisasi FPB: \\(5x^2 + 20x\\) adalah...',
+                        options: ['\\(5x(x + 4)\\)', '\\(5(x^2 + 4x)\\)', '\\(10x(x + 2)\\)', '\\(x(5x + 20)\\)'],
+                        correct: 0,
+                        explanation: 'FPB dari \\(5x^2\\) dan \\(20x\\) adalah <b>5x</b>.<br>\\(5x^2 + 20x = 5x(x + 4)\\).'
+                    },
+                    {
+                        id: 4,
+                        question: 'Jika \\(3x^2 + 15x\\) difaktorkan menjadi \\(3x(x + p)\\), berapakah nilai \\(p\\)?',
+                        options: ['\\(3\\)', '\\(15\\)', '\\(5\\)', '\\(1\\)'],
+                        correct: 2,
+                        explanation: '\\(3x^2 + 15x = 3x(x + 5)\\). Jadi nilai <b>p = 5</b>.'
+                    }
+                ],
+
+                // Practice Questions (5 Quadratic Factorization Questions) - KaTeX formatted
+                quizScore: 0,
+                quizAnswers: {},
+                practiceQuestions: [
+                    {
+                        id: 101,
+                        type: 'a = 1',
+                        question: 'Faktorkanlah bentuk kuadratik: \\(x^2 + 5x + 6\\)',
+                        options: ['\\((x + 1)(x + 6)\\)', '\\((x + 2)(x + 3)\\)', '\\((x - 2)(x - 3)\\)', '\\((x + 5)(x + 1)\\)'],
+                        correct: 1,
+                        explanation: 'Cari dua angka yang hasil kalinya = 6 dan jumlahnya = 5.<br>Angka tersebut adalah <b>2</b> dan <b>3</b> (\\(2 \\times 3 = 6\\), \\(2 + 3 = 5\\)).<br>Maka faktornya = <b>\\((x + 2)(x + 3)\\)</b>.'
+                    },
+                    {
+                        id: 102,
+                        type: 'a = 1',
+                        question: 'Faktorkanlah bentuk kuadratik dengan tanda negatif: \\(x^2 - 7x + 12\\)',
+                        options: ['\\((x - 3)(x - 4)\\)', '\\((x + 3)(x + 4)\\)', '\\((x - 2)(x - 6)\\)', '\\((x + 1)(x - 12)\\)'],
+                        correct: 0,
+                        explanation: 'Hasil kali = +12 dan jumlah = -7.<br>Karena hasil kali positif dan jumlah negatif, kedua angka pasti negatif: <b>-3</b> dan <b>-4</b>.<br>Maka faktornya = <b>\\((x - 3)(x - 4)\\)</b>.'
+                    },
+                    {
+                        id: 103,
+                        type: 'a = 1',
+                        question: 'Faktorkanlah bentuk: \\(x^2 + 2x - 15\\)',
+                        options: ['\\((x - 3)(x - 5)\\)', '\\((x + 5)(x - 3)\\)', '\\((x - 5)(x + 3)\\)', '\\((x + 15)(x - 1)\\)'],
+                        correct: 1,
+                        explanation: 'Hasil kali = -15 dan jumlah = +2.<br>Angka yang memenuhi adalah <b>+5</b> dan <b>-3</b> (\\(5 \\times (-3) = -15\\), \\(5 + (-3) = 2\\)).<br>Maka faktornya = <b>\\((x + 5)(x - 3)\\)</b>.'
+                    },
+                    {
+                        id: 104,
+                        type: 'a > 1',
+                        question: 'Faktorkanlah bentuk kuadratik: \\(2x^2 + 5x + 3\\)',
+                        options: ['\\((2x + 3)(x + 1)\\)', '\\((2x + 1)(x + 3)\\)', '\\((2x + 5)(x + 1)\\)', '\\((x + 2)(2x + 3)\\)'],
+                        correct: 0,
+                        explanation: '1. \\(a \\times c = 2 \\times 3 = 6\\).<br>2. Cari angka yang dikalikan = 6 dan dijumlahkan = 5 ➔ <b>2 dan 3</b>.<br>3. Pecah suku tengah: \\(2x^2 + 2x + 3x + 3\\).<br>4. Kelompokkan: \\(2x(x + 1) + 3(x + 1) = (2x + 3)(x + 1)\\).'
+                    },
+                    {
+                        id: 105,
+                        type: 'a > 1',
+                        question: 'Faktorkanlah bentuk kuadratik: \\(3x^2 - 5x - 2\\)',
+                        options: ['\\((3x + 1)(x - 2)\\)', '\\((3x - 1)(x + 2)\\)', '\\((3x - 2)(x + 1)\\)', '\\((x - 5)(3x + 2)\\)'],
+                        correct: 0,
+                        explanation: '1. \\(a \\times c = 3 \\times (-2) = -6\\).<br>2. Cari angka yang dikalikan = -6 dan dijumlahkan = -5 ➔ <b>-6 dan +1</b>.<br>3. Pecah suku tengah: \\(3x^2 - 6x + 1x - 2\\).<br>4. Kelompokkan: \\(3x(x - 2) + 1(x - 2) = (3x + 1)(x - 2)\\).'
+                    }
+                ],
+
+                initApp() {
+                    this.renderKaTeX();
+                    document.addEventListener('DOMContentLoaded', () => {
+                        this.renderKaTeX();
+                    });
+                },
+
+                setTab(tab) {
+                    this.activeTab = tab;
+                    this.renderKaTeX();
+                },
+
+                setSubMateri(sub) {
+                    this.subMateri = sub;
+                    this.renderKaTeX();
+                },
+
+                renderKaTeX() {
+                    this.$nextTick(() => {
+                        if (window.renderMathInElement) {
+                            window.renderMathInElement(document.getElementById('katex-container') || document.body, {
+                                delimiters: [
+                                    {left: '$$', right: '$$', display: true},
+                                    {left: '\\(', right: '\\)', display: false}
+                                ],
+                                throwOnError: false
+                            });
+                        }
+                    });
+                },
+
+                answerWarmup(qId, oIdx) {
+                    if (this.warmupAnswers[qId] !== undefined) return;
+                    this.warmupAnswers[qId] = oIdx;
+                    const question = this.warmupQuestions.find(q => q.id === qId);
+                    if (question && oIdx === question.correct) {
+                        this.warmupScore++;
+                    }
+                    this.renderKaTeX();
+                },
+
+                answerQuiz(qId, oIdx) {
+                    if (this.quizAnswers[qId] !== undefined) return;
+                    this.quizAnswers[qId] = oIdx;
+                    const question = this.practiceQuestions.find(q => q.id === qId);
+                    if (question && oIdx === question.correct) {
+                        this.quizScore++;
+                    }
+                    this.renderKaTeX();
+                },
+
+                resetQuiz() {
+                    this.quizScore = 0;
+                    this.quizAnswers = {};
+                    this.renderKaTeX();
+                },
+
+                computeFactorA1() {
+                    const b = Number(this.calcB);
+                    const c = Number(this.calcC);
+
+                    if (isNaN(b) || isNaN(c)) return '<span class="text-rose-500 text-xs">Masukkan angka yang valid!</span>';
+
+                    // Find factors of c that sum to b
+                    let p = null, q = null;
+                    const absC = Math.abs(c);
+
+                    for (let i = -absC - 20; i <= absC + 20; i++) {
+                        if (i === 0) continue;
+                        if (c % i === 0) {
+                            const partner = c / i;
+                            if (i + partner === b) {
+                                p = i;
+                                q = partner;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (p !== null && q !== null) {
+                        const pStr = p >= 0 ? `+ ${p}` : `- ${Math.abs(p)}`;
+                        const qStr = q >= 0 ? `+ ${q}` : `- ${Math.abs(q)}`;
+                        return `\\((x ${pStr})(x ${qStr})\\)`;
+                    } else {
+                        return `<span class="text-amber-600 text-xs">Tidak ada faktor bulat sederhana untuk \\(x^2 + (${b})x + (${c})\\)</span>`;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

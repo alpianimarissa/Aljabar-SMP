@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLSV Interaktif - Kelas 7 SMP (Bilingual)</title>
+    <!-- Memuat Tailwind CSS untuk styling responsif dan modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Google Font 'Inter' dan 'JetBrains Mono' untuk persamaan matematika -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#0EA5E9',
+                        accent: '#F59E0B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Kustomisasi scrollbar halus dan animasi transisi */
+        html {
+            scroll-behavior: smooth;
+        }
+        .math-eq {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-800">
+
+    <!-- Navbar Navigasi Cepat -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                    x
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-base sm:text-lg leading-tight">Matematika Kelas 7</h1>
+                    <p class="text-xs text-slate-500 font-medium">PLSV & Linear Equations (Bilingual)</p>
+                </div>
+            </div>
+            
+            <!-- Menu Navigasi Bagian -->
+            <nav class="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium overflow-x-auto py-1">
+                <a href="#tujuan" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition">1. Tujuan</a>
+                <a href="#warmup" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition">2. Warm-Up</a>
+                <a href="#materi" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition">3. Materi</a>
+                <a href="#english-words" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition">4. Word to Math</a>
+                <a href="#contoh-soal" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 transition">5. Contoh Soal</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-sky-600 text-white py-10 sm:py-14 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-indigo-100 text-xs font-semibold tracking-wider uppercase mb-3 border border-white/20">
+                Modul Interaktif SMP Kelas VII
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                Persamaan Linear Satu Variabel (PLSV)
+            </h2>
+            <p class="text-indigo-100 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                Belajar menyelesaikan persamaan 1 langkah, 2 langkah, variabel di kedua ruas, hingga menerjemahkan soal cerita Bahasa Inggris ke dalam model matematika!
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-12">
+
+        <!-- BAGIAN 1: TUJUAN PEMBELAJARAN -->
+        <section id="tujuan" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">1</span>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Tujuan Pembelajaran</h3>
+                    <p class="text-xs text-slate-500 italic">Learning Objectives</p>
+                </div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Persamaan 1 & 2 Langkah</p>
+                        <p class="text-xs text-slate-600 mt-1">Siswa mampu menentukan nilai variabel pada persamaan satu langkah (<i>one-step</i>) dan dua langkah (<i>two-step equations</i>) dengan konsep kesetimbangan.</p>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Variabel di Kedua Ruas</p>
+                        <p class="text-xs text-slate-600 mt-1">Siswa mampu menyelesaikan persamaan yang memiliki variabel dan konstanta di ruas kiri maupun ruas kanan.</p>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Translating Words to Equations</p>
+                        <p class="text-xs text-slate-600 mt-1">Siswa mampu mengubah kalimat berbahasa Inggris menjadi persamaan aljabar yang tepat.</p>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-800">Penerapan Soal Cerita (Word Problems)</p>
+                        <p class="text-xs text-slate-600 mt-1">Siswa mampu memecahkan masalah kehidupan sehari-hari dalam format bilingual (Indonesia & Inggris).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 2: WARM-UP (4 SOAL INTERAKTIF) -->
+        <section id="warmup" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">2</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Warm-Up (Pemanasan Otak)</h3>
+                        <p class="text-xs text-slate-500">4 soal kilat sebelum masuk ke materi inti. Coba tebak dan klik periksa!</p>
+                    </div>
+                </div>
+                <span id="warmup-score" class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">
+                    Skor: 0 / 4
+                </span>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 mt-5" id="warmup-container">
+                <!-- Soal Warm-Up di-render via JS agar interaktif -->
+            </div>
+        </section>
+
+        <!-- BAGIAN 3: MATERI LENGKAP & SIMULASI TIMBANGAN -->
+        <section id="materi" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm">3</span>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Materi Inti: Tiga Level PLSV</h3>
+                    <p class="text-xs text-slate-500">Prinsip Utama: Apa yang dilakukan di ruas kiri, HARUS dilakukan di ruas kanan (Prinsip Timbangan).</p>
+                </div>
+            </div>
+
+            <!-- Tabs Pilihan Level Materi -->
+            <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-4 mb-6">
+                <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition">
+                    Level 1: Satu Langkah (1-Step)
+                </button>
+                <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                    Level 2: Dua Langkah (2-Step)
+                </button>
+                <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">
+                    Level 3: Variabel Kiri & Kanan
+                </button>
+            </div>
+
+            <!-- Konten Tab 1: Satu Langkah -->
+            <div id="tab1" class="tab-content fade-in space-y-5">
+                <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-5">
+                    <h4 class="font-bold text-indigo-950 text-base mb-2">Konsep 1-Step Equations (Persamaan Satu Langkah)</h4>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-3">
+                        Hanya butuh <strong>1 operasi kebalikan (invers)</strong> untuk membuat variabel sendirian di satu sisi:
+                    </p>
+                    <ul class="text-sm text-slate-700 space-y-1.5 ml-4 list-disc">
+                        <li>Kebalikan dari <strong>Tambah (+)</strong> adalah <strong>Kurang (−)</strong>.</li>
+                        <li>Kebalikan dari <strong>Kurang (−)</strong> adalah <strong>Tambah (+)</strong>.</li>
+                        <li>Kebalikan dari <strong>Kali (×)</strong> adalah <strong>Bagi (÷)</strong>.</li>
+                        <li>Kebalikan dari <strong>Bagi (÷)</strong> adalah <strong>Kali (×)</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- 4 Mini Contoh Pola Papan Tulis -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-indigo-600">Tipe Penjumlahan</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">x + 30 = -10</div>
+                        <p class="text-xs text-slate-600">Kurangi kedua ruas dengan 30:</p>
+                        <div class="math-eq text-sm text-emerald-700 bg-emerald-50 p-2 rounded-lg mt-2">
+                            x + 30 - 30 = -10 - 30<br>
+                            <strong>x = -40</strong>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-indigo-600">Tipe Pengurangan</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">x - 18 = -22</div>
+                        <p class="text-xs text-slate-600">Tambahkan kedua ruas dengan 18:</p>
+                        <div class="math-eq text-sm text-emerald-700 bg-emerald-50 p-2 rounded-lg mt-2">
+                            x - 18 + 18 = -22 + 18<br>
+                            <strong>x = -4</strong>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-sky-600">Tipe Perkalian</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">5x = 45</div>
+                        <p class="text-xs text-slate-600">Bagi kedua ruas dengan 5:</p>
+                        <div class="math-eq text-sm text-emerald-700 bg-emerald-50 p-2 rounded-lg mt-2">
+                            5x ÷ 5 = 45 ÷ 5<br>
+                            <strong>x = 9</strong>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-sky-600">Tipe Pembagian</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">x / 9 = -4</div>
+                        <p class="text-xs text-slate-600">Kalikan kedua ruas dengan 9:</p>
+                        <div class="math-eq text-sm text-emerald-700 bg-emerald-50 p-2 rounded-lg mt-2">
+                            (x / 9) × 9 = -4 × 9<br>
+                            <strong>x = -36</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Konten Tab 2: Dua Langkah -->
+            <div id="tab2" class="tab-content hidden fade-in space-y-5">
+                <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-5">
+                    <h4 class="font-bold text-sky-950 text-base mb-2">Konsep 2-Step Equations (Persamaan Dua Langkah)</h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Jika variabel dikali/dibagi DAN ditambah/dikurang sekaligus (contoh: <span class="math-eq font-semibold">2x + 5 = 17</span> atau <span class="math-eq font-semibold">-x + 7 = 12</span>), ikuti urutan terbalik dari PEMDAS:
+                    </p>
+                    <ol class="text-sm text-slate-700 space-y-1.5 ml-4 list-decimal mt-2">
+                        <li><strong>Langkah 1:</strong> Hilangkan konstanta (angka yang sendirian) dengan <strong>+</strong> atau <strong>−</strong>.</li>
+                        <li><strong>Langkah 2:</strong> Hilangkan koefisien (angka yang menempel pada variabel) dengan <strong>×</strong> atau <strong>÷</strong>.</li>
+                    </ol>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-sky-600">Contoh A (Koefisien Negatif)</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">-x + 7 = 12</div>
+                        <div class="math-eq text-xs sm:text-sm text-slate-700 bg-slate-50 p-3 rounded-lg mt-2 space-y-1">
+                            <div>1) Kurangi 7 kedua ruas:</div>
+                            <div class="text-indigo-700">-x + 7 - 7 = 12 - 7 &rarr; -x = 5</div>
+                            <div class="pt-1">2) Bagi kedua ruas dengan -1:</div>
+                            <div class="text-emerald-700 font-bold">-x / -1 = 5 / -1 &rarr; x = -5</div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-slate-200 bg-white">
+                        <span class="text-xs font-bold uppercase text-sky-600">Contoh B (Bentuk Standar)</span>
+                        <div class="math-eq text-lg font-bold text-slate-900 my-1">3x - 4 = 14</div>
+                        <div class="math-eq text-xs sm:text-sm text-slate-700 bg-slate-50 p-3 rounded-lg mt-2 space-y-1">
+                            <div>1) Tambah 4 kedua ruas:</div>
+                            <div class="text-indigo-700">3x - 4 + 4 = 14 + 4 &rarr; 3x = 18</div>
+                            <div class="pt-1">2) Bagi kedua ruas dengan 3:</div>
+                            <div class="text-emerald-700 font-bold">3x / 3 = 18 / 3 &rarr; x = 6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Konten Tab 3: Variabel Kiri dan Kanan -->
+            <div id="tab3" class="tab-content hidden fade-in space-y-5">
+                <div class="bg-purple-50/70 border border-purple-100 rounded-xl p-5">
+                    <h4 class="font-bold text-purple-950 text-base mb-2">Variables on Both Sides (Variabel di Ruas Kiri & Kanan)</h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        Bagaimana jika bentuknya seperti <span class="math-eq font-semibold">5x + 3 = 2x + 15</span>? Kuncinya adalah <strong>mengelompokkan suku sejenis</strong>:
+                    </p>
+                    <ul class="text-sm text-slate-700 space-y-1.5 ml-4 list-disc mt-2">
+                        <li>Kumpulkan semua <strong>variabel</strong> di satu sisi (biasanya ruas kiri).</li>
+                        <li>Kumpulkan semua <strong>konstanta (angka biasa)</strong> di sisi lainnya (ruas kanan).</li>
+                        <li>Tips: Hilangkan variabel dengan koefisien lebih kecil terlebih dahulu agar hasilnya positif!</li>
+                    </ul>
+                </div>
+
+                <div class="p-5 rounded-xl border border-slate-200 bg-white">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="text-xs font-bold uppercase px-2.5 py-1 rounded bg-purple-100 text-purple-700">Bedah Langkah Demi Langkah</span>
+                        <span class="math-eq text-lg font-bold text-slate-900">5x + 3 = 2x + 15</span>
+                    </div>
+                    <div class="grid sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+                        <div class="p-3 rounded-lg bg-slate-50 border border-slate-100">
+                            <div class="font-bold text-slate-800 mb-1">Langkah 1: Satukan Variabel</div>
+                            <p class="text-slate-600 text-xs mb-2">Kurangi <span class="math-eq">2x</span> di kedua ruas:</p>
+                            <div class="math-eq text-indigo-700 font-semibold">5x - 2x + 3 = 2x - 2x + 15<br>3x + 3 = 15</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-50 border border-slate-100">
+                            <div class="font-bold text-slate-800 mb-1">Langkah 2: Satukan Konstanta</div>
+                            <p class="text-slate-600 text-xs mb-2">Kurangi <span class="math-eq">3</span> di kedua ruas:</p>
+                            <div class="math-eq text-indigo-700 font-semibold">3x + 3 - 3 = 15 - 3<br>3x = 12</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-100">
+                            <div class="font-bold text-emerald-900 mb-1">Langkah 3: Temukan x</div>
+                            <p class="text-emerald-700 text-xs mb-2">Bagi kedua ruas dengan <span class="math-eq">3</span>:</p>
+                            <div class="math-eq text-emerald-800 font-bold">3x ÷ 3 = 12 ÷ 3<br>x = 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 4: TRANSLATING ENGLISH WORDS TO EQUATIONS -->
+        <section id="english-words" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">4</span>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Translating Words into Equations (Bahasa Inggris)</h3>
+                    <p class="text-xs text-slate-500">Kamus kata kunci untuk mengubah kalimat Bahasa Inggris menjadi persamaan matematika.</p>
+                </div>
+            </div>
+
+            <!-- Tabel Kata Kunci -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200 mb-6">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                        <tr>
+                            <th class="p-3">Simbol</th>
+                            <th class="p-3">Kata Kunci Bahasa Inggris (Keywords)</th>
+                            <th class="p-3">Contoh Kalimat & Bentuk Aljabar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                        <tr>
+                            <td class="p-3 font-bold text-indigo-600 text-base text-center">+</td>
+                            <td class="p-3"><i>sum, more than, increased by, added to, total</i></td>
+                            <td class="p-3">"5 more than a number <i>x</i>" &rarr; <span class="math-eq font-bold">x + 5</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-3 font-bold text-rose-600 text-base text-center">−</td>
+                            <td class="p-3"><i>difference, less than*, decreased by, minus, left</i></td>
+                            <td class="p-3">"4 less than a number <i>n</i>" &rarr; <span class="math-eq font-bold">n - 4</span> <span class="text-xs text-rose-600">(dibalik!)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-sky-600 text-base text-center">×</td>
+                            <td class="p-3"><i>product, times, twice (2×), each, per</i></td>
+                            <td class="p-3">"Twice a number <i>y</i>" &rarr; <span class="math-eq font-bold">2y</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-3 font-bold text-amber-600 text-base text-center">÷</td>
+                            <td class="p-3"><i>quotient, divided by, split equally, half (/2)</i></td>
+                            <td class="p-3">"The quotient of <i>x</i> and 6" &rarr; <span class="math-eq font-bold">x / 6</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-emerald-600 text-base text-center">=</td>
+                            <td class="p-3"><i>is, equals, is equal to, results in, was</i></td>
+                            <td class="p-3">"...is equal to 20" &rarr; <span class="math-eq font-bold">= 20</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Latihan Interaktif Susun Persamaan dari Kalimat Bahasa Inggris -->
+            <div class="bg-slate-900 text-white rounded-xl p-5 sm:p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Mini Challenge: English to Math</span>
+                    <span class="text-xs text-slate-400">Pilih persamaan yang tepat</span>
+                </div>
+                <div id="word-to-math-box" class="space-y-4">
+                    <!-- Konten diisi oleh JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 5: CONTOH SOAL BILINGUAL (INDONESIA - INGGRIS) & SOAL CERITA -->
+        <section id="contoh-soal" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">5</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900">Contoh Soal & Penerapan Soal Cerita (Bilingual)</h3>
+                        <p class="text-xs text-slate-500">Klik tombol "Lihat Pembahasan" untuk memeriksa langkah penyelesaiannya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6" id="examples-container">
+                <!-- Daftar contoh soal bilingual di-render melalui JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+        <p>Modul Interaktif Matematika Kelas 7 SMP &bull; Persamaan Linear Satu Variabel (Bilingual Edition)</p>
+    </footer>
+
+    <!-- JAVASCRIPT UNTUK INTERAKTIVITAS -->
+    <script>
+        // 1. DATA & LOGIKA WARM-UP (4 SOAL)
+        const warmupQuestions = [
+            {
+                id: 1,
+                label: "Warm-Up #1 (1-Step)",
+                question: "x + 12 = 20",
+                hint: "Berapa ditambah 12 hasilnya 20?",
+                answer: 8
+            },
+            {
+                id: 2,
+                label: "Warm-Up #2 (1-Step)",
+                question: "4x = -28",
+                hint: "Bagi -28 dengan 4 (ingat tanda negatif!).",
+                answer: -7
+            },
+            {
+                id: 3,
+                label: "Warm-Up #3 (2-Step)",
+                question: "2x - 1 = 9",
+                hint: "Tambah 1 dulu ke 9, lalu bagi 2.",
+                answer: 5
+            },
+            {
+                id: 4,
+                label: "Warm-Up #4 (Kiri & Kanan)",
+                question: "3x = x + 10",
+                hint: "Kurangi x di kedua ruas: 2x = 10.",
+                answer: 5
+            }
+        ];
+
+        let warmupSolved = new Set();
+
+        function renderWarmup() {
+            const container = document.getElementById('warmup-container');
+            container.innerHTML = warmupQuestions.map(q => `
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs font-bold text-amber-700 uppercase">${q.label}</span>
+                            <span id="wu-badge-${q.id}" class="text-xs font-semibold hidden"></span>
+                        </div>
+                        <div class="math-eq text-xl font-bold text-slate-900 my-2">${q.question}</div>
+                        <p class="text-xs text-slate-500 mb-3">${q.hint}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="math-eq text-sm font-bold text-slate-700">x =</span>
+                        <input type="number" id="wu-input-${q.id}" placeholder="?" 
+                            class="w-24 px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            onkeydown="if(event.key==='Enter') checkWarmup(${q.id})">
+                        <button onclick="checkWarmup(${q.id})" 
+                            class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition">
+                            Cek
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkWarmup(id) {
+            const q = warmupQuestions.find(item => item.id === id);
+            const inputEl = document.getElementById(`wu-input-${id}`);
+            const badgeEl = document.getElementById(`wu-badge-${id}`);
+            const userVal = parseFloat(inputEl.value);
+
+            badgeEl.classList.remove('hidden');
+            if (userVal === q.answer) {
+                badgeEl.textContent = "Benar! ✓";
+                badgeEl.className = "text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded";
+                inputEl.classList.remove('border-rose-400');
+                inputEl.classList.add('border-emerald-500', 'bg-emerald-50');
+                warmupSolved.add(id);
+            } else {
+                badgeEl.textContent = "Coba lagi ✗";
+                badgeEl.className = "text-xs font-bold text-rose-600 bg-rose-100 px-2 py-0.5 rounded";
+                inputEl.classList.add('border-rose-400');
+            }
+            document.getElementById('warmup-score').textContent = `Skor: ${warmupSolved.size} / 4`;
+        }
+
+        // 2. LOGIKA TABS MATERI
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+        }
+
+        // 3. DATA & LOGIKA WORD TO MATH (ENGLISH)
+        const englishChallenges = [
+            {
+                sentence: '"Seven less than twice a number x is equal to 15."',
+                indo: '(Tujuh kurangnya dari dua kali suatu bilangan x sama dengan 15)',
+                options: ["7 - 2x = 15", "2x - 7 = 15", "2(x - 7) = 15"],
+                correctIndex: 1,
+                explanation: 'Ingat! Kata "less than" membalik urutan: "twice a number x" (2x) dikurangi 7 menjadi 2x - 7 = 15.'
+            },
+            {
+                sentence: '"The sum of three times a number n and 4 is 25."',
+                indo: '(Jumlah dari tiga kali bilangan n dan 4 adalah 25)',
+                options: ["3n + 4 = 25", "3(n + 4) = 25", "n/3 + 4 = 25"],
+                correctIndex: 0,
+                explanation: '"Sum" berarti penjumlahan (+), dan "three times a number n" adalah 3n. Jadi 3n + 4 = 25.'
+            }
+        ];
+
+        function renderEnglishChallenges() {
+            const box = document.getElementById('word-to-math-box');
+            box.innerHTML = englishChallenges.map((item, idx) => `
+                <div class="p-4 rounded-xl bg-slate-800 border border-slate-700">
+                    <p class="font-semibold text-sm sm:text-base text-white">${idx + 1}. ${item.sentence}</p>
+                    <p class="text-xs text-slate-400 mb-3">${item.indo}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${item.options.map((opt, optIdx) => `
+                            <button onclick="checkEnglish(${idx}, ${optIdx})" id="eng-btn-${idx}-${optIdx}"
+                                class="eng-opt-${idx} math-eq px-3.5 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs sm:text-sm font-medium transition border border-slate-600">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p id="eng-feedback-${idx}" class="text-xs mt-2.5 hidden"></p>
+                </div>
+            `).join('');
+        }
+
+        function checkEnglish(qIdx, optIdx) {
+            const challenge = englishChallenges[qIdx];
+            const feedbackEl = document.getElementById(`eng-feedback-${qIdx}`);
+            const buttons = document.querySelectorAll(`.eng-opt-${qIdx}`);
+
+            buttons.forEach((btn, i) => {
+                btn.classList.remove('bg-emerald-600', 'border-emerald-400', 'bg-rose-600', 'border-rose-400');
+                if (i === optIdx) {
+                    if (optIdx === challenge.correctIndex) {
+                        btn.classList.add('bg-emerald-600', 'border-emerald-400');
+                    } else {
+                        btn.classList.add('bg-rose-600', 'border-rose-400');
+                    }
+                }
+            });
+
+            feedbackEl.classList.remove('hidden');
+            if (optIdx === challenge.correctIndex) {
+                feedbackEl.className = "text-xs mt-2.5 text-emerald-300 font-medium";
+                feedbackEl.textContent = `Tepat sekali! ${challenge.explanation}`;
+            } else {
+                feedbackEl.className = "text-xs mt-2.5 text-rose-300 font-medium";
+                feedbackEl.textContent = `Kurang tepat. Coba perhatikan urutan kata kuncinya lagi!`;
+            }
+        }
+
+        // 4. DATA & LOGIKA CONTOH SOAL BILINGUAL (TERMASUK SOAL DARI PAPAN TULIS)
+        const bilingualExamples = [
+            {
+                category: "Contoh 1: Soal Cerita 1-Langkah (Perkalian)",
+                en: "Riley made $d by working 5 days last week. She made $45 each day. Write an equation and find d.",
+                id: "Riley menghasilkan $d dengan bekerja selama 5 hari minggu lalu. Ia menghasilkan $45 setiap hari. Buatlah persamaannya dan tentukan nilai d.",
+                equation: "d / 5 = 45   (atau   d = 5 × 45)",
+                steps: [
+                    "<strong>Identifikasi Variabel:</strong> Total penghasilan = <code>d</code>, jumlah hari = 5, penghasilan per hari = $45.",
+                    "<strong>Model Persamaan:</strong> Total uang dibagi 5 hari sama dengan $45 &rarr; <code>d / 5 = 45</code>.",
+                    "<strong>Penyelesaian:</strong> Kalikan kedua ruas dengan 5 &rarr; <code>d = 45 × 5</code>.",
+                    "<strong>Hasil:</strong> <code>d = 225</code>. Jadi total penghasilan Riley adalah <strong>$225</strong>."
+                ]
+            },
+            {
+                category: "Contoh 2: Soal Cerita 1-Langkah (Pengurangan)",
+                en: "The track field has stands that hold 210 people. After x people sit down, there are 120 seats left. Find the value of x.",
+                id: "Lapangan lari memiliki tribun yang menampung 210 orang. Setelah x orang duduk, tersisa 120 kursi. Tentukan nilai x.",
+                equation: "210 - x = 120",
+                steps: [
+                    "<strong>Model Persamaan:</strong> Kapasitas awal (210) dikurangi orang yang duduk (x) sama dengan sisa kursi (120) &rarr; <code>210 - x = 120</code>.",
+                    "<strong>Langkah 1:</strong> Kurangi kedua ruas dengan 210 &rarr; <code>-x = 120 - 210</code> &rarr; <code>-x = -90</code>.",
+                    "<strong>Langkah 2:</strong> Bagi kedua ruas dengan -1 &rarr; <code>x = 90</code>.",
+                    "<strong>Hasil:</strong> Banyak orang yang sudah duduk adalah <strong>90 orang</strong>."
+                ]
+            },
+            {
+                category: "Contoh 3: Soal Cerita 2-Langkah (Two-Step Word Problem)",
+                en: "Budi buys 3 notebooks of the same price and a pen for Rp 5.000. If he pays a total of Rp 26.000, what is the price of one notebook (n)?",
+                id: "Budi membeli 3 buku tulis dengan harga yang sama dan sebuah pulpen seharga Rp 5.000. Jika ia membayar total Rp 26.000, berapa harga satu buku tulis (n)?",
+                equation: "3n + 5000 = 26000",
+                steps: [
+                    "<strong>Model Persamaan:</strong> Harga 3 buku (<code>3n</code>) + 1 pulpen (<code>5000</code>) = <code>26000</code>.",
+                    "<strong>Langkah 1:</strong> Kurangi kedua ruas dengan 5000 &rarr; <code>3n = 26000 - 5000</code> &rarr; <code>3n = 21000</code>.",
+                    "<strong>Langkah 2:</strong> Bagi kedua ruas dengan 3 &rarr; <code>n = 21000 ÷ 3</code>.",
+                    "<strong>Hasil:</strong> <code>n = 7000</code>. Jadi harga satu buku tulis adalah <strong>Rp 7.000</strong>."
+                ]
+            },
+            {
+                category: "Contoh 4: Variabel di Kedua Ruas (Variables on Both Sides)",
+                en: "Four times a number x plus 6 is equal to two times the same number x plus 18. Find the value of x.",
+                id: "Empat kali suatu bilangan x ditambah 6 sama dengan dua kali bilangan x tersebut ditambah 18. Tentukan nilai x.",
+                equation: "4x + 6 = 2x + 18",
+                steps: [
+                    "<strong>Model Persamaan:</strong> Ruas kiri = <code>4x + 6</code>, Ruas kanan = <code>2x + 18</code>.",
+                    "<strong>Langkah 1 (Satukan Variabel):</strong> Kurangi <code>2x</code> di kedua ruas &rarr; <code>4x - 2x + 6 = 18</code> &rarr; <code>2x + 6 = 18</code>.",
+                    "<strong>Langkah 2 (Satukan Konstanta):</strong> Kurangi <code>6</code> di kedua ruas &rarr; <code>2x = 18 - 6</code> &rarr; <code>2x = 12</code>.",
+                    "<strong>Langkah 3:</strong> Bagi kedua ruas dengan 2 &rarr; <code>x = 6</code>."
+                ]
+            }
+        ];
+
+        function renderExamples() {
+            const container = document.getElementById('examples-container');
+            container.innerHTML = bilingualExamples.map((ex, index) => `
+                <div class="rounded-2xl border border-slate-200 overflow-hidden bg-slate-50/40">
+                    <div class="bg-slate-100/80 px-5 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-700">${ex.category}</span>
+                        <span class="text-xs font-semibold text-slate-500">Bilingual Problem #${index + 1}</span>
+                    </div>
+                    
+                    <div class="p-5 grid md:grid-cols-2 gap-4">
+                        <!-- Kolom Bahasa Inggris -->
+                        <div class="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs">
+                            <span class="inline-block text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-sky-100 text-sky-700 mb-2">English</span>
+                            <p class="text-sm text-slate-800 leading-relaxed font-medium">${ex.en}</p>
+                        </div>
+                        <!-- Kolom Bahasa Indonesia -->
+                        <div class="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs">
+                            <span class="inline-block text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-rose-100 text-rose-700 mb-2">Indonesia</span>
+                            <p class="text-sm text-slate-700 leading-relaxed">${ex.id}</p>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Toggle Pembahasan -->
+                    <div class="px-5 pb-5">
+                        <button onclick="toggleSolution(${index})" id="sol-btn-${index}"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition shadow-xs">
+                            <span>Lihat Pembahasan & Persamaan</span>
+                            <span id="sol-arrow-${index}">▼</span>
+                        </button>
+
+                        <div id="sol-box-${index}" class="hidden mt-4 p-4 sm:p-5 rounded-xl bg-emerald-50/80 border border-emerald-200 fade-in">
+                            <div class="mb-3 pb-2 border-b border-emerald-200/80">
+                                <span class="text-xs font-bold text-emerald-800 uppercase">Persamaan Matematika (Equation):</span>
+                                <div class="math-eq text-base sm:text-lg font-bold text-emerald-950 mt-0.5">${ex.equation}</div>
+                            </div>
+                            <ul class="space-y-2 text-xs sm:text-sm text-slate-800 list-disc ml-4">
+                                ${ex.steps.map(step => `<li>${step}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleSolution(index) {
+            const box = document.getElementById(`sol-box-${index}`);
+            const arrow = document.getElementById(`sol-arrow-${index}`);
+            const isHidden = box.classList.contains('hidden');
+            
+            if (isHidden) {
+                box.classList.remove('hidden');
+                arrow.textContent = "▲";
+            } else {
+                box.classList.add('hidden');
+                arrow.textContent = "▼";
+            }
+        }
+
+        // Inisialisasi saat halaman dimuat
+        window.onload = function() {
+            renderWarmup();
+            renderEnglishChallenges();
+            renderExamples();
+        };
+    </script>
+</body>
+</html>
